@@ -1,0 +1,171 @@
+<%-- FileName : reveive.jsp --%>
+<%@ page contentType="text/html; charset=euc-kr" pageEncoding="euc-kr"%>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.net.*" %>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
+<%@ page import="com.and.servlet.MyMultipartRequest" %>
+<%@ page import="com.and.servlet.AndFileRenamePolicy" %>
+<%@ page import="com.and.easyone.file.*" %>
+<%@ page import="com.and.easyone.ftp.*" %>
+<%@ page import="com.fasoo.adk.packager.*" %>
+<%
+	// 사용객체
+	InetAddress			iNetLocal	=	null;
+	MyMultipartRequest	myMuiltPart	=	null;
+	Iterator			itFiles		=	null;
+	ArrayList			fileLists	=	null;
+	AndSyncUploadFile	syncFile	=	null;
+
+	String staf_id				= request.getParameter("staf_id");			//사번
+	String callbackFn 			= request.getParameter("callbackFunction"); 
+	String customCallback		= request.getParameter("customCallback"); 
+	String scope				= request.getParameter("scope"); 
+	staf_id						= staf_id == null ? "" : staf_id;
+	String status				= "0";
+	String errorMessage			= "파일이 업로드 되었습니다.";
+
+	String staf_name	= request.getParameter("staf_name");			//사번명
+	staf_name			= staf_name == null ? "" : staf_name;
+
+
+	System.out.println("[STAF_ID]=" + staf_id);
+	System.out.println("[STAF_NAME]=" + staf_name);
+
+	// 사용변수
+	String	file_full_path	=	AndFileConst.getUploadRootPath();
+	int		max_size		=	AndFileConst.getUploadMaxSize();
+	String	subFolder		=	( request.getParameter("divi") == null ) ? "" : request.getParameter("divi").trim();
+	boolean	isDuplicate		=	( request.getParameter("dupYn") != null && request.getParameter("dupYn").equals("Y") ) ? true : false;
+	String	tmpFileName		=	null;
+	String	tmpKeyName		=	null;
+
+	try{
+		// 사용변수 설정
+		file_full_path	=	file_full_path + (( subFolder.equals("") ) ? "" : File.separator + subFolder);
+		iNetLocal		=	AndFtpConst.getLocalInetAddr();
+		System.out.println("[local host ip]=" + iNetLocal.getHostAddress());
+		System.out.println("[upload path]=" + file_full_path);
+		System.out.println("[max size]=" + max_size);
+
+		// file config
+		myMuiltPart	=	new MyMultipartRequest(request);				// MyMultipartRequest 생성
+		myMuiltPart.setSaveDirecotry(file_full_path);					// 저장경로 설정(필수)
+		myMuiltPart.setUploadMaxSize(max_size);							// 최대사이즈설정(필수)
+		myMuiltPart.setEncoding("utf-8");								// 인코딩(설정 없으면 euc-kr)
+		myMuiltPart.setRenamePolicy(new AndFileRenamePolicy());		// 리네임정책(설정 없으면 new DefaultFileRenamePolicy())
+		myMuiltPart.setIsDuplicate(isDuplicate);						// 중복허락여부
+
+		// file upload 실행
+		myMuiltPart.runMyMuiltPart();
+
+		// upload 한 파일목록
+		syncFile	=	new AndSyncUploadFile(iNetLocal);
+		itFiles		=	myMuiltPart.getFileNames();
+
+		String HOMEDIR = "/oraweb/jeus/webroot/WEB-INF/fasoo/fsdinit";
+		//String HOMEDIR = "C:\\AND\\WORKSPACE\\AND\\WebContent\\WEB-INF\\fasoo\\fsdinit";
+   		String SERVERID = "0000000000010076";//서버 DRM
+   		String SERVERID2 = "0000000000010078";//PC DRM
+
+		//파일화
+		WorkPackager oWorkPackager = new WorkPackager();
+		oWorkPackager.setOverWriteFlag(true);//true:기존파일명그대로, false:파일명변경
+
+
+		System.out.println("------------------ sync list ---------------------------");
+		while( itFiles.hasNext() ){
+			tmpKeyName	=	(String)itFiles.next();
+			tmpFileName	=	myMuiltPart.getFileSystemName(tmpKeyName);
+			System.out.println("[KEY0]=" + tmpKeyName);
+			System.out.println("[file name0]=" + tmpFileName);
+
+
+	//    		파일복호화
+    		boolean bRet = false;
+            
+    		int nFileType = oWorkPackager.GetFileType(file_full_path +'/'+ tmpFileName);
+                System.out.println("[file type1]=" + nFileType);
+				System.out.println("[PATH1]=" + file_full_path +'/'+ tmpFileName);
+    		if (nFileType == 26 ) // 서버 DRM복호화
+    		{
+				System.out.println("[#######################1]=" + nFileType);
+    			bRet = oWorkPackager.DoExtract_s(HOMEDIR,
+    											SERVERID,
+    											file_full_path +'/'+ tmpFileName,
+    											file_full_path +'/'+ tmpFileName,
+//    											"admin",
+                              					staf_id,
+    											"SECURE_SAVE", "", "", "", ""
+    											);	
+
+
+    	        if (!bRet){
+    				System.out.println("복호화 에러");
+    				System.out.println("    ["+ oWorkPackager.getLastErrorNum()+"] "+oWorkPackager.getLastErrorStr());
+    			}else{
+    				System.out.println("복호화 성공!!");
+    			}
+    		}
+    		else if (nFileType == 103) // PC DRM복호화
+    		{
+				System.out.println("[#######################2]=" + nFileType);
+    			bRet = oWorkPackager.DoExtract_s(HOMEDIR,
+    											SERVERID2,
+    											file_full_path +'/'+ tmpFileName,
+    											file_full_path +'/'+ tmpFileName,
+//    											"admin",
+                              					staf_id,
+    											"SECURE_SAVE", "", "", "", ""
+    											);	
+    			
+
+    	        if (!bRet){
+    				System.out.println("복호화 에러");
+    				System.out.println("    ["+ oWorkPackager.getLastErrorNum()+"] "+oWorkPackager.getLastErrorStr());
+    			}else{
+    				System.out.println("복호화 성공!!");
+    			}
+    		}
+
+			// ftp 를 이용한 WAS 싱크
+			try{
+				syncFile.setSourceFileName(tmpFileName);
+				syncFile.setSourceFullPath(file_full_path);
+				syncFile.runSync();
+			}
+			catch(AndFtpException e){
+				e.printStackTrace();
+				System.out.println("[싱크시 에러]=" + e.getMessage());
+				status = "1";
+				errorMessage = e.getMessage();
+			}
+		}
+		System.out.println("callback :::" + callbackFn);
+		status = "0";
+		// 정상처리 일경우 반환코드
+	}
+	catch(AndFileException afex) {
+		// AndFileException 이 경우는 AND 제한체크임. 나머지는 모두 시스템 에러
+		System.out.println("1" + afex.getMessage());
+		afex.printStackTrace();
+		//out.println("1" + afex.getMessage());
+		status = "1";
+		errorMessage = afex.getMessage();
+	}
+	catch(Exception e) {
+		System.out.println("1" + e.getMessage());
+		e.printStackTrace();
+		//out.println("1" +  e.getMessage());
+		status = "1";
+		errorMessage = e.getMessage();
+	}
+	finally{
+		String resultMsg = "";
+		errorMessage = errorMessage.replaceAll("[\n\r]", "");
+		resultMsg += "<script>window.onload = doInit;function doInit() {parent." + callbackFn + "({\"errorMessage\" : \"" + errorMessage + "\", \"status\":" + status + ", \"callback\":\""+customCallback+"\", \"scope\":\"" + scope + "\"});}</script>";
+		out.println(resultMsg);
+		if( myMuiltPart != null ) { myMuiltPart.close(); }
+	}
+%>

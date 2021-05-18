@@ -1,0 +1,1684 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<?xml-stylesheet href="/cm/css/all.css" type="text/css"?>
+<?xml-stylesheet href="/cm/css/contents.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    
+    <head>
+    	<w2:type>DEFAULT</w2:type>
+        <w2:buildDate />
+        <xf:model>
+        	<xf:instance>
+        		<data xmlns="" />
+        	</xf:instance>
+        	<w2:dataCollection baseNode="map">
+        		<w2:dataMap baseNode="map" id="dma_ocmab01" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="KEY_VALUE" name="키값"></w2:key>
+        				<w2:key dataType="text" id="KEY_DIVI" name="키구분"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="dma_onpbi01_s03" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="SYS_HTML_ID" name="화면ID"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataList baseNode="list" id="dlt_onpbi01_s03" repeatNode="map" saveRemovedData="true" style="">
+        			<w2:columnInfo>
+        				<w2:column dataType="text" id="SPC_CODE" name="SPC코드"></w2:column>
+        				<w2:column dataType="text" id="SPC_NAME" name="SPC명"></w2:column>
+        			</w2:columnInfo>
+        			<w2:data use="false"></w2:data>
+        		</w2:dataList>
+        		<w2:dataMap baseNode="map" id="dma_onpmc01_s07" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="SYS_HTML_ID" name="화면ID"></w2:key>
+        				<w2:key dataType="text" id="SPC_CODE" name="SPC코드"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NO" name="차주번호"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataList baseNode="list" id="dlt_onpmc01_s07" repeatNode="map" saveRemovedData="true" style="">
+        			<w2:columnInfo>
+        				<w2:column dataType="text" id="OBJT_NO" name="물건번호"></w2:column>
+        				<w2:column dataType="text" id="ADDR_1" name="특별,광역시/도"></w2:column>
+        				<w2:column dataType="text" id="ADDR_2" name="시/군/구"></w2:column>
+        				<w2:column dataType="text" id="ADDR_3" name="동/리/읍/면"></w2:column>
+        				<w2:column dataType="text" id="ETC_ADDR" name="상세주소"></w2:column>
+        				<w2:column dataType="text" id="LAND_VOLU" name="대지면적"></w2:column>
+        				<w2:column dataType="text" id="BLDG_VOLU" name="건물면적"></w2:column>
+        				<w2:column dataType="text" id="MACH_DEVC" name="기계기구등"></w2:column>
+        				<w2:column dataType="text" id="NON_PRSN" name="제시외"></w2:column>
+        				<w2:column dataType="text" id="ETC_AMT" name="기타금액"></w2:column>
+        				<w2:column dataType="text" id="APRA_AMT_SUM" name="감정평가액"></w2:column>
+        				<w2:column dataType="text" id="INFL_YN" name="유입여부"></w2:column>
+        				<w2:column dataType="text" id="OWNR_ACQS_YMD" name="소유권취득일"></w2:column>
+        				<w2:column dataType="text" id="INFL_AMT" name="유입금액"></w2:column>
+        				<w2:column dataType="text" id="PRCR_COST" name="선순위비용"></w2:column>
+        				<w2:column dataType="text" id="DPSL_EXPT_AMT" name="매각예정액"></w2:column>
+        				<w2:column dataType="text" id="PHOTCNT" name="담보물사진"></w2:column>
+        				<w2:column dataType="text" id="OWNR" name="소유자"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataMap baseNode="map" id="dma_onpmc01_s09" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="SYS_HTML_ID" name="화면ID"></w2:key>
+        				<w2:key dataType="text" id="SPC_CODE" name="SPC코드"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NO" name="차주번호"></w2:key>
+        				<w2:key dataType="text" id="OBJT_NO" name="물건번호"></w2:key>
+        				<w2:key id="DEBT_NAME" name="차주명" dataType="text"></w2:key>
+        				<w2:key id="STAF_NAME" name="담당자" dataType="text"></w2:key>
+        				<w2:key id="INFL_YN" name="유입여부" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataList baseNode="list" id="dlt_onpmc01_s09" repeatNode="map" saveRemovedData="true" style="">
+        			<w2:columnInfo>
+        				<w2:column dataType="text" id="SPC_CODE" name="SPC_CODE"></w2:column>
+        				<w2:column dataType="text" id="DEBT_NO" name="차주번호"></w2:column>
+        				<w2:column dataType="text" id="DEBT_NAME" name="차주명"></w2:column>
+        				<w2:column id="STAF_NAME" name="담당자" dataType="text"></w2:column>
+        				<w2:column id="INFL_YN" name="유입여부" dataType="text"></w2:column>
+        				<w2:column id="OBJT_NO" name="물건번호" dataType="text"></w2:column>
+        				<w2:column id="FILE_NAME" name="파일명" dataType="text"></w2:column>
+        				<w2:column id="INPT_DATE" name="입력일" dataType="text"></w2:column>
+        				<w2:column id="RPRS_PICT_YN" name="대표사진여부" dataType="text"></w2:column>
+        				<w2:column id="FILE_SEQ" name="파일순번" dataType="text"></w2:column>
+        				<w2:column id="FILE_DIR" name="파일디렉토리" dataType="text"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataMap baseNode="map" id="dma_onpmc01_s01" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="SYS_HTML_ID" name="화면ID"></w2:key>
+        				<w2:key dataType="text" id="SPC_CODE" name="SPC코드"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NO" name="차주번호"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NAME" name="차주명"></w2:key>
+        				<w2:key dataType="text" id="STAF_ID" name="담당자"></w2:key>
+        				<w2:key id="INFL_YN" name="유입여부" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataList baseNode="list" id="dlt_onpmc01_s01" repeatNode="map" saveRemovedData="true" style="">
+        			<w2:columnInfo>
+        				<w2:column dataType="text" id="SPC_CODE" name="SPC코드"></w2:column>
+        				<w2:column dataType="text" id="DEBT_NO" name="차주번호"></w2:column>
+        				<w2:column dataType="text" id="DEBT_NAME" name="채무자명"></w2:column>
+        				<w2:column dataType="text" id="OBJT_NO" name="물건번호"></w2:column>
+        				<w2:column dataType="text" id="STAF_NAME" name="담당자명"></w2:column>
+        				<w2:column dataType="text" id="MORT_KIND" name="담보종류코드"></w2:column>
+        				<w2:column dataType="text" id="MORT_KIND_NAME" name="담보종류명"></w2:column>
+        				<w2:column dataType="text" id="ADDR_2" name="시/군/구"></w2:column>
+        				<w2:column dataType="text" id="ADDR_3" name="동/리/읍/면"></w2:column>
+        				<w2:column dataType="text" id="INFL_YN" name="유입여부"></w2:column>
+        				<w2:column dataType="text" id="DPSL_CPLT_YN" name="매각완료여부"></w2:column>
+        			</w2:columnInfo>
+        		</w2:dataList>
+        		<w2:dataMap baseNode="map" id="dma_onpmc01_s02" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="RRAPPLID" name="통신ID"></w2:key>
+        				<w2:key dataType="text" id="RRRECORD" name="NCRM 통신레코드 세팅"></w2:key>
+        				<w2:key dataType="text" id="SYS_HTML_ID" name="화면ID"></w2:key>
+        				<w2:key dataType="text" id="SPC_CODE" name="SPC코드"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NO" name="차주번호"></w2:key>
+        				<w2:key dataType="text" id="OBJT_NO" name="물건번호"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="dma_onpmc01_s02_output" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="SPC_CODE" name="SPC코드"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NO" name="차주번호"></w2:key>
+        				<w2:key dataType="text" id="OBJT_NO" name="물건번호"></w2:key>
+        				<w2:key dataType="text" id="DEBT_NAME" name="차주명"></w2:key>
+        				<w2:key dataType="text" id="MORT_KIND" name="담보종류"></w2:key>
+        				<w2:key dataType="text" id="STAF_ID" name="담당자"></w2:key>
+        				<w2:key dataType="text" id="ADDR_1" name="특별,광역시/도"></w2:key>
+        				<w2:key dataType="text" id="ADDR_2" name="시/군/구"></w2:key>
+        				<w2:key dataType="text" id="ADDR_3" name="동/리/읍/면"></w2:key>
+        				<w2:key dataType="text" id="ETC_ADDR" name="상세주소"></w2:key>
+        				<w2:key dataType="text" id="OBJT_USE" name="용도"></w2:key>
+        				<w2:key dataType="text" id="LAND_VOLU" name="대지면적"></w2:key>
+        				<w2:key id="SLOT_VOLU" name="건물분양면적" dataType="text"></w2:key>
+        				<w2:key dataType="text" id="BLDG_VOLU" name="건물면적"></w2:key>
+        				<w2:key dataType="text" id="MACH_DEVC" name="기계기구등"></w2:key>
+        				<w2:key dataType="text" id="NON_PRSN" name="제시외"></w2:key>
+        				<w2:key dataType="text" id="ETC_AMT" name="기타금액"></w2:key>
+        				<w2:key dataType="text" id="OWNR" name="소유자"></w2:key>
+        				<w2:key dataType="text" id="MORT_STAT" name="담보상태"></w2:key>
+        				<w2:key dataType="text" id="FXNG_RANK" name="설정순위"></w2:key>
+        				<w2:key dataType="text" id="FXNG_YMD" name="설정일자"></w2:key>
+        				<w2:key dataType="text" id="CLSC_FXNG_AMT" name="근저당권설정액"></w2:key>
+        				<w2:key dataType="text" id="PRCR_FXNG_AMT" name="선설정액"></w2:key>
+        				<w2:key dataType="text" id="SAMT_GRNT_AMT" name="소액보증금"></w2:key>
+        				<w2:key dataType="text" id="BOND_PAY" name="임금채권"></w2:key>
+        				<w2:key dataType="text" id="CURR_YEAR_TAX" name="당해세"></w2:key>
+        				<w2:key dataType="text" id="PRCR_RENT_GRNT_AMT" name="선임차보증금"></w2:key>
+        				<w2:key dataType="text" id="PRCR_BOND_TAX" name="선조세채권"></w2:key>
+        				<w2:key dataType="text" id="ETC_PRCR" name="기타 선순위"></w2:key>
+        				<w2:key dataType="text" id="PRCR_SUM" name="선순위 計"></w2:key>
+        				<w2:key dataType="text" id="APRA_VLUT_YMD" name="감정평가일"></w2:key>
+        				<w2:key dataType="text" id="APRA_VLUT_ORGN" name="감정평가기관"></w2:key>
+        				<w2:key dataType="text" id="APRA_AMT_LAND" name="감정가_대지"></w2:key>
+        				<w2:key dataType="text" id="APRA_AMT_BLDG" name="감정가_건물"></w2:key>
+        				<w2:key dataType="text" id="APRA_AMT_MCDC" name="감정가_기계기구"></w2:key>
+        				<w2:key dataType="text" id="APRA_AMT_ETC" name="감정가_제시외"></w2:key>
+        				<w2:key dataType="text" id="APRA_AMT_SUM" name="감정가_합계"></w2:key>
+        				<w2:key dataType="text" id="AUCT_CURT" name="경매법원"></w2:key>
+        				<w2:key dataType="text" id="AUCT_CASE_NO1" name="경매사건번호1"></w2:key>
+        				<w2:key dataType="text" id="AUCT_CASE_NO2" name="경매사건번호2"></w2:key>
+        				<w2:key dataType="text" id="AUCT_CASE_NO3" name="경매사건번호3"></w2:key>
+        				<w2:key dataType="text" id="INFL_YN" name="유입여부"></w2:key>
+        				<w2:key dataType="text" id="OWNR_ACQS_YMD" name="소유권취득일"></w2:key>
+        				<w2:key dataType="text" id="INFL_AMT" name="유입금액"></w2:key>
+        				<w2:key dataType="text" id="INFL_COST" name="유입비용"></w2:key>
+        				<w2:key dataType="text" id="PRCR_COST" name="선순위비용"></w2:key>
+        				<w2:key dataType="text" id="DPSL_EXPT_AMT" name="매각예정액"></w2:key>
+        				<w2:key dataType="text" id="DPSL_CPLT_YN" name="매각완료여부"></w2:key>
+        				<w2:key dataType="text" id="MORT_END_YN" name="담보종결여부"></w2:key>
+        				<w2:key dataType="text" id="MORT_END_YMD" name="담보종결일"></w2:key>
+        				<w2:key dataType="text" id="MORT_END_RESN" name="담보종결사유"></w2:key>
+        				<w2:key dataType="text" id="BDDC_POSE_DEPT" name="건철보유부서"></w2:key>
+        				<w2:key dataType="text" id="MORT_CMNT" name="담보COMMENT"></w2:key>
+        				<w2:key dataType="text" id="PRCR_CMNT" name="선순위COMMENT"></w2:key>
+        				<w2:key dataType="text" id="REAL_DLGS_CMNT" name="실거래COMMENT"></w2:key>
+        				<w2:key dataType="text" id="SCFB_CMNT" name="낙찰COMMENT"></w2:key>
+        				<w2:key dataType="text" id="MAIN_ISSU_CMNT" name="주요이슈COMMENT"></w2:key>
+        				<w2:key dataType="text" id="SCFB_EXPT_AMT" name="낙찰예상가"></w2:key>
+        				<w2:key id="ETC_NAME" name="기타수량" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        	</w2:dataCollection>
+        	<w2:workflowCollection></w2:workflowCollection>
+        	<xf:submission id="sbm_ocmab01_s01" ref="data:json,dma_ocmab01" target="" action="/Action?name=and.cm.ctl.ocmab01_s01"
+        		method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
+        		mode="asynchronous" processMsg="조회 중 입니다." ev:submit="" ev:submitdone="scwin.sbm_ocmab01_s01_submitdone" ev:submiterror=""
+        		abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="sbm_onpbi01_s03" ref="data:json,dma_onpbi01_s03" target="data:json,dlt_onpbi01_s03"
+        		action="/Action?name=and.np.ctl.onpbi01_s03" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+        		ev:submitdone="scwin.sbm_onpbi01_s03_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="sbm_onpmc01_s01" ref="data:json,dma_onpmc01_s01" target="data:json,dlt_onpmc01_s01"
+        		action="/Action?name=and.np.ctl.onpmc01_s01" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+        		ev:submitdone="scwin.sbm_onpmc01_s01_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="sbm_onpmc01_s07" ref="data:json,dma_onpmc01_s07" target="data:json,dlt_onpmc01_s07"
+        		action="/Action?name=and.np.ctl.onpmc01_s07" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+        		ev:submitdone="scwin.sbm_onpmc01_s07_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="sbm_onpmc01_s09" ref="data:json,dma_onpmc01_s09" target="data:json,dlt_onpmc01_s09"
+        		action="/Action?name=and.np.ctl.onpmc01_s09" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+        		ev:submitdone="scwin.sbm_onpmc01_s09_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="sbm_onpmc01_s02" ref="data:json,dma_onpmc01_s02" target="data:json,dma_onpmc01_s02_output"
+        		action="/Action?name=and.np.ctl.onpmc01_s02" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+        		ev:submitdone="scwin.sbm_onpmc01_s02_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        </xf:model>
+        <script type="text/javascript" lazy="false"><![CDATA[
+/*
+	#####################################################################
+	파일명 : onpbi07.xml
+	프로그램명 : 유입물건조회
+	설 명 : 유입물건조회
+	작성자 : 김표진
+	작성일 : 2019.12.05
+	    
+	수정일자       수정자                 수정내용
+    =====================================================================
+    2019.12.05    김표진        최초작성
+    #####################################################################
+    */
+    //전역변수설정
+	scvar.KEY_DIVI = "";
+		
+	scvar.SPC_CODE = ""; 	//spc코드
+	scvar.DEBT_NO = "";  	//차주번호
+	scvar.DEBT_NAME = "";	//차주명
+	scvar.OBJT_NO = "";  	//물건번호
+	//scvar.BOND_SEQ = ""; 	//채권일련번호
+	scvar.STAF_ID = ""; 	//담당자
+	scvar.MORT_KIND = "";	//담보종류
+	scvar.KEY_FILE_NAME = ""; //파일명
+	
+	
+	/**
+	 * onpageload
+	 */    
+	scwin.onpageload = function() {
+		try{
+			//초기화
+			scwin.init();
+			
+		} catch(ex){
+			$p.log("[scwin.onpageload] Exception :: " + ex);
+		}	
+	};
+	
+	/**
+	 * onpageunload
+	 */
+	scwin.onpageunload = function() {
+		
+	};
+	
+	/**
+	 * 화면이 처음 로딩될 때의 처리 (초기값, 버튼처리,필터링,포커스 등)
+	 */
+	scwin.init = function() {
+		try {
+			
+			com.setEnterKeyEvent(grp_debtGrp, scwin.btn_search_onclick);
+			com.setEnterKeyEvent(grp_debtGrp2, scwin.btn_search_onclick);
+			
+			scwin.setCommonCdSet(); // 화면 공통코드 조회
+			
+			scwin.mainProcess('onpbi01_s03'); // spc코드조회
+			
+		} catch (ex) {
+			$p.log("[scwin.init] Exception :: " + ex);
+		}
+	};
+	
+	scwin.CLEAR = function() {
+		// 데이타초기화
+		dma_onpmc01_s02_output.reset();
+		dlt_onpmc01_s09.reset();
+		
+		ibx_landVolu.setValue("");
+		ibx_bldgVolu.setValue("");
+		ibx_parcelVoluM.setValue("");
+		ibx_parcelVolu.setValue("");
+		//ibx_apraAmtParcel.setValue("");
+		ibx_unitBldg.setValue("");
+		ibx_unitBldg2.setValue("");
+		ibx_unitParcel.setValue("");
+		ibx_unitParcel2.setValue("");
+		ibx_unitEtc.setValue("");
+		ibx_unitEtc2.setValue("");
+		
+	}
+	
+	/**
+	 *  화면 공통코드 조회 코드정의되면 수정할것
+	 */
+	scwin.setCommonCdSet = function() {
+		try {
+			var codeOptions = [{
+				code : "NPL_DEBT_NO_DVSN", // 차주번호구분
+				compID : "sbx_keyDebtNoCode"
+			}];
+			com.setCommonCode(codeOptions);
+
+		} catch (ex) {
+			$p.log("[scwin.setCommonCdSet] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * 공통코드 조회 후 callback 
+	 */
+	scwin.commonCodeCallback = function(){
+		try{
+		
+		}catch(ex){
+			$p.log("[scwin.commonCodeCallback] Exception :: " + ex);
+		};	
+	};
+	
+	/**
+	 * 다른 화면으로 보낼 DATA SET (SETDATA)
+	 */
+	scwin.setData = function(argTran){
+		try {
+		
+			var data = {};
+			var sendData = {};
+			var objmsg = new Object();
+
+			objmsg.tran = "onpmc01";
+			
+			switch(argTran) {
+				// 물건리스트조회 팝업
+				case "onpmp02":
+
+					var options  = { id 	  		: "onpmp02"	
+	                               , popupName      : "물건리스트조회"
+	                               , type           : "wframePopup"
+	                               , size           : "C" 
+	                               , width          : 850 
+	                               , height         : 250 }; 	 	
+	                               
+		            objmsg.dataListInfo = dlt_onpmc01_s01.getAllJSON(); 
+		            objmsg.callbackFn = "scwin.getData";
+		            
+		            com.openPopup("/ui/np/onpmp02.xml" , options, objmsg);
+		            
+                    break;
+			
+				// 기초정보등록 화면으로 이동
+				case "onpbi01":
+	
+					objmsg.gTabIndex  = scvar.tabIndex;		//탭인덱스
+				    objmsg.gSPC_CODE  = scvar.SPC_CODE; 	//spc코드
+		            objmsg.gDEBT_NO	  = scvar.DEBT_NO;  	//차주번호
+		            objmsg.gDEBT_NAME = scvar.DEBT_NAME;  	//차주명
+		            
+		            com.openMenu("기초정보등록","/ui/np/onpbi01.xml" , null, objmsg);
+                    break;
+                    
+                // 파일업로드 팝업
+				case "onpma02":
+
+					var options  = { id 	  		: "onpma02"	
+	                               , popupName      : "파일업로드"
+	                               , type           : "wframePopup"
+	                               , size           : "C" 
+	                               , width          : 1110 
+	                               , height         : 570 }; 	 	
+	                               
+		            
+		            objmsg.callbackFn = "scwin.getData";
+		            
+				    objmsg.gSPC_CODE  = scvar.SPC_CODE; 	//spc코드
+		            objmsg.gDEBT_NO	  = scvar.DEBT_NO;  	//차주번호
+		            objmsg.gDEBT_NAME = scvar.DEBT_NAME;  	//차주명
+		            objmsg.gSTAF_NAME = ibx_keyStafName.getValue();		//담당자명
+		            objmsg.gSTAF_ID = ibx_keyStafId.getValue();		//담당자ID
+					objmsg.gINFL_YN	  =	sbx_inflYn.getValue();		//유입여부
+					objmsg.gOBJT_NO	  = scvar.OBJT_NO;  //물건번호
+		            
+		            
+		            com.openPopup("/ui/np/onpma02.xml" , options, objmsg);
+		            
+                    break;        
+				
+				// 담당자 조회 (팝업)
+				case "ocmab01":
+					
+				    var data	 = { "gKEY_DIVI": (isNaN(ibx_keyStafId.getValue())) ? "2" : "1"
+								   , "gSTAF_ID"	: ibx_keyStafId.getValue()
+								   , id			: "ocmab01"
+								   , callbackFn : "scwin.getData"
+								   };
+					var options	 = { id			: "ocmab01"
+								   , popupName	: "사원 검색"
+								   , modal		: true
+								   , type		: "wframePopup"
+								   , size		: "C"
+								   , width		: 650
+								   , height		: 350 }; 
+					com.openPopup("/ui/cm/ocmab01.xml", options, data);
+					break;
+					
+				default:
+					break;	
+					
+			}
+		} catch (ex) {
+			$p.log("[scwin.setData] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * 이동 화면으로부터 받은 DATA SET
+	 */
+	scwin.getData = function(retdata) {
+		try {
+			var objmsg;
+            
+            if (typeof retdata == 'undefined') {
+                scvar.param = com.getParameter();
+                objmsg = scvar.param;
+            } else {
+                objmsg = retdata;
+            }
+			
+			var objChange;
+			if(com.empty(objmsg.tran)){
+				objChange = objmsg.id
+			}else{
+				objChange = objmsg.tran
+			}
+			
+			switch(objChange){
+			
+				// 물건리스트조회 팝업
+				case "onpmp02":
+
+					scvar.SPC_CODE 	= objmsg.gSPC_CODE; //spc코드
+					scvar.DEBT_NO 	= objmsg.gDEBT_NO;  //차주번호
+					scvar.OBJT_NO 	= objmsg.gOBJT_NO;  //물건번호
+					//scvar.BOND_SEQ 	= scvar.SPC_CODE + scvar.DEBT_NO + scvar.OBJT_NO; // 채권일련번호
+					scvar.STAF_ID 	= objmsg.gSTAF_ID;	//담당자
+					scvar.DEBT_NAME = objmsg.gDEBT_NAME; //차주명
+					scvar.MORT_KIND  = objmsg.gMORT_KIND; //담보종류
+					
+					var tmpDebtNo =objmsg.gDEBT_NO.split("-");
+					
+					sbx_keyDebtNoCode.setText(tmpDebtNo[0]);
+					ibx_keyDebtNo.setValue(tmpDebtNo[1]);
+                    ibx_keyDebtName.setValue(scvar.DEBT_NAME);
+					
+					scwin.mainProcess('onpmc01_s02'); 	//담보정보
+					scwin.mainProcess('onpmc01_s09'); 	//물건사진리스트
+					
+					break;
+				
+				// 사원명 					
+				case "ocmab01":
+				
+					ibx_keyStafId.setValue( objmsg.gSTAF_CODE );
+					ibx_keyStafName.setValue( objmsg.gSTAF_NAME );
+					
+					break;
+					
+		        default:
+		            break;
+	        }
+		} catch (ex) {
+			$p.log("[scwin.getData] Exception :: " + ex);
+		}
+	};
+
+/**
+	 * 호스트측에 요청을 하기 위한 기본함수
+	 */
+	 scwin.mainProcess = function(argFun){
+		try{
+			//유효성 검사
+			if(!scwin.isValid(argFun)){
+	            return;
+	        }
+	        //확인
+	        if(!scwin.confirm(argFun)){
+	        	return;
+	        }
+	        
+	        var tmpKeyDebtNo = com.trim(sbx_keyDebtNoCode.getText()) + "-" + com.trim(ibx_keyDebtNo.getValue()); //차주번호
+	        
+			switch(argFun)	{
+			
+				// 담당자명 조회	
+				case "ocmab01_s01" :	
+					dma_ocmab01.set("RRAPPLID", "AND");
+					dma_ocmab01.set("RRRECORD", "ICMAB011");
+					dma_ocmab01.set("KEY_VALUE", ibx_keyStafId.getValue());
+					scvar.KEY_DIVI = isNaN(ibx_keyStafId.getValue()) ? "2" : "1";
+					dma_ocmab01.set("KEY_DIVI", scvar.KEY_DIVI);
+					
+					com.executeSubmission(sbm_ocmab01_s01);
+					break;
+					
+				// SPC코드리스트 조회	
+				case "onpbi01_s03" :	
+					dma_onpbi01_s03.set("RRAPPLID", "AND");
+					dma_onpbi01_s03.set("RRRECORD", "INPBI001");
+					dma_onpbi01_s03.set("SYS_HTML_ID", "ONPMB01");
+					
+					com.executeSubmission(sbm_onpbi01_s03);
+					break;	
+				
+				// 조회 - 조회시 물건리스트조회
+				case "onpmc01_s01" :	
+					dma_onpmc01_s01.set("RRAPPLID", "AND");
+					dma_onpmc01_s01.set("RRRECORD", "INPMC001");
+					dma_onpmc01_s01.set("SYS_HTML_ID", "ONPMC01");
+					dma_onpmc01_s01.set("SPC_CODE", sbx_keySpcCode.getValue()); 	// SPC코드
+					dma_onpmc01_s01.set("DEBT_NO", tmpKeyDebtNo);		// 차주번호
+					dma_onpmc01_s01.set("DEBT_NAME", ibx_keyDebtName.getValue());	// 차주명
+					dma_onpmc01_s01.set("STAF_ID", ibx_keyStafId.getValue());		// 담당자
+					dma_onpmc01_s01.set("INFL_YN", sbx_inflYn.getValue());			// 유입여부
+					
+					com.executeSubmission(sbm_onpmc01_s01);
+					break;	
+					
+				// 담보정보조회
+				case "onpmc01_s02" :	
+					dma_onpmc01_s02.set("RRAPPLID", "AND");
+					dma_onpmc01_s02.set("RRRECORD", "INPMC002");
+					dma_onpmc01_s02.set("SYS_HTML_ID", "ONPMC01");
+					dma_onpmc01_s02.set("SPC_CODE", scvar.SPC_CODE); 	// SPC코드
+					dma_onpmc01_s02.set("DEBT_NO", scvar.DEBT_NO);		// 차주번호
+					dma_onpmc01_s02.set("OBJT_NO", scvar.OBJT_NO);		// 물건번호
+
+					com.executeSubmission(sbm_onpmc01_s02);
+					break;
+						
+					
+				// 유입물건내역조회
+				case "onpmc01_s07" :	
+					dma_onpmc01_s07.set("RRAPPLID", "AND");
+					dma_onpmc01_s07.set("RRRECORD", "INPMC008");
+					dma_onpmc01_s07.set("SYS_HTML_ID", "ONPMC01");
+					dma_onpmc01_s07.set("SPC_CODE", scvar.SPC_CODE); 	// SPC코드
+					dma_onpmc01_s07.set("DEBT_NO", scvar.DEBT_NO);		// 차주번호
+				
+					com.executeSubmission(sbm_onpmc01_s07);
+					break;	
+					
+				// 물건사진정보리스트
+				case "onpmc01_s09" :	
+					dma_onpmc01_s09.set("RRAPPLID", "AND");
+					dma_onpmc01_s09.set("RRRECORD", "INPMC008");
+					dma_onpmc01_s09.set("SYS_HTML_ID", "ONPMC01");
+					dma_onpmc01_s09.set("SPC_CODE", scvar.SPC_CODE); 	// SPC코드
+					dma_onpmc01_s09.set("DEBT_NO", scvar.DEBT_NO);		// 차주번호
+					dma_onpmc01_s09.set("OBJT_NO", scvar.OBJT_NO);		// 물건번호	
+					dma_onpmc01_s09.set("DEBT_NAME", scvar.DEBT_NAME); 	// 차주명
+					dma_onpmc01_s09.set("STAF_NAME", ibx_keyStafName.getValue());	// 담당자
+					dma_onpmc01_s09.set("INFL_YN", sbx_inflYn.getValue());		// 유입여부	
+				
+					com.executeSubmission(sbm_onpmc01_s09);
+					break;			
+				
+				default : 
+					break;
+			}
+		} catch(ex) {
+			$p.log("[scwin.mainProcess] Exception:: "+ex);
+		}
+	};
+	
+	/**
+	 * 정합성 체크
+	 */
+	scwin.isValid = function(argFun){
+		return true;
+	};
+	
+	//* 호스트측에 요청 시 확인하기 위한 함수 *//
+	scwin.confirm = function(argFun) {
+		return true;
+	};
+	
+	/**
+	 *	단가계산
+	 */
+	scwin.CALCU = function() {
+		try{
+		/*	
+		   var tmpApraAmtLand = dma_onpmc01_s02_output.get("APRA_AMT_LAND"); // 토지감정가액
+	       var tmpLandVolu = dma_onpmc01_s02_output.get("LAND_VOLU"); // 면적(평)
+	       var tmpLandVolu2 = com.toInt(tmpLandVolu) * 3.3; // 면적(m)
+	       
+	       var tmpApraAmtBldg = dma_onpmc01_s02_output.get("APRA_AMT_BLDG"); // 건물감정가액
+	       var tmpBldgVolu = dma_onpmc01_s02_output.get("BLDG_VOLU"); // 면적(평)
+	       var tmpBldgVolu2 = com.toInt(tmpBldgVolu) * 3.3; // 면적(m)
+	       
+	       var tmpApraAmtEtc = dma_onpmc01_s02_output.get("APRA_AMT_ETC"); // 제시외감정가액
+	       var tmpEtcVolu = dma_onpmc01_s02_output.get("NON_PRSN"); // 면적(평)
+	       var tmpEtcVolu2 = com.toInt(tmpEtcVolu) * 3.3; // 면적(m)
+	       
+	       ibx_landVoluM.setValue(tmpLandVolu2); // 토지면적(m)
+	       ibx_BldgVoluM.setValue(tmpBldgVolu2); // 건물면적(m)
+	       ibx_EtcVoluM.setValue(tmpEtcVolu2); 	// 제시면적(m)
+	     */
+	       var tmpApraAmtLand = com.toInt(dma_onpmc01_s02_output.get("APRA_AMT_LAND")); // 토지감정가액
+	       var tmpLandVolu2 = com.toInt(dma_onpmc01_s02_output.get("LAND_VOLU")); // 면적(m)
+	       var tmpLandVolu = Math.round(com.toInt(tmpLandVolu2) / 3.3); // 면적(평)
+	      
+	       var tmpApraAmtBldg = com.toInt(dma_onpmc01_s02_output.get("APRA_AMT_BLDG")); // 건물감정가액
+	       var tmpBldgVolu2 = com.toInt(dma_onpmc01_s02_output.get("BLDG_VOLU")); // 면적(m)
+	       var tmpBldgVolu = Math.round(com.toInt(tmpBldgVolu2) / 3.3); // 면적(평)
+	       
+	       var tmpApraAmtEtc = com.toInt(dma_onpmc01_s02_output.get("APRA_AMT_ETC")); // 제시외감정가액
+	       var tmpEtcVolu2 = com.toFloat(dma_onpmc01_s02_output.get("NON_PRSN")); // 면적(m)
+	       var tmpEtcVolu = Math.round(com.toInt(tmpEtcVolu2) / 3.3); // 면적(평)
+	       
+           var tmpSlotVolu2 = com.toInt(dma_onpmc01_s02_output.get("SLOT_VOLU")); // 면적(m)
+           var tmpSlotVolu = Math.round(com.toInt(tmpSlotVolu2) / 3.3); // 면적(평)
+           
+	       ibx_landVolu.setValue(tmpLandVolu); // 토지면적(평)
+	       ibx_bldgVolu.setValue(tmpBldgVolu); // 건물면적(평)
+	       ibx_parcelVolu.setValue(tmpSlotVolu); // 건물(분양)면적(평)
+	       ibx_etcVolu.setValue(tmpEtcVolu); 	// 제시면적(평)
+	       
+	       ibx_etcVoluM.setValue(tmpEtcVolu2); // 제시면적(m)
+	       
+	       if(tmpApraAmtLand == 0 || tmpLandVolu2 == 0){
+	       		ibx_unitLand.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitLand.setValue(Math.round(tmpApraAmtLand/tmpLandVolu2)); //면적단가
+	       }
+	       if(tmpApraAmtLand == 0 || tmpLandVolu == 0){
+	       		ibx_unitLand2.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitLand2.setValue(Math.round(tmpApraAmtLand/tmpLandVolu)); //평단가
+	       }
+	       
+	       if(tmpApraAmtBldg == 0 || tmpBldgVolu2 == 0){
+	       		ibx_unitBldg.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitBldg.setValue(Math.round(tmpApraAmtBldg/tmpBldgVolu2)); //건물면적단가
+	       }
+	       
+	       if(tmpApraAmtBldg == 0 || tmpBldgVolu == 0){
+	       		ibx_unitBldg2.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitBldg2.setValue(Math.round(tmpApraAmtBldg/tmpBldgVolu)); //건물평단가
+	       }
+	       
+	       if(tmpApraAmtEtc == 0 || tmpEtcVolu2 == 0){
+	       		ibx_unitEtc.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitEtc.setValue(Math.round(tmpApraAmtEtc/tmpEtcVolu2)); //면적단가
+	       }
+	       
+	       if(tmpApraAmtEtc == 0 || tmpEtcVolu == 0){
+	       		ibx_unitEtc2.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitEtc2.setValue(Math.round(tmpApraAmtEtc/tmpEtcVolu)); //평단가
+	       }
+	       
+	       // 분양 계산
+	       //ibx_parcelVolu.setValue(com.toInt(ibx_landVolu.getValue()) + com.toInt(ibx_bldgVolu.getValue())); // 건물분양면적(평)
+	       //ibx_parcelVoluM.setValue(com.toInt(tmpLandVolu2) + com.toInt(tmpBldgVolu2)); // 건물분양면적(M)
+	       //ibx_apraAmtParcel.setValue(com.toInt(tmpApraAmtLand) + com.toInt(tmpApraAmtBldg)); //분양 감정가
+	       
+	       //ibx_unitParcel.setValue(ibx_unitLand.getValue() + ibx_unitBldg.getValue()); //분양면적단가
+	       //ibx_unitParcel2.setValue(ibx_unitLand2.getValue() + ibx_unitBldg2.getValue()); //분양평단가
+	       
+	       if(tmpApraAmtBldg == 0 || ibx_parcelVoluM.getValue() == 0){
+	       		ibx_unitParcel.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitParcel.setValue(Math.round(tmpApraAmtBldg/ibx_parcelVoluM.getValue())); //분양면적단가
+	       }
+	       
+	       if(tmpApraAmtBldg == 0 || ibx_parcelVolu.getValue() == 0){
+	       		ibx_unitParcel2.setValue(0); //면적단가
+	       } else {
+	       		ibx_unitParcel2.setValue(Math.round(tmpApraAmtBldg/ibx_parcelVolu.getValue())); //분양평단가
+	       }
+		
+		}catch(ex){
+			$p.log("[scwin.CALCU] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 *	사원 자동조회후처리
+	 */
+	scwin.sbm_ocmab01_s01_submitdone = function(e) {
+		try{
+			var returnData = e.responseJSON;
+			var dltList= returnData.dlt_rsList[0];
+			
+			var tmp_statusCode = returnData.rsMsg.statusCode;
+			var tmp_message = returnData.rsMsg.message;
+			
+			if (tmp_statusCode.substring(0,1) == "0") {
+				var occCnt		= returnData.RCXXCNTF - 0;
+				var tmpDatas 	= returnData.dlt_rsList;
+				
+				if(occCnt == 1)	{
+					ibx_keyStafId.setValue(tmpDatas[0].STAF_ID);
+					ibx_keyStafName.setValue(tmpDatas[0].STAF_NAME);
+				} else	{	
+					scwin.setData('ocmab01');	
+				}
+			}
+		
+		}catch(ex){
+			$p.log("[scwin.sbm_ocmab01_s01_submitdone] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * spc코드 리스트조회후처리
+	 */
+	scwin.sbm_onpbi01_s03_submitdone = function(e) {
+		try{
+			var returnData = e.responseJSON;
+	        var rsList = returnData.dlt_rsList;
+	        
+	        console.log("sbm_onpbi01_s03_submitdone");
+	        console.log(returnData);
+	        
+	        if(returnData){
+		       
+		        for( var i = 0; i < returnData.RCXXCNTF; i++){      
+	                sbx_keySpcCode.addItem(returnData.dlt_rsList[i].SPC_NAME, returnData.dlt_rsList[i].SPC_CODE, i,true);                                                   
+	            } 
+	            
+	            sbx_keySpcCode.setSelectedIndex( 0 );     
+	        }
+		}catch(ex){
+			$p.log("[scwin.sbm_onpbi01_s03_submitdone] Exception :: " + ex);
+		} 
+	};
+	
+	/**
+	 * 물건 리스트조회후처리
+	 */
+	scwin.sbm_onpmc01_s01_submitdone = function(e) {
+		try{
+			var returnData = e.responseJSON;
+	        var rsList = returnData.dlt_rsList;
+	        
+	        console.log("sbm_onpmc01_s01_submitdone");
+	        console.log(returnData);
+	        
+	        if(returnData){
+
+				// 1건이면 바로 고객정보조회, 1건이상일경우 팝업노출
+				if(returnData.RCXXCNTF > 1){
+					//팝업
+					scwin.setData("onpmp02");
+				} else {
+					scvar.SPC_CODE 	= ""; 	//spc코드
+					scvar.DEBT_NO 	= "";  	//차주번호
+					scvar.OBJT_NO 	= "";  	//물건번호
+					scvar.DEBT_NAME = "";  //차주명
+					
+					for( var i = 0; i < returnData.RCXXCNTF; i++){  
+						//고객정보조회
+						scvar.SPC_CODE 	= dlt_onpmc01_s01.getCellData(i, "SPC_CODE"); 	//spc코드
+						scvar.DEBT_NO 	= dlt_onpmc01_s01.getCellData(i, "DEBT_NO");  	//차주번호
+						scvar.OBJT_NO 	= dlt_onpmc01_s01.getCellData(i, "OBJT_NO");  	//물건번호
+						scvar.DEBT_NAME = dlt_onpmc01_s01.getCellData(i, "DEBT_NAME");  //차주명
+											
+						var tmpDebtNo =scvar.DEBT_NO.split("-");
+						
+						sbx_keyDebtNoCode.setText(tmpDebtNo[0]);
+						ibx_keyDebtNo.setValue(tmpDebtNo[1]);
+						ibx_keyDebtName.setValue(scvar.DEBT_NAME);
+					}
+					
+					scwin.mainProcess('onpmc01_s02'); //유입물건조회
+					scwin.mainProcess('onpmc01_s09'); //물건사진정보조회
+					
+				}
+	        }
+		}catch(ex){
+			$p.log("[scwin.sbm_onpmc01_s01_submitdone] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * 담보정보조회후처리
+	 */
+	scwin.sbm_onpmc01_s02_submitdone = function(e) {
+		try{
+			var returnData = e.responseJSON;
+	        var rsList = returnData.dlt_rsList;
+	        
+	        console.log("sbm_onpmc01_s02_submitdone");
+	        console.log(returnData);
+	        
+	        if ("" == dma_onpmc01_s02_output.get( "APRA_AMT_ETC" )) {
+	            dma_onpmc01_s02_output.set( "APRA_AMT_ETC" , 0 );
+	        }
+	        if ("" == dma_onpmc01_s02_output.get( "ETC_AMT" )) {
+                dma_onpmc01_s02_output.set( "ETC_AMT" , 0 );
+            }
+	        
+	        var apraAmtSum = 0;
+	        
+	        var apraAmtLand = parseInt(dma_onpmc01_s02_output.get( "APRA_AMT_LAND" )==""?0:dma_onpmc01_s02_output.get( "APRA_AMT_LAND" ));
+	        var apraAmtBldg = parseInt(dma_onpmc01_s02_output.get( "APRA_AMT_BLDG" )==""?0:dma_onpmc01_s02_output.get( "APRA_AMT_BLDG" ));
+	        var apraAmtMcdc = parseInt(dma_onpmc01_s02_output.get( "APRA_AMT_MCDC" )==""?0:dma_onpmc01_s02_output.get( "APRA_AMT_MCDC" ));
+	        var apraAmtEtc = parseInt(dma_onpmc01_s02_output.get( "APRA_AMT_ETC" )==""?0:dma_onpmc01_s02_output.get( "APRA_AMT_ETC" ));
+	        var etcAmt = parseInt(dma_onpmc01_s02_output.get( "ETC_AMT" )==""?0:dma_onpmc01_s02_output.get( "ETC_AMT" ));
+	        
+	        apraAmtSum = apraAmtLand + apraAmtBldg + apraAmtMcdc + apraAmtEtc + etcAmt;
+	        dma_onpmc01_s02_output.set( "APRA_AMT_SUM" , apraAmtSum );
+	        
+            if(returnData){
+               if(returnData.rsMsg.statusCode == 00){ //최초의 disabled(true)상태에서  --> 건이 있을경우에만  disabled(false);
+                   btn_fileUpLoad.setDisabled( false );  
+                   scwin.CALCU();
+               }else{ //검색은 했지만 건이 없으면 X disabled(true);            
+                   btn_fileUpLoad.setDisabled( true );         
+               }                
+            }else{ //returnData자체가 없는경우 disabled(true);            
+               btn_fileUpLoad.setDisabled( true ); 
+            }
+            debugger;
+        }catch(ex){
+			$p.log("[scwin.sbm_onpmc01_s02_submitdone] Exception :: " + ex);
+		} 
+	};
+	
+	/**
+	 * 유입물건조회
+	 */
+	scwin.sbm_onpmc01_s07_submitdone = function(e) {
+		try{
+			var returnData = e.responseJSON;
+	        var rsList = returnData.dlt_rsList;
+	        
+	        console.log("sbm_onpmc01_s07_submitdone");
+	        console.log(returnData);
+	        
+	        if(returnData){
+		       
+	        }
+		}catch(ex){
+			$p.log("[scwin.sbm_onpmc01_s07_submitdone] Exception :: " + ex);
+		} 
+	};
+	
+	/**
+	 * 물건사진정보조회
+	 */
+	scwin.sbm_onpmc01_s09_submitdone = function(e) {
+		try{
+            var returnData = e.responseJSON;
+            var rsList = returnData.dlt_rsList;
+            
+            console.log("sbm_onpmc01_s09_submitdone");
+            console.log(returnData);
+            
+            var tmpCnt = 1;
+            if(returnData){ //결과건이 존재한다면,
+                for(var i = 0; i < returnData.RCXXCNTF; i++){
+                
+                    var imgId = $p.getComponentById("image"+ tmpCnt);
+                    if(dlt_onpmc01_s09.getCellData(i, "RPRS_PICT_YN") == "Y"){
+                        tmpCnt++;
+
+                        var tmpSeq = dlt_onpmc01_s09.getCellData(i, "FILE_SEQ");    // 파일순번
+                        var tmpDir = dlt_onpmc01_s09.getCellData(i, "FILE_DIR");    // 파일디렉토리
+//                      var tmpName = dlt_onpmc01_s09.getCellData(i, "FILE_NAME");  // 파일명
+                        var tmpName = $p.URLEncoder((dlt_onpmc01_s09.getCellData(i, "FILE_NAME"))).replaceAll("+", " ");      // 파일명 (공백이 들어가면 이미지에 안들어감)
+                        var tmpUrl = "/upload/" + tmpDir + "/" + tmpName; 
+                        
+                        
+                        
+                        //var tmpCnt = i + 1;
+                        //var imgId = $p.getComponentById("image"+ tmpCnt);
+                        imgId.setSrc(tmpUrl); // 이미지세팅
+
+                    }else if(imgId.getSrc().substring(27)!="") {
+                        imgId.setSrc(""); //N일경우는 reflash
+                    }
+                }//returnData_for_end
+                if(returnData.RCXXCNTF == 1){ //1건만 존재한다면 나머지는 reflash
+                  image2.setSrc( "" );
+                  image3.setSrc( "" );
+           
+                }else if(returnData.RCXXCNTF == 2){ //2건만 존재한다면 나머지는 reflash
+                  image3.setSrc( "" );
+                }
+
+
+            }else{ //결과값이 아예 없다면,
+               image1.setSrc( "" );
+               image2.setSrc( "" );
+               image3.setSrc( "" );
+            }
+            
+
+//	        if(returnData){
+//	       	 	
+//	        	for(var i = 0; i < returnData.RCXXCNTF; i++){
+//	        		if(dlt_onpmc01_s09.getCellData(i, "RPRS_PICT_YN") == "Y"){
+//	        			var tmpSeq = dlt_onpmc01_s09.getCellData(i , "FILE_SEQ");	// 파일순번
+//		        		var tmpDir = dlt_onpmc01_s09.getCellData(i , "FILE_DIR");	// 파일디렉토리
+//		        		var tmpName = dlt_onpmc01_s09.getCellData(i , "FILE_NAME");	// 파일명
+//		        		var tmpUrl = "/upload/" + tmpDir + "/" + tmpName; 
+//						var tmpCnt = i + 1;
+//						var imgId = $p.getComponentById("image"+ tmpCnt);
+//					
+//						imgId.setSrc(tmpUrl); // 이미지세팅
+//	        		
+//	        		}
+//	        	}
+//	        }
+		}catch(ex){
+			$p.log("[scwin.sbm_onpmc01_s09_submitdone] Exception :: " + ex);
+		} 
+	};
+	
+	/**
+	 *	기초정보등록-담보정보입력 화면으로이동
+	 */
+	scwin.btn_objt_save_onclick = function() {
+		try {
+			scvar.tabIndex = 3;
+			scwin.setData('onpbi01');
+		} catch(ex){
+			$p.log("[scwin.btn_objt_save_onclick] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * 조회
+	 */
+	scwin.btn_search_onclick = function() {
+		try {
+			scwin.CLEAR();
+			scwin.mainProcess('onpmc01_s01');
+		} catch(ex){
+			$p.log("[scwin.btn_search_onclick] Exception :: " + ex);
+		}
+	};
+	
+	/**
+	 * 파일업로드
+	 */
+	scwin.btn_fileUpLoad_onclick = function() {
+		scwin.setData('onpma02');
+	};
+	
+	/**
+	* SPC코드 변경시
+	**/
+	scwin.sbx_keySpcCode_onchange = function() {
+		
+		scvar.SPC_CODE = sbx_keySpcCode.getValue();
+		sbx_keyDebtNoCode.setValue("");
+		ibx_keyDebtNo.setValue("");
+		ibx_keyDebtName.setValue("");
+	};
+	
+	/**
+	* 차주번호 변경시
+	**/
+	scwin.sbx_keyDebtNoCode_onchange = function() {
+
+		ibx_keyDebtNo.setValue("");
+		ibx_keyDebtName.setValue("");
+	};
+	
+	scwin.ibx_keyStafId_onblur = function(e) {
+		try{
+            if(this.getValue() != ""){
+                 scwin.mainProcess('ocmab01_s01');
+            }else{
+                ibx_keyStafName.setValue("");
+            }           
+		}catch(ex){
+			$p.log("[scwin.ibx_keyStafId_onblur] Exception :: " + ex);
+		}
+	};
+	
+	scwin.btn_stafSearch_onclick = function() {
+		try{
+
+			scwin.setData("ocmab01");
+
+		}catch(ex){
+			$p.log("[scwin.btn_stafSearch_onclick] Exception :: " + ex);
+		}
+	};
+	]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+    	<w2:wframe id="" style=""></w2:wframe>
+    	<xf:group class="sub_contents" id="" style="">
+    		<xf:group class="shbox" id="" style="">
+    			<xf:group class="shbox_inner" id="" style="">
+    				<xf:group adaptive="" adaptiveThreshold="" class="w2tb tb" id="" style="" tagname="table">
+    					<w2:attributes>
+    						<w2:summary></w2:summary>
+    					</w2:attributes>
+    					<xf:group tagname="colgroup">
+    						<xf:group style="width:70.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:280.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:70.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:140.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:50.00px;;" tagname="col"></xf:group>
+    						<xf:group style="width:130.00px;;" tagname="col"></xf:group>
+    						<xf:group tagname="col" style="width:52px;"></xf:group>
+    						<xf:group tagname="col" style="width:150.00px;"></xf:group>
+    						<xf:group style="width:63.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:70.00px;" tagname="col"></xf:group>
+    						<xf:group style="width:50.00px;" tagname="col"></xf:group>
+    					</xf:group>
+    					<xf:group style="" tagname="tr">
+    						<xf:group class="w2tb_th" style="" tagname="th">SPC코드</xf:group>
+    						<xf:group class="w2tb_td" style="" tagname="td"><xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+    								disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_keySpcCode" optionOrder="false" ref="" selectedData="true"
+    								style="width: 100%;" submenuSize="auto" textAlign="left" ev:onchange="" ev:onviewchange="scwin.sbx_keySpcCode_onchange">
+    								<xf:choices>
+    									<xf:itemset nodeset="data:dlt_onpbi01_s03">
+    										<xf:label ref="SPC_NAME"></xf:label>
+    										<xf:value ref="SPC_CODE"></xf:value>
+    									</xf:itemset>
+    								</xf:choices>
+    							</xf:select1></xf:group>
+    						<xf:group class="w2tb_th" style="" tagname="th">차주번호</xf:group>
+    						<xf:group class="w2tb_td" style="" tagname="td" id="grp_debtGrp">
+    							<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+    								disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_keyDebtNoCode" optionOrder="false" ref="" selectedData="true"
+    								style="width:60px;" submenuSize="auto" textAlign="left" ev:onchange="" ev:onviewchange="scwin.sbx_keyDebtNoCode_onchange">
+    								<xf:choices>
+    									<xf:item>
+    										<xf:label><![CDATA[전체]]></xf:label>
+    										<xf:value></xf:value>
+    									</xf:item>
+    								</xf:choices>
+    							</xf:select1>
+    							<xf:input id="ibx_keyDebtNo" style="width:70px;"></xf:input>
+    						</xf:group>
+    						<xf:group class="w2tb_th" tagname="th">
+    							차주명
+    							<w2:attributes></w2:attributes>
+    						</xf:group>
+    						<xf:group class="w2tb_td" tagname="td" id="grp_debtGrp2"><w2:attributes></w2:attributes><xf:input id="ibx_keyDebtName" style="width:120px;"></xf:input></xf:group>
+    						<xf:group tagname="th" class="w2tb_th">
+    							담당자
+    							<w2:attributes>
+    								<w2:scope>row</w2:scope>
+    							</w2:attributes>
+    						</xf:group>
+    						<xf:group tagname="td" class="w2tb_td"><w2:attributes>
+    								<w2:scope>row</w2:scope>
+    							</w2:attributes><xf:input id="ibx_keyStafId" style="width:40px;" ev:onblur="scwin.ibx_keyStafId_onblur" editType="select"></xf:input><w2:anchor class="btn_search" id="btn_stafSearch" outerDiv="false" style="" ev:onclick="scwin.btn_stafSearch_onclick">
+    								<xf:label><![CDATA[검색]]></xf:label>
+    							</w2:anchor><xf:input id="ibx_keyStafName" style="width:68px;"></xf:input></xf:group>
+    						<xf:group class="w2tb_th" tagname="th">
+    							유입물건
+    							<w2:attributes></w2:attributes>
+    						</xf:group>
+    						<xf:group class="w2tb_td" tagname="td">
+    							<w2:attributes></w2:attributes>
+    							<xf:select1 allOption="" appearance="minimal" chooseOption="" class="" direction="auto" disabled="false"
+    								disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_inflYn" optionOrder="false" ref="" renderType=""
+    								selectedData="true" style="width:72px;" submenuSize="auto" textAlign="left">
+    								<xf:choices>
+    									<xf:item>
+    										<xf:label><![CDATA[전체]]></xf:label>
+    										<xf:value></xf:value>
+    									</xf:item>
+    									<xf:item>
+    										<xf:label><![CDATA[Y]]></xf:label>
+    										<xf:value>Y</xf:value>
+    									</xf:item>
+    									<xf:item>
+    										<xf:label><![CDATA[N]]></xf:label>
+    										<xf:value>N</xf:value>
+    									</xf:item>
+    								</xf:choices>
+    							</xf:select1>
+    						</xf:group>
+    						<xf:group class="w2tb_td tar" tagname="td">
+    							<w2:attributes></w2:attributes>
+    							<w2:anchor class="btn_cm ty3" id="btn_search" outerDiv="false" style="" ev:onclick="scwin.btn_search_onclick">
+    								<xf:label><![CDATA[조회]]></xf:label>
+    							</w2:anchor>
+    						</xf:group>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		
+    		<xf:group class="dfbox" id="" style="">
+    			<w2:textbox class="df_tit fl" id="" label="담보정보" style=""></w2:textbox>
+    			<xf:group class="fr" id="" style="">
+    				<w2:anchor class="btn_cm ty2" id="btn_objt_save" outerDiv="false" style="" ev:onclick="scwin.btn_objt_save_onclick">
+    					<xf:label><![CDATA[기초정보등록]]></xf:label>
+    				</w2:anchor>
+    			</xf:group>
+    		</xf:group>
+    		
+    		<xf:group class="tbbox" id="" style="">
+    			<xf:group adaptive="" adaptiveThreshold="" class="w2tb tb" id="" style="" tagname="table">
+    				<w2:attributes>
+    					<w2:summary></w2:summary>
+    				</w2:attributes>
+    				<xf:group tagname="colgroup">
+    					<xf:group style="width:70px;" tagname="col"></xf:group>
+    					<xf:group style="width:70px;" tagname="col"></xf:group>
+    					<xf:group style="" tagname="col"></xf:group>
+    					<xf:group style="" tagname="col"></xf:group>
+    					<xf:group style="width:70px;" tagname="col"></xf:group>
+    					<xf:group style="width:300px;" tagname="col"></xf:group>
+    					<xf:group style="width:70px;" tagname="col"></xf:group>
+    					<xf:group tagname="col" style="width:70px;"></xf:group>
+    					<xf:group tagname="col" style="width:70px;"></xf:group>
+    					<xf:group tagname="col" style="width:50px;"></xf:group>
+    					<xf:group tagname="col" style="width:50px;"></xf:group>
+    					<xf:group tagname="col" style="width:70px;"></xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						물건번호
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						담보종류
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						특별,광역시/도
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						시/군/구
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						동/리/읍/면
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						상세&amp;nbsp;주소
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						토지면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="th" class="w2tb_th">
+    						건물면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="th" class="w2tb_th">
+    						기계기구
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="th" class="w2tb_th">
+    						제시外
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="th" class="w2tb_th">
+    						기타
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="th" class="w2tb_th">
+    						소유자
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_td tac" style="" tagname="td">
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.OBJT_NO"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.MORT_KIND"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" style="" tagname="td">
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.ADDR_1"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.ADDR_2"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.ADDR_3"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="untxt ett" id="" label=""
+    							style="" ref="data:dma_onpmc01_s02_output.ETC_ADDR">
+    						</w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.LAND_VOLU"></w2:span>
+    					</xf:group>
+    					<xf:group tagname="td" class="w2tb_td tac">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.BLDG_VOLU"></w2:span>
+    					</xf:group>
+    					<xf:group tagname="td" class="w2tb_td tac">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.MACH_DEVC"></w2:span>
+    					</xf:group>
+    					<xf:group tagname="td" class="w2tb_td tac">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.NON_PRSN"></w2:span>
+    					</xf:group>
+    					<xf:group tagname="td" class="w2tb_td tac">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.ETC_AMT" dataType="number" displayFormat="#,###"></w2:span>
+    					</xf:group>
+    					<xf:group tagname="td" class="w2tb_td tac">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.OWNR"></w2:span>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<xf:group class="tbbox" id="" style="">
+    			<xf:group adaptive="" adaptiveThreshold="" class="w2tb tb" id="" style="" tagname="table">
+    				<w2:attributes>
+    					<w2:summary></w2:summary>
+    				</w2:attributes>
+    				<xf:group tagname="colgroup">
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="width:50px;" tagname="col"></xf:group>
+    					<xf:group style="width:30px;" tagname="col"></xf:group>
+    					<xf:group style="width:90px;" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="width:80px;" tagname="col"></xf:group>
+    					<xf:group style="" tagname="col"></xf:group>
+    					<xf:group style="" tagname="col"></xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>1</w2:colspan>
+    							<w2:rowspan>3</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						토지면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>3</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						건물전용면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						건물분양면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						기계기구
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>1</w2:colspan>
+    							<w2:rowspan>2</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						제시외면적
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						기타
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>1</w2:colspan>
+    							<w2:rowspan>2</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						합계
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>1</w2:colspan>
+    							<w2:rowspan>2</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						m²
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						坪
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						m²
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						坪
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						m²
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						坪
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						m²
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						坪
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_td tac" style="" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="ibx_landVoluM" label="" style="" dataType="number" displayFormat="#,###.#" ref="data:dma_onpmc01_s02_output.LAND_VOLU"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_landVolu" label="" style="" ref="" dataType="number" displayFormat=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" style="" tagname="td">
+    						<w2:span class="ett" id="ibx_BldgVoluM" label="" style="" dataType="number" displayFormat="#,###.#" ref="data:dma_onpmc01_s02_output.BLDG_VOLU"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:span class="ett" id="ibx_bldgVolu" label="" style="" ref="" dataType="number" displayFormat=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_parcelVoluM" label="" style="" dataType="number" displayFormat="#,###.#" ref="data:dma_onpmc01_s02_output.SLOT_VOLU"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_parcelVolu" label="" style="" dataType="number" displayFormat=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="0" style="" ref="data:dma_onpmc01_s02_output.MACH_DEVC" dataType="number" displayFormat="###,###,###"></w2:span>
+    						<w2:span class="ett" id="" label="점" style=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_etcVoluM" label="" style="" dataType="number" displayFormat="" ref=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_etcVolu" label="" style="" ref="" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.ETC_NAME" dataType="text" displayFormat=""></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						감정평가액
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>3</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.APRA_AMT_LAND" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>4</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.APRA_AMT_BLDG" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="0" style="" ref="data:dma_onpmc01_s02_output.APRA_AMT_MCDC" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.APRA_AMT_ETC" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" dataType="number" displayFormat="###,###,###" id="" label=""
+    							ref="data:dma_onpmc01_s02_output.ETC_AMT" style="">
+    						</w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.APRA_AMT_SUM" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						m²/평단가
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="ibx_unitLand" label="" style="" dataType="number" displayFormat="###,###,###.##"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" displayFormat="###,###,###.##" id="ibx_unitLand2" label="" style="" dataType="number"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" displayFormat="###,###,###.##" id="ibx_unitBldg" label="" style="" dataType="number"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_unitBldg2" label="" style="" dataType="number" displayFormat="###,###,###.##"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_unitParcel" label="" style="" dataType="number" displayFormat="#,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_unitParcel2" label="" style="" dataType="number" displayFormat="#,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_unitEtc" label="" style="" dataType="number" displayFormat="###,###,###.##"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="ibx_unitEtc2" label="" style="" dataType="number" displayFormat="###,###,###.##"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						유입물건
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.INFL_YN"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						유입금액
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.INFL_AMT" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						유입비용
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.PRCR_COST" dataType="number" displayFormat="###,###,###"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						유입일자
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.OWNR_ACQS_YMD" dataType="date" displayFormat="yyyy-MM-dd"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						매각목표액
+    						<w2:attributes></w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" displayFormat="##,###,###,###" id="" label="" style="" ref="data:dma_onpmc01_s02_output.DPSL_EXPT_AMT" dataType="number"></w2:span>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group style="" tagname="tr">
+    					<xf:group class="w2tb_th" tagname="th">
+    						담보종결
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.MORT_END_YN"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						담보종결일
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    						<w2:span class="ett" id="" label="-" style="" ref="data:dma_onpmc01_s02_output.MORT_END_YMD" dataType="date" displayFormat="yyyy-MM-dd"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						담보종결사유
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    							<w2:colspan>2</w2:colspan>
+    							<w2:rowspan>1</w2:rowspan>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.MORT_END_RESN"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						매각완료Y/N
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="" style="" ref="data:dma_onpmc01_s02_output.DPSL_CPLT_YN"></w2:span>
+    					</xf:group>
+    					<xf:group class="w2tb_th" tagname="th">
+    						건철보유부서
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group class="w2tb_td tac" tagname="td">
+    						<w2:attributes></w2:attributes>
+    						<w2:span class="ett" id="" label="-" style="" ref="data:dma_onpmc01_s02_output.BDDC_POSE_DEPT"></w2:span>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<xf:group class="dfbox" id="" style="">
+    			<w2:textbox class="df_tit fl" id="" label="담보물 사진" style=""></w2:textbox>
+    			<xf:group class="fr" id="" style="">
+	    			<w2:anchor class="btn_cm ty2" id="btn_fileUpLoad" outerDiv="false" style="" ev:onclick="scwin.btn_fileUpLoad_onclick" disabled="true">
+	    				<xf:label><![CDATA[파일업로드]]></xf:label>
+	    			</w2:anchor>
+    			</xf:group>
+    		</xf:group>
+    		<xf:group class="lybox col3" id="" style="">
+    			<xf:group class="ly_column" id="" style="">
+    				<xf:group class="chart" id="" style="height:250px;">
+    				<xf:image id="image1" src="" style="height:220px; width:320px;"></xf:image> 
+    				</xf:group>
+    			</xf:group>
+    			<xf:group class="ly_column" id="" style="">
+    				<xf:group class="chart" id="" style="height:250px;">
+    				<xf:image id="image2" src="" style="height:220px; width:320px;"></xf:image> 
+    				</xf:group>
+    			</xf:group>
+    			<xf:group class="ly_column" id="" style="">
+    				<xf:group class="chart" id="" style="height:250px;">
+    				<xf:image id="image3" src="" style="height:220px; width:320px;"></xf:image> 
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    	</xf:group>
+    </body>
+</html>

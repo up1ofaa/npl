@@ -1,0 +1,1224 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<?xml-stylesheet href="/cm/css/all.css" type="text/css"?>
+<?xml-stylesheet href="/cm/css/contents.css" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    
+    <head>
+        <w2:type>DEFAULT</w2:type>
+        <w2:buildDate />
+        <xf:model>
+            <xf:instance>
+                <data xmlns="" />
+            </xf:instance>
+            <w2:dataCollection baseNode="map">
+                <w2:dataMap baseNode="map" id="dma_onpmc01_s09">
+                    <w2:keyInfo>
+                        <w2:key id="RRAPPLID" name="통신ID" dataType="text"></w2:key>
+                        <w2:key id="RRRECORD" name="NCRM 통신레코드" dataType="text"></w2:key>
+                        <w2:key id="SYS_HTML_ID" name="화면ID" dataType="text"></w2:key>
+                        <w2:key id="SPC_CODE" name="SPC코드" dataType="text"></w2:key>
+                        <w2:key id="DEBT_NO" name="차주번호" dataType="text"></w2:key>
+                        <w2:key id="OBJT_NO" name="물건번호" dataType="text"></w2:key>
+                        <w2:key id="DEBT_NAME" name="차주명" dataType="text"></w2:key>
+                        <w2:key id="STAF_NAME" name="담당자명" dataType="text"></w2:key>
+                        <w2:key id="INFL_YN" name="유입여부" dataType="text"></w2:key>
+                        <w2:key id="FILE_DIVI" name="파일구분" dataType="text"></w2:key>
+                    </w2:keyInfo>
+                </w2:dataMap>
+                <w2:dataList baseNode="list" id="dlt_onpmc01_s09" repeatNode="map" saveRemovedData="false" style="">
+                    <w2:columnInfo>
+                        <w2:column dataType="text" id="FILE_NAME" name="파일명"></w2:column>
+                        <w2:column dataType="text" id="INPT_DATE" name="파일날짜"></w2:column>
+                        <w2:column id="RPRS_PICT_YN" name="대표사진여부" dataType="text"></w2:column>
+                        <w2:column id="SPC_CODE" name="SPC코드" dataType="text"></w2:column>
+                        <w2:column id="DEBT_NO" name="차주번호" dataType="text"></w2:column>
+                        <w2:column id="OBJT_NO" name="물건번호" dataType="text"></w2:column>
+                        <w2:column id="FILE_SEQ" name="파일순번" dataType="text"></w2:column>
+                        <w2:column dataType="text" id="FILE_DIR" name="파일디렉토리"></w2:column>
+                        <w2:column id="FILE_PATH" name="파일패스" dataType="text"></w2:column>
+                        <w2:column id="FILE_DIVI" name="구분" dataType="text"></w2:column>
+                    </w2:columnInfo>
+                </w2:dataList>
+                <w2:dataMap baseNode="map" id="dma_onpmc01_i01">
+                    <w2:keyInfo>
+                        <w2:key id="RRAPPLID" name="통신ID" dataType="text"></w2:key>
+                        <w2:key id="RRRECORD" name="NCRM 통신레코드" dataType="text"></w2:key>
+                        <w2:key id="SYS_HTML_ID" name="화면ID" dataType="text"></w2:key>
+                        <w2:key id="SPC_CODE" name="SPC코드" dataType="text"></w2:key>
+                        <w2:key id="DEBT_NO" name="차주번호" dataType="text"></w2:key>
+                        <w2:key id="OBJT_NO" name="물건번호" dataType="text"></w2:key>
+                        <w2:key id="FILE_DIR" name="파일디렉토리" dataType="text"></w2:key>
+                        <w2:key id="FILE_NAME" name="파일명" dataType="text"></w2:key>
+                        <w2:key id="STAF_ID" name="담당자" dataType="text"></w2:key>
+                        <w2:key id="INFL_YN" name="유입여부" dataType="text"></w2:key>
+                        <w2:key id="RPRS_PICT_YN" name="대표사진여부" dataType="text"></w2:key>
+                        <w2:key id="CHNG_STAF" name="변경담당자" dataType="text"></w2:key>
+                        <w2:key id="FILE_DIVI" name="파일구분" dataType="text"></w2:key>
+                    </w2:keyInfo>
+                </w2:dataMap>
+                <w2:dataMap baseNode="map" id="dma_onpmc01_u10">
+                    <w2:keyInfo>
+                        <w2:key id="RRAPPLID" name="통신ID" dataType="text"></w2:key>
+                        <w2:key id="RRRECORD" name="NCRM 통신레코드" dataType="text"></w2:key>
+                        <w2:key id="SYS_HTML_ID" name="화면ID" dataType="text"></w2:key>
+                        <w2:key id="RCXXCNTF" name="건수" dataType="text"></w2:key>
+                    </w2:keyInfo>
+                </w2:dataMap>
+                <w2:dataList baseNode="list" repeatNode="map" id="dlt_onpmc01_u10" saveRemovedData="true">
+                    <w2:columnInfo>
+                        <w2:column id="SPC_CODE" name="SPC코드" dataType="text"></w2:column>
+                        <w2:column id="DEBT_NO" name="차주번호" dataType="text"></w2:column>
+                        <w2:column id="OBJT_NO" name="물건번호" dataType="text"></w2:column>
+                        <w2:column id="FILE_SEQ" name="파일순번" dataType="text"></w2:column>
+                        <w2:column id="RPRS_PICT_YN" name="대표사진여부" dataType="text"></w2:column>
+                        <w2:column id="CHNG_STAF" name="변경담당자" dataType="text"></w2:column>
+                    </w2:columnInfo>
+                </w2:dataList>
+                <w2:dataMap baseNode="map" id="dma_onpbi01_s03">
+                    <w2:keyInfo>
+                        <w2:key id="RRAPPLID" name="통신ID" dataType="text"></w2:key>
+                        <w2:key id="RRRECORD" name="NCRM 통신레코드 세팅" dataType="text"></w2:key>
+                        <w2:key id="SYS_HTML_ID" name="화면ID" dataType="text"></w2:key>
+                    </w2:keyInfo>
+                </w2:dataMap>
+                <w2:dataList baseNode="list" repeatNode="map" id="dlt_onpbi01_s03" saveRemovedData="true">
+                    <w2:columnInfo>
+                        <w2:column id="SPC_CODE" name="SPC코드" dataType="text"></w2:column>
+                        <w2:column id="SPC_NAME" name="SPC명" dataType="text"></w2:column>
+                    </w2:columnInfo>
+                </w2:dataList>
+                <w2:dataMap baseNode="map" id="dma_onpmc01_d01">
+                    <w2:keyInfo>
+                        <w2:key id="SPC_CODE" name="name1" dataType="text"></w2:key>
+                        <w2:key id="DEBT_NO" name="name2" dataType="text"></w2:key>
+                        <w2:key id="OBJT_NO" name="name3" dataType="text"></w2:key>
+                        <w2:key id="FILE_SEQ" name="name4" dataType="text"></w2:key>
+                        <w2:key id="CHNG_STAF" name="name5" dataType="text"></w2:key>
+                        <w2:key id="FILE_DIR" name="name6" dataType="text"></w2:key>
+                        <w2:key id="FILE_NAME" name="name7" dataType="text"></w2:key>
+                    </w2:keyInfo>
+                </w2:dataMap>
+            </w2:dataCollection>
+            <w2:workflowCollection></w2:workflowCollection>
+            <xf:submission id="sbm_onpmc01_s09" ref="data:json,dma_onpmc01_s09" target="data:json,dlt_onpmc01_s09"
+                action="/Action?name=and.np.ctl.onpmc01_s09" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+                errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+                ev:submitdone="scwin.sbm_onpmc01_s09_submitdone" ev:submiterror="" abortTrigger="">
+            </xf:submission>
+            <xf:submission id="sbm_onpmc01_i01" ref="data:json,dma_onpmc01_i01" target="" action="/Action?name=and.np.ctl.onpmc01_i01"
+                method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
+                mode="asynchronous" processMsg="반영 중 입니다." ev:submit="" ev:submitdone="scwin.sbm_onpmc01_i01_submitdone" ev:submiterror=""
+                abortTrigger="">
+            </xf:submission>
+            <xf:submission id="sbm_onpmc01_u10" ref='data:json,["dma_onpmc01_u10","dlt_onpmc01_u10"]' target=""
+                action="/Action?name=and.np.ctl.onpmc01_u10" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+                errorHandler="" customHandler="" mode="asynchronous" processMsg="반영 중 입니다." ev:submit=""
+                ev:submitdone="scwin.sbm_onpmc01_u10_submitdone" ev:submiterror="" abortTrigger="">
+            </xf:submission>
+            <xf:submission id="sbm_onpbi01_s03" ref="data:json,dma_onpbi01_s03" target="data:json,dlt_onpbi01_s03"
+                action="/Action?name=and.np.ctl.onpbi01_s03" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+                errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중 입니다." ev:submit=""
+                ev:submitdone="scwin.sbm_onpbi01_s03_submitdone" ev:submiterror="" abortTrigger="">
+            </xf:submission>
+            <xf:submission id="sbm_onpmc01_d01" ref="data:json,dma_onpmc01_d01" target="" action="/Action?name=and.np.ctl.onpmc01_d01" method="post" mediatype="application/json"
+                encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit=""
+                ev:submitdone="scwin.sbm_onpmc01_d01_submitdone" ev:submiterror="" abortTrigger="">
+            </xf:submission>
+        </xf:model>
+        <script type="text/javascript" lazy="false"><![CDATA[
+    /*
+    #####################################################################
+    파일명 : onpma02.xml
+    프로그램명 : NPL파일관리
+    설 명 : 담보정보상세 / NPL파일관리
+    작성자 : 서지은
+    작성일 : 2019.12.23
+    
+    수정일자       수정자                 수정내용
+    =====================================================================
+    2019.12.23    서지은        최초작성
+    2020.01.28    백진우        scwin.fileUpLoad함수 수정.
+    
+    1) 파일업로드 com.fileUpload함수가 에러가 없을경우에 콜백함수를 타지않는 증상이 있어서, 
+        정상업로드해야하는데 콜백 함수를 타지못하는 경우를 대비해 
+        별도의 전역변수를 통해 구분값을 만들어 임의로 scwin.mainProcess("onpmc01_i01")를 실행시켜서 DB에 파일저장.
+         (파일이 정상적으로 올라갔는지는 --> np05ojpt테이블과 photo폴더에 다 올라갔는지를 확인하면 된다)
+
+    2) onpmc01 (이전화면)에서 대표사진일 경우에 사진이 보여지도록 아래의 함수를 추가.        
+         var parentScope = $p.getFrame().parentControl.getScopeWindow();
+         parentScope.scwin.mainProcess("onpmc01_s09");
+         
+    #####################################################################
+    */      
+     
+    // ===================================================================
+    // 1. 전역변수 영역
+    // ===================================================================
+    scvar.fileName      = "";   // 파일명
+    scvar.fileDir       = "";   // 파일디렉토리
+    scvar.rprsPictCnt   = 0;    // 대표사진건수
+    
+    // 사용자 정보
+    scvar.sysStafId   = gcm.SYS_INFO.SYS_STAF_ID;    // 사번
+    scvar.sysStafName = gcm.SYS_INFO.SYS_STAF_NAME;  // 이름
+    scvar.sysStafJbgr = gcm.SYS_INFO.SYS_STAF_JBGR;  // 직군
+    scvar.sysStafClnt = gcm.SYS_INFO.SYS_STAF_CLNT;  // 위탁사
+    scvar.sysTeamCode = gcm.SYS_INFO.SYS_TEAM_CODE;  // 팀코드
+    scvar.sysTeamName = gcm.SYS_INFO.SYS_TEAM_NAME;  // 팀이름
+    scvar.tmpRowData  = ""; 
+    
+    scvar.fileArray = new Array();
+    scvar.fileDivi = "";
+    
+    // ===================================================================
+    // 2. CONTROLLER
+    // ===================================================================
+    /** 
+     * 화면 최초 로드시
+     */
+    scwin.onpageload = function() {
+        try {
+            scwin.init();
+            scwin.mainProcess("onpbi01_s03"); // SPC코드조회
+            
+        } catch (ex) {
+            $p.log("[scwin.onpageload] Exception :: " + ex);
+        };
+    };
+    
+    /** 
+     * 화면 종료시
+     */
+    scwin.onpageunload = function() {
+        try {
+
+        } catch (ex) {
+            $p.log("[scwin.onpageload] Exception :: " + ex);
+        };
+    };
+    
+    /** 
+     * 화면이 최초 로드될 때 호출되는 함수
+     */
+    scwin.init = function() {
+        try {
+            // 조회조건 비활성화
+            sbx_keySpcCode.setDisabled( true );     // SPC코드
+            ibx_debtNo.setReadOnly( true );         // 차주번호
+            ibx_debtName.setReadOnly( true );       // 차주명
+            ibx_keyStafId.setReadOnly( true );      // 담당자사번
+            btn_stafSearch.setDisabled( true );     // 담당자조회 버튼
+            ibx_keyStafName.setReadOnly( true );    // 담당자명
+            sbx_inflYn.setDisabled( true );         // 유입물건
+            
+            // 파일관련
+            rad_updownDivi.setValue("12");          // [DOWN]
+        } catch (ex) {
+            $p.log("[scwin.init] Exception :: " + ex);
+        };
+    };
+    
+    /**
+     * 이동 화면으로부터 받은 DATA SET
+     */
+    scwin.getData = function(retdata) {     
+        try { 
+            var objmsg;
+            
+            if (typeof retdata == 'undefined') {
+                scvar.param = com.getParameter();
+                objmsg = scvar.param;
+            } else {
+                objmsg = retdata;
+            }
+            
+            switch(objmsg.tran)
+            {
+                // -----------------------------------------------------------------
+                // 담보정보상세, 유입물건조회, NPL메인
+                // -----------------------------------------------------------------
+                case "onpmc01" :
+                case "onpbi07" :
+                case "onpma01" :
+                    sbx_keySpcCode.setValue( objmsg.gSPC_CODE );   // SPC코드
+                    ibx_debtNo.setValue( objmsg.gDEBT_NO );        // 차주번호
+                    ibx_objtNo.setValue( objmsg.gOBJT_NO );        // 물건번호
+                    ibx_debtName.setValue( objmsg.gDEBT_NAME );    // 차주명
+                    ibx_keyStafId.setValue( objmsg.gSTAF_ID );     // 담당자사번
+                    ibx_keyStafName.setValue( objmsg.gSTAF_NAME ); // 담당자명
+                    sbx_inflYn.setValue( objmsg.gINFL_YN );        // 유입여부
+                    
+                    scwin.mainProcess("onpmc01_s09");
+                    break;
+                    
+                // 담당자 조회 (팝업)     
+                case "ocmab01":
+                    ibx_keyStafId.setValue( objmsg.gSTAF_CODE );
+                    ibx_keyStafName.setValue( objmsg.gSTAF_NAME );
+                    break;
+                    
+                default :
+                    break;
+            }
+        } catch (ex) {
+            $p.log("[scwin.getData] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * 다른 화면으로 보낼 DATA SET
+     */
+    scwin.setData = function(argTran) {     
+        try {
+            var objmsg = new Object();
+            objmsg.tran = "onpma02";
+            objmsg.callbackFn = "scwin.getData";
+            
+            switch (argTran)
+            {
+                // 담당자 조회 (팝업)
+                case "ocmab01":
+                    var data     = { "gKEY_DIVI": (isNaN(ibx_keyStafId.getValue())) ? "2" : "1"
+                                   , "gSTAF_ID" : ibx_keyStafId.getValue()
+                                   , id         : "ocmab01"
+                                   , callbackFn : "scwin.getData"
+                                   };
+                    var options  = { id         : "ocmab01"
+                                   , popupName  : "사원 검색"
+                                   , modal      : true
+                                   , type       : "wframePopup"
+                                   , size       : "C"
+                                   , width      : 650
+                                   , height     : 350 }; 
+                    com.openPopup("/ui/cm/ocmab01.xml", options, data);
+                    break;
+                    
+                // -----------------------------------------------------------------
+                // 담보정보상세, 유입물건조회, NPL메인
+                // -----------------------------------------------------------------
+                case "onpmc01" :
+                case "onpbi07" :
+                case "onpma01" :
+
+                        scvar.parent = $p.getFrame().parentControl.getScopeWindow();
+                        
+                        com.closePopup(scvar.parent.scwin.getData(objmsg)); 
+                        break;   
+                    
+                default : 
+                    break;
+            }
+        } catch (ex) {
+            $p.log("[scwin.setData] Exception :: " + ex);
+        }
+    };
+    
+    // ===================================================================
+    // 3. MODEL
+    // ===================================================================
+    /**
+     * 호스트측에 요청을 하기 위한 기본함수 (MAIN)  
+     */
+    scwin.mainProcess = function(argFun) {
+        try {
+            if (!scwin.isValid(argFun)) {
+                return;
+            }
+            if (!scwin.confirm(argFun)) {
+                return;
+            }
+            switch(argFun)
+            {
+                case "onpmc01_s09" :        // 조회
+                    dma_onpmc01_s09.set("RRAPPLID",             "AND");
+                    dma_onpmc01_s09.set("RRRECORD",             "INPMC020");                        // NCRM 통신레코드 세팅
+                    dma_onpmc01_s09.set("SYS_HTML_ID",          "ONPMA02");
+                    dma_onpmc01_s09.set("SPC_CODE",             sbx_keySpcCode.getValue());         // SPC코드
+                    dma_onpmc01_s09.set("DEBT_NO",              ibx_debtNo.getValue());             // 차주번호
+                    dma_onpmc01_s09.set("OBJT_NO",              ibx_objtNo.getValue());             // 물건번호
+                    dma_onpmc01_s09.set("DEBT_NAME",            ibx_debtName.getValue());           // 차주명
+                    dma_onpmc01_s09.set("STAF_NAME",            ibx_keyStafName.getValue());        // 담당자명
+                    dma_onpmc01_s09.set("INFL_YN",              sbx_inflYn.getValue());             // 유입여부
+
+                    dma_onpmc01_s09.set("FILE_DIVI",            sbx_fileDivi.getValue());                   // 전체/문서/사진 구분
+                    
+                    com.executeSubmission(sbm_onpmc01_s09);
+                    break;
+                    
+                case "onpmc01_i01" :        // 파일저장
+                    dma_onpmc01_i01.set("RRAPPLID",             "AND");
+                    dma_onpmc01_i01.set("RRRECORD",             "INPMC021");                        // NCRM 통신레코드 세팅
+                    dma_onpmc01_i01.set("SYS_HTML_ID",          "ONPMA02");
+                    dma_onpmc01_i01.set("SPC_CODE",             sbx_keySpcCode.getValue());         // SPC코드
+                    dma_onpmc01_i01.set("DEBT_NO",              ibx_debtNo.getValue());             // 차주번호
+                    dma_onpmc01_i01.set("OBJT_NO",              ibx_objtNo.getValue());             // 물건번호
+                    dma_onpmc01_i01.set("FILE_DIR",             scvar.fileDir);                     // 파일디렉토리
+                    dma_onpmc01_i01.set("FILE_NAME",            scvar.fileName);                    // 파일명
+                    dma_onpmc01_i01.set("STAF_ID",              ibx_keyStafId.getValue());          // 담당자
+                    dma_onpmc01_i01.set("INFL_YN",              sbx_inflYn.getValue());             // 유입여부
+                    dma_onpmc01_i01.set("RPRS_PICT_YN",         cbx_rprsPictYn.getValue());         // 대표사진여부
+                    dma_onpmc01_i01.set("CHNG_STAF",            scvar.sysStafId);                   // 변경담당자
+
+                    dma_onpmc01_i01.set("FILE_DIVI",            scvar.fileDivi);                   // 전체/문서/사진 구분
+                    
+                    com.executeSubmission(sbm_onpmc01_i01);
+                    break;
+                    
+                case "onpmc01_u10" :        // 파일수정
+                    var tmpCount = 0;
+                    dlt_onpmc01_u10.removeAll();   // Clear
+                    
+                    // 변경건만 input Setting
+                    for(var i=0; i<dlt_onpmc01_s09.getRowCount(); i++){
+                        var status = dlt_onpmc01_s09.getRowStatus( i );
+                        
+                        if ( status == "U" ) {
+                            dlt_onpmc01_u10.insertRow( tmpCount );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "SPC_CODE"      , dlt_onpmc01_s09.getCellData( i , "SPC_CODE" ) );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "DEBT_NO"       , dlt_onpmc01_s09.getCellData( i , "DEBT_NO" ) );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "OBJT_NO"       , dlt_onpmc01_s09.getCellData( i , "OBJT_NO" ) );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "FILE_SEQ"      , dlt_onpmc01_s09.getCellData( i , "FILE_SEQ" ) );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "RPRS_PICT_YN"  , dlt_onpmc01_s09.getCellData( i , "RPRS_PICT_YN" ) );
+                            dlt_onpmc01_u10.setCellData( tmpCount , "CHNG_STAF"     , scvar.sysStafId );
+                            tmpCount++;
+                        }
+                    }
+                    
+                    dma_onpmc01_u10.set("RRAPPLID",    "AND");
+                    dma_onpmc01_u10.set("RRRECORD",    "INPMC022");         // NCRM 통신레코드 세팅
+                    dma_onpmc01_u10.set("SYS_HTML_ID", "ONPMA02");
+                    dma_onpmc01_u10.set("RCXXCNTF",    tmpCount);           // 선택건수 
+
+                    com.executeSubmission(sbm_onpmc01_u10);
+                    break;
+                    
+                case "onpbi01_s03" :        // SPC코드리스트 조회
+                    dma_onpbi01_s03.set("RRAPPLID",         "AND");
+                    dma_onpbi01_s03.set("RRRECORD",         "INPBI001");
+                    dma_onpbi01_s03.set("SYS_HTML_ID",      "ONPMB01");
+                    
+                    com.executeSubmission(sbm_onpbi01_s03);
+                    break;
+                    
+                case "onpmc01_d01" :        // SPC코드리스트 조회
+                    dma_onpmc01_d01.set("RRAPPLID",         "AND");
+                    dma_onpmc01_d01.set("RRRECORD",         "INPBI001");
+                    dma_onpmc01_d01.set("SYS_HTML_ID",      "ONPMB01");
+                    dma_onpmc01_d01.set("SPC_CODE",      scvar.tmpRowData.SPC_CODE);
+                    dma_onpmc01_d01.set("DEBT_NO",      scvar.tmpRowData.DEBT_NO);
+                    dma_onpmc01_d01.set("OBJT_NO",      scvar.tmpRowData.OBJT_NO);
+                    dma_onpmc01_d01.set("FILE_SEQ",      scvar.tmpRowData.FILE_SEQ);
+                    dma_onpmc01_d01.set("CHNG_STAF",      gcm.SYS_INFO.SYS_STAF_ID);
+                    dma_onpmc01_d01.set("FILE_DIR",      scvar.tmpRowData.FILE_DIR);
+                    dma_onpmc01_d01.set("FILE_NAME",      scvar.tmpRowData.FILE_NAME);
+                    
+                    com.executeSubmission(sbm_onpmc01_d01);
+                    break;
+                   
+                default : 
+                    break;
+            } 
+        } catch (ex) {
+            $p.log("[scwin.mainProcess] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * 호스트측에 요청을 하기전에 체크하기 위한 함수  
+     */
+    scwin.isValid = function(argFun) {      
+        try {
+            switch(argFun)
+            {
+                case "onpmc01_i01" :    // 파일저장
+                    if (com.empty(sbx_keySpcCode.getValue())) {
+                        return com.errField(sbx_keySpcCode, "SPC코드가 존재하지 않습니다.");
+                    }
+                    if (com.empty(ibx_debtNo.getValue())) {
+                        return com.errField(ibx_debtNo, "차주번호가 존재하지 않습니다.");
+                    }
+                    if (com.empty(ibx_debtName.getValue())) {
+                        return com.errField(ibx_debtName, "차주명이 존재하지 않습니다.");
+                    }
+                    if (scvar.rprsPictCnt == 3 && cbx_rprsPictYn.getValue() == "Y") {
+                        return com.errField(cbx_rprsPictYn, "대표사진은 최대 3건까지 등록하실 수 있습니다.");
+                    }
+                    break;
+                    
+                case "onpmc01_u10" :    // 파일수정
+                    if (!scwin.getRprcPictCnt()) {
+                        return false;
+                    }
+                    break;
+
+                case "onpmc01_d01" :    // 파일수정
+                    if (scvar.tmpRowData == "") {
+                        return false;
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+            return true;
+
+        } catch (ex) {
+            $p.log("[scwin.isValid] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * 호스트측에 요청 시 확인하기 위한 함수
+     */
+    scwin.confirm = function(argFun) {      
+        try {
+            return true;
+
+        } catch (ex) {
+            $p.log("[scwin.comfirm] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * sbm_onpmc01_s09_submitdone(조회)
+     */
+    scwin.sbm_onpmc01_s09_submitdone = function(e) {
+        try {
+            var result = e.responseJSON;
+            var tmpSYS_RETN_CODE    = result.rsMsg.statusCode;         //리턴코드
+            var tmpSYS_RETN_MSG     = result.rsMsg.message;            //리턴코드메시지
+            
+            var occCnt = com.toInt( result.RCXXCNTF ) - 0;  // List 갯수
+            
+            // 정상조회 되었을 경우
+            if(tmpSYS_RETN_CODE.substring(0,1) == "0"){
+                scvar.rprsPictCnt = 0;  // 건수 초기화
+                
+                for (var i=0; i < occCnt; i++ ) {
+                    if (dlt_onpmc01_s09.getCellData( i , "RPRS_PICT_YN" ) == "Y") {
+                        scvar.rprsPictCnt += 1;                    
+                    }
+                    scvar.fileArray[i] = dlt_onpmc01_s09.getRowData( i );
+
+                    var fileDivi = dlt_onpmc01_s09.getCellData( i , "FILE_DIVI");
+                    if(fileDivi == "01"){
+                        dlt_onpmc01_s09.setCellData(i, "FILE_DIVI", "사진");
+
+                    }else if(fileDivi == "02"){
+                        dlt_onpmc01_s09.setCellData(i, "FILE_DIVI", "문서");
+                    
+                    }
+                }
+
+                //구분을 사진이 먼저 나오도록 정렬
+                var sortOptions = {
+                    sortIndex : "FILE_DIVI",
+                    sortOrder : "0",
+                    hideHeader : true
+                };
+                dlt_onpmc01_s09.multisort(sortOptions); //showSortableUseFilter ==> true
+                grd_onpma02.setHeaderSortImage( "column117" , 0 ); //header ID, 0 (0은 안보이도록 하는 flag)
+            } 
+        } catch (ex) {
+            $p.log("[scwin.sbm_onpmc01_s09_submitdone] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * sbm_onpmc01_i01_submitdone(처리)
+     */
+    scwin.sbm_onpmc01_i01_submitdone = function(e) {
+        try {
+            var result = e.responseJSON;
+            var tmpSYS_RETN_CODE    = result.rsMsg.statusCode;         //리턴코드
+            var tmpSYS_RETN_MSG     = result.rsMsg.message;            //리턴코드메시지
+            
+            // 정상조회 되었을 경우
+            if(tmpSYS_RETN_CODE.substring(0,1) == "0"){
+
+                scwin.mainProcess("onpmc01_s09");   // 재조회
+            }
+        } catch (ex) {
+            $p.log("[scwin.sbm_onpmc01_i01_submitdone] Exception :: " + ex);
+        }
+    };
+        
+    /**
+     * sbm_onpmc01_u10_submitdone(대표사진여부 수정)
+     */
+    scwin.sbm_onpmc01_u10_submitdone = function(e) {
+        try{
+            debugger;
+            var result = e.responseJSON;
+            scwin.mainProcess("onpmc01_s09");   // 재조회
+            
+            $p.setTimeout(function() { //위에 실행후 100ms뒤에 파일업로드 실행된다.
+                 //2-2. 메인화면의 아래의 코드를 실행시킨다.
+                var parentScope = $p.getFrame().parentControl.getScopeWindow();
+                parentScope.scwin.mainProcess("onpmc01_s09");
+            }, 100);
+                    
+                    
+        } catch(ex){
+            $p.log("[scwin.sbm_onpmc01_u10_submitdone] Exception :: " + ex);
+        }
+    };
+    
+    /**
+     * sbm_onpbi01_s03_submitdone(SPC코드 리스트조회)
+     */
+    scwin.sbm_onpbi01_s03_submitdone = function(e) {
+        try{
+            var returnData = e.responseJSON;
+            var rsList = returnData.dlt_rsList;
+            if(returnData){
+                scwin.getData();
+            }
+        } catch(ex){
+            $p.log("[scwin.sbm_onpbi01_s03_submitdone] Exception :: " + ex);
+        }
+    };
+    
+    // ===================================================================
+    // 4. Fuction
+    // ===================================================================
+    /**
+    * 일반파일 업로드
+    */ 
+    scvar.fileUpLoadDivi = "";
+    scwin.fileUpLoad = function(){
+        try{
+            debugger;
+            var tmpStrIndex     =   -1;
+            var tmpEndIndex     =   -1;
+            var tmpUpdownDivi   =   rad_updownDivi.getValue();              // UP/DOWN 구분
+            var tmpFilename2     =   upd_keyFileName.getValue();             // 파일명
+            var tmpFilelen      =   upd_keyFileName.getValue().length;      // 파일명길이
+            var tmpFilename  =   $p.URLEncoder(tmpFilename2); //한글파일명 다운로드 에러관련            
+            
+            //파일명 조립
+            tmpFilename =   new String(upd_keyFileName.getValue());
+            tmpStrIndex =   tmpFilename.lastIndexOf('\\', tmpFilename.length);
+            tmpEndIndex =   tmpFilename.lastIndexOf('.', tmpFilename.length);
+            
+            // -----------------------------------------------------------------
+            // 파일 upload 전 체크사항
+            // -----------------------------------------------------------------
+            // UPLOAD 업무인지 체크
+            if( tmpUpdownDivi != 11 ){
+                com.alert("업로드 업무를 선택하세요.");
+                return false;
+            }
+            // UPLOAD 할 파일이 있는지 체크
+            if( tmpFilename == "" ){
+                com.alert("전송할 파일을 입력하세요.");
+                upd_keyFileName.focus();
+                return false;
+            }
+            // 대표사진여부 체크
+            if( !scwin.isImgFile() && cbx_rprsPictYn.getValue() == "Y" ) {
+                com.errField(upd_keyFileName, "대표사진은 이미지파일 형식만 가능합니다.");
+                cbx_rprsPictYn.setValue( "N" );
+                return false;
+            }
+            
+            // -----------------------------------------------------------------
+            // 파일정보 SETTING
+            // -----------------------------------------------------------------
+            // 파일명
+            scvar.fileName = (tmpEndIndex > 0) ? tmpFilename.substring(tmpStrIndex + 1, tmpFilename.length) : "";
+            
+            // 파일디렉토리
+            if( scwin.isImgFile() ){
+                scvar.fileDir = "np/photo";
+            } else {
+                scvar.fileDir = "np";
+            }
+            var options = { upPath : scvar.fileDir
+                          //, dupYn  : "Y"
+                          };
+            com.fileUpload(upd_keyFileName, "scwin.upload_done", options);
+
+            //1. 콜백함수를 안타는 경우를 대비해서 중복일 경우와 아닐경우를 구분.
+            var count = 0;
+            for(var i=0; i<scvar.fileArray.length; i++){
+                if(scvar.fileArray[i][0] == scvar.fileName){
+                    scvar.fileUpLoadDivi = "N";
+                    break;
+                }else{
+                    scvar.fileUpLoadDivi = "";
+                }
+            }
+            
+            //2-1. 중복이 아닐경우에 아래와 같은 코드를 실행한다.
+            if(scvar.fileUpLoadDivi != "N"){
+                scwin.fileClear();
+                scwin.mainProcess("onpmc01_i01");    
+
+                //2-2. 메인화면의 아래의 코드를 실행시킨다.
+                var parentScope = $p.getFrame().parentControl.getScopeWindow();
+                parentScope.scwin.mainProcess("onpmc01_s09");
+                //scwin.setData("onpmc01");               
+            }
+
+            //2-2. 업로드된 파일을 조회.
+            //scwin.mainProcess("onpmc01_s09");
+        }catch(ex){
+                $p.log("[scwin.fileUpLoad] Exception ::" + ex);
+        }
+    };
+    
+    /**
+    * 업로드 완료 후 콜백함수\
+    * 운영에서는 되는데 개발에서는 왜 업로드 성공시 콜백로직을 안타는 것 같다.
+    */ 
+    scwin.upload_done = function(param){
+        try{
+            debugger;
+            if(param){
+                if(param.status == 0 ){
+                    scvar.fileUpLoadDivi = "";
+
+                    var parentScope = $p.getFrame().parentControl.getScopeWindow();
+                    parentScope.scwin.mainProcess("onpmc01_s09");
+                    //scwin.fileClear();
+                    //scwin.mainProcess("onpmc01_i01"); 
+                } else {
+                    scvar.fileUpLoadDivi = "N";
+                    //com.alert("[파일전송 실패]=" + param.substring(1, param.length-1) + "\n[파일명]=" + scvar.tmpSubfilename + 
+                    com.alert("[파일전송 실패]=" + param.errorMsg + "\n[파일명]=" + scvar.fileName +
+                            "\n\n[조치사항]=IT서비스팀으로 연락하시기바랍니다.");
+                    scwin.fileClear();
+                    return false;
+                }
+            } else{
+                scvar.fileUpLoadDivi = "N";
+                com.alert("파일전송이 실패 되었습니다.") ;
+                return false;
+            }       
+        } catch(ex){
+            $p.log("[scwin.upload_done] Exception ::" + ex);
+        }
+    };
+    
+    /**
+    * 파일 선택부 clear
+    */ 
+    scwin.fileClear = function(){
+        try{
+            upd_keyFileName.reset();
+        } catch(ex){
+             $p.log("[scwin.fileClear] Exception :: "+ ex);
+        }
+    };
+    
+    /**
+    * 파일 다운로드
+    */
+    scwin.fileDownLoad = function(argFileName, argFilePath){
+        try{
+            var fileNm  =   $p.URLEncoder(argFileName); //한글파일명 다운로드 에러관련
+            url ="/jsp/download.jsp?file_name=" + fileNm + "&file_path=" + argFilePath + "&staf_id=" + gcm.SYS_INFO.SYS_STAF_ID + "&staf_name=" + gcm.SYS_INFO.SYS_STAF_NAME;
+            $p.download( url );
+
+        }catch(ex){
+            $p.log("[scwin.fileDownLoad] Exception :: " + ex);
+        }
+    };
+    
+    /**
+    * 이미지파일 여부 체크
+    */
+    scwin.isImgFile = function(){
+        try{
+            scvar.fileDivi = "";
+            var tmpIndex        =   -1;
+            var tmpFileExt      =   null;
+            var tmpFilename     =   upd_keyFileName.getValue();             // 파일명
+            
+            //파일 확장자 분리
+            tmpFilename =   new String(upd_keyFileName.getValue());
+            tmpIndex    =   tmpFilename.lastIndexOf('.', tmpFilename.length);
+            tmpFileExt  =   (tmpIndex > 0) ? tmpFilename.substring(tmpIndex + 1, tmpFilename.length) : "";
+            
+            if( tmpFileExt != "gif" && tmpFileExt != "png" &&  tmpFileExt != "img" && tmpFileExt != "jpg"
+                && tmpFileExt != "GIF" && tmpFileExt != "PNG" &&  tmpFileExt != "IMG" && tmpFileExt != "JPG" ){
+                 scvar.fileDivi = "02";
+                
+                return false;
+            } else {
+                 scvar.fileDivi = "01";
+            
+                return true;
+            }
+        }catch(ex){
+            $p.log("[scwin.isImgFile] Exception :: " + ex);
+        }  
+    };
+    
+    /**
+    * 대표사진 건수체크
+    */
+    scwin.getRprcPictCnt = function(){
+        try{
+            var rprsPictCnt = 0;  // 대표사진 건수 초기화
+            for (var i=0; i < dlt_onpmc01_s09.getRowCount(); i++) {
+                if (dlt_onpmc01_s09.getCellData( i , "RPRS_PICT_YN" ) == "Y") {
+                    rprsPictCnt += 1;
+                }
+            }
+            // 대표사진 건수 체크
+            if ( rprsPictCnt > 3 ) {
+                alert("대표사진은 최대 3건까지 등록하실 수 있습니다.");
+                return false;
+            } else {
+                return true;
+            }
+        }catch(ex){
+            $p.log("[scwin.getRprcPictCnt] Exception :: " + ex);
+        }  
+    };
+    
+    // ===================================================================
+    // 5. VIEW
+    // ===================================================================
+    /** 
+     * 라디오 변경시
+     */
+    scwin.rad_updownDivi_onviewchange = function(info) {
+        try{
+            // 그리드 초기화
+            dlt_onpmc01_s09.removeAll();
+            
+            // DOWNLOAD
+            if( rad_updownDivi.getValue()=="12"){ 
+                btn_fileSave.setDisabled( true );
+                btn_clear.setDisabled( true );
+                upd_keyFileName.setDisabled( true );
+                cbx_rprsPictYn.setDisabled( true );
+
+                sbx_fileDivi.setDisabled( false );
+                sbx_fileDivi.setValue("");                
+
+                // 수정가능
+                btn_update.setDisabled( false );
+                grd_onpma02.setReadOnly( "column", "RPRS_PICT_YN", false );
+                 
+                scwin.mainProcess("onpmc01_s09");   // 조회
+                
+            // UPLOAD
+            } else {
+                btn_update.setDisabled( true );
+                btn_fileSave.setDisabled( false );
+                btn_clear.setDisabled( false );
+                upd_keyFileName.setDisabled( false );
+                cbx_rprsPictYn.setDisabled( false );
+
+                sbx_fileDivi.setDisabled( true );
+                sbx_fileDivi.setValue("");                
+                
+                // 수정불가
+                btn_update.setDisabled( true );
+                grd_onpma02.setReadOnly( "column", "RPRS_PICT_YN", true );
+            }
+        }catch(ex){
+            $p.log("[scwin.rad_updownDivi_onviewchange] Exception ::" + ex);
+        }
+    };
+    
+    /** 
+     * 담담자 조회 버튼 클릭시
+     */
+    scwin.btn_stafSearch_onclick = function() {
+        try{
+            scwin.setData("ocmab01");
+        }catch(ex){
+            $p.log("[scwin.btn_stafSearch_onclick] Exception :: " + ex);
+        }
+    };
+    
+    /** 
+     * 대표사진여부 클릭시
+     */
+    scwin.cbx_rprsPictYn_onchange = function() {
+        try {
+            if( !scwin.isImgFile() && cbx_rprsPictYn.getValue() == "Y" ){
+                com.errField(upd_keyFileName, "대표사진은 이미지파일 형식만 가능합니다.");
+                cbx_rprsPictYn.setValue( "N" );
+                return false;
+            }
+        } catch(ex){
+            $p.log("[scwin.cbx_rprsPictYn_onchange] Exception ::" + ex);
+        }
+    };
+    
+    /** 
+     * 수정 버튼 클릭시
+     */
+    scwin.btn_update_onclick = function() {
+        try {
+           scwin.mainProcess("onpmc01_u10");
+        } catch (ex) {
+            $p.log("[scwin.btn_update_onclick] Exception :: " + ex);
+        };
+    };
+    
+    /** 
+     * 파일저장 버튼 클릭시
+     */
+    scwin.btn_fileSave_onclick = function(e) {
+        try {
+//          if(sbx_fileDivi.getValue() ==""){
+//             com.alert("파일형식을 선택하세요");
+//             return false;
+//           }
+
+          if(upd_keyFileName.getValue() != ""){
+               scwin.mainProcess("onpmc01_s09");
+               dlt_onpmc01_s09.removeAll();
+
+               $p.setTimeout(function() { //위에 실행후 100ms뒤에 파일업로드 실행된다.
+                    scwin.fileUpLoad();
+                }, 100);
+            }   
+          
+        } catch (ex) {
+            $p.log("[scwin.btn_fileSave_onclick] Exception :: " + ex);
+        };
+    };
+    
+    /** 
+     * file Clear 버튼 클릭시
+     */
+    scwin.btn_clear_onclick = function() {
+        try {
+            scwin.fileClear();
+        } catch (ex) {
+            $p.log("[scwin.btn_clear_onclick] Exception :: " + ex);
+        };
+    };
+
+    /**
+    * 그리드뷰 클릭시 
+    */ 
+    scwin.grd_onpma02_oncellclick = function(row,col) {
+        try{
+            var rprsPictYn = grd_onpma02.getColumnIndex( "RPRS_PICT_YN" );    // 대표사진여부
+            var rprsDelYn = grd_onpma02.getColumnIndex( "DEL_BTN" );
+            
+            var tmpIndex        =   -1;
+            var tmpFileExt      =   null;
+            var tmpFilename     =   "";
+
+            // 대표사진여부
+            if (col == rprsPictYn) {
+                // 1. 이미지파일 여부 체크
+                tmpFilename =   new String(dlt_onpmc01_s09.getCellData( row , "FILE_NAME" ));
+                tmpIndex    =   tmpFilename.lastIndexOf('.', tmpFilename.length);
+                tmpFileExt  =   (tmpIndex > 0) ? tmpFilename.substring(tmpIndex + 1, tmpFilename.length) : "";
+                
+                if( tmpFileExt != "gif" && tmpFileExt != "png" &&  tmpFileExt != "img" && tmpFileExt != "jpg"
+                    && tmpFileExt != "GIF" && tmpFileExt != "PNG" &&  tmpFileExt != "IMG" && tmpFileExt != "JPG" ){
+                    alert("대표사진은 이미지파일 형식만 가능합니다.");
+                    dlt_onpmc01_s09.setCellData( row , "RPRS_PICT_YN" , "N" );
+                    return false;
+                }
+                
+                // 2. 대표사진여부 건수 체크
+                if ( !scwin.getRprcPictCnt() ) {
+                  dlt_onpmc01_s09.setCellData( row , "RPRS_PICT_YN" , "N" );
+                  return false;
+                }
+                
+            // 삭제 or 다운로드
+            } else if (col == rprsDelYn) {
+                scvar.tmpRowData = "";
+                scvar.tmpRowData = dlt_onpmc01_s09.getRowJSON(row);
+                scwin.mainProcess("onpmc01_d01");
+            } else {
+                var tmpData = dlt_onpmc01_s09.getRowJSON(row);
+                scwin.fileDownLoad(tmpData.FILE_NAME, tmpData.FILE_PATH);
+            }
+            
+
+    
+        }catch(ex){
+            $p.log("[scwin.grd_onpma02_oncellclick] Exception ::" + ex);
+        }
+    };
+
+    /**
+    * sbm_onpmc01_d01_submitdone
+    */ 
+    scwin.sbm_onpmc01_d01_submitdone = function(e) {
+        try{
+            debugger;
+            var returnData = e.responseJSON;
+            var tmpSYS_RETN_CODE    = returnData.rsMsg.statusCode;         //리턴코드
+            
+            if(tmpSYS_RETN_CODE.substring(0,1) == "0"){
+                com.alert("파일 삭제가 성공하였습니다.");
+                scwin.mainProcess("onpbi01_s03");
+            }
+
+            $p.setTimeout(function() { //위에 실행후 100ms뒤에 파일업로드 실행된다.
+                //2-2. 메인화면의 아래의 코드를 실행시킨다.
+                var parentScope = $p.getFrame().parentControl.getScopeWindow();
+                parentScope.scwin.mainProcess("onpmc01_s09");
+            }, 100);
+
+        } catch(ex){
+            $p.log("[scwin.sbm_onpmc01_d01_submitdone] Exception :: " + ex);
+        }
+    };
+    
+    /**
+    * 파일구분 이벤트 (조회)
+    */ 
+    scwin.sbx_fileDivi_onviewchange = function(info) {
+        try{
+          scwin.mainProcess("onpmc01_s09");
+        }catch(ex){
+            $p.log("[scwin.sbx_fileDivi_onviewchange] Exception :: " + ex);
+        }
+    };
+    ]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+        <xf:group class="sub_contents" id="" style="width:1082px;"><!-- width:1082px; 스타일값은 화면 확인용 이므로 실제 개발서버에는 스타일 지워야함 -->
+            <xf:group class="shbox" id="" style="">
+                <xf:group class="shbox_inner" id="" style="">
+                    <xf:group adaptive="" adaptiveThreshold="" class="w2tb tb" id="" style="" tagname="table">
+                        <w2:attributes>
+                            <w2:summary></w2:summary>
+                        </w2:attributes>
+                        <xf:group tagname="colgroup">
+                            <xf:group style="width:70px;" tagname="col"></xf:group>
+                            <xf:group style="" tagname="col"></xf:group>
+                            <xf:group style="width:60px;" tagname="col"></xf:group>
+                            <xf:group style="" tagname="col"></xf:group>
+                            <xf:group style="width:50px;" tagname="col"></xf:group>
+                            <xf:group style="" tagname="col"></xf:group>
+                            <xf:group tagname="col" style="width:50px;"></xf:group>
+                            <xf:group tagname="col" style="width:160px;"></xf:group>
+                            <xf:group tagname="col" style="width:70px;"></xf:group><xf:group tagname="col" style="width:7.69%;"></xf:group><xf:group tagname="col" style="width:70px;"></xf:group>
+                            <xf:group tagname="col" style=""></xf:group>
+                            <xf:group style="width:50px;" tagname="col"></xf:group>
+                        </xf:group>
+                        <xf:group style="" tagname="tr">
+                            <xf:group class="w2tb_th" style="" tagname="th">SPC코드</xf:group>
+                            <xf:group class="w2tb_td" style="" tagname="td">
+                                <xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+                                    disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_keySpcCode" optionOrder="false" ref="" selectedData="true"
+                                    style="width: 100%;" submenuSize="auto" textAlign="left">
+                                    <xf:choices>
+                                        <xf:itemset nodeset="data:dlt_onpbi01_s03">
+                                            <xf:label ref="SPC_NAME"></xf:label>
+                                            <xf:value ref="SPC_CODE"></xf:value>
+                                        </xf:itemset>
+                                    </xf:choices>
+                                </xf:select1>
+                            </xf:group>
+                            <xf:group class="w2tb_th" style="" tagname="th">차주번호</xf:group>
+                            <xf:group class="w2tb_td" style="" tagname="td">
+                                <xf:input id="ibx_debtNo" style="width:100px;" readOnly="true"></xf:input>
+                            </xf:group>
+                            <xf:group class="w2tb_th" tagname="th">
+                                차주명
+                                <w2:attributes></w2:attributes>
+                            </xf:group>
+                            <xf:group class="w2tb_td" tagname="td">
+                                <w2:attributes></w2:attributes>
+                                <xf:input id="ibx_debtName" style="width:100px;" readOnly="true"></xf:input>
+                            </xf:group>
+                            <xf:group tagname="th" class="w2tb_th">
+                                담당자
+                                <w2:attributes></w2:attributes>
+                            </xf:group>
+                            <xf:group tagname="td" class="w2tb_td">
+                                <w2:attributes></w2:attributes>
+                                <xf:input ev:onblur="scwin.ibx_keyStafId_onblur" id="ibx_keyStafId" style="width:40px;" readOnly="true"></xf:input>
+                                <w2:anchor class="btn_search" ev:onclick="scwin.btn_stafSearch_onclick" id="btn_stafSearch" outerDiv="false"
+                                    style="" disabled="true">
+                                    <xf:label><![CDATA[검색]]></xf:label>
+                                </w2:anchor>
+                                <xf:input id="ibx_keyStafName" style="width:80px;" readOnly="true"></xf:input>
+                            </xf:group>
+                            <xf:group tagname="th" class="w2tb_th">물건번호<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+                            <xf:group tagname="td" class="w2tb_td">
+                                <xf:input ev:onblur="scwin.ibx_keyStafId_onblur" id="ibx_objtNo" style="width:50px;" readOnly="true"></xf:input>
+                            </xf:group>
+                            <xf:group tagname="th" class="w2tb_th">
+                                유입물건
+                                <w2:attributes></w2:attributes>
+                            </xf:group>
+                            <xf:group tagname="td" class="w2tb_td">
+                                <w2:attributes></w2:attributes>
+                                <xf:select1 allOption="" appearance="minimal" chooseOption="" class="" direction="auto" disabled="false"
+                                    disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_inflYn" optionOrder="false" ref="" renderType=""
+                                    selectedData="true" style="width:72px;" submenuSize="auto" textAlign="left">
+                                    <xf:choices>
+                                        <xf:item>
+                                            <xf:label><![CDATA[전체]]></xf:label>
+                                            <xf:value></xf:value>
+                                        </xf:item>
+                                        <xf:item>
+                                            <xf:label><![CDATA[Y]]></xf:label>
+                                            <xf:value>Y</xf:value>
+                                        </xf:item>
+                                        <xf:item>
+                                            <xf:label><![CDATA[N]]></xf:label>
+                                            <xf:value>N</xf:value>
+                                        </xf:item>
+                                    </xf:choices>
+                                </xf:select1>
+                            </xf:group>
+                            <xf:group class="w2tb_td tar" tagname="td">
+                                <w2:attributes></w2:attributes>
+                                <w2:anchor class="btn_cm ty3" id="btn_update" outerDiv="false" style="" ev:onclick="scwin.btn_update_onclick">
+                                    <xf:label><![CDATA[수정]]></xf:label>
+                                </w2:anchor>
+                            </xf:group>
+                        </xf:group>
+                    </xf:group>
+                </xf:group>
+            </xf:group>
+            <xf:group class="shbox" id="" style="">
+                <xf:group class="shbox_inner" id="" style="">
+                    <xf:group adaptive="" adaptiveThreshold="" class="w2tb tb" id="" style="" tagname="table">
+                        <w2:attributes>
+                            <w2:summary></w2:summary>
+                        </w2:attributes>
+                        <xf:group tagname="colgroup">
+                            <xf:group style="width:220.00px;;" tagname="col"></xf:group>
+                            <xf:group tagname="col" style="width:50px;;"></xf:group><xf:group tagname="col" style="width:85px;;"></xf:group><xf:group style="width:50px;;" tagname="col"></xf:group>
+                            <xf:group style="width:420.00px;" tagname="col"></xf:group>
+                            <xf:group style="width:89px;" tagname="col"></xf:group>
+                            <xf:group tagname="col" style="width:1.68%;"></xf:group><xf:group style="width:163px;" tagname="col"></xf:group>
+                        </xf:group>
+                        
+                        
+                        <xf:group style="" tagname="tr">
+                            <xf:group class="w2tb_td" tagname="td"><w2:attributes>
+                                    <w2:scope>row</w2:scope>
+                                </w2:attributes><xf:select1 appearance="full" cols="" id="rad_updownDivi" ref="" rows="1" selectedIndex="-1" style="" ev:onviewchange="scwin.rad_updownDivi_onviewchange">
+                                    <xf:choices>
+                                        <xf:item>
+                                            <xf:label><![CDATA[UPLOAD 업무]]></xf:label>
+                                            <xf:value><![CDATA[11]]></xf:value>
+                                        </xf:item>
+                                        <xf:item>
+                                            <xf:label><![CDATA[DOWNLOAD 업무]]></xf:label>
+                                            <xf:value><![CDATA[12]]></xf:value>
+                                        </xf:item>
+                                    </xf:choices>
+                                </xf:select1></xf:group>
+                            <xf:group tagname="th" class="w2tb_th">구분<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+                            <xf:group tagname="td" class="w2tb_td"><w2:attributes>
+                                    <w2:scope>row</w2:scope>
+                                </w2:attributes>
+                                <xf:select1 allOption="" appearance="minimal" chooseOption="true" class="" direction="auto" disabled="false"
+                                    disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_fileDivi" optionOrder="false" ref=""
+                                    renderType="" selectedData="true" style="width:72px;" submenuSize="auto" textAlign="left"
+                                    chooseOptionLabel="전체" ev:onviewchange="scwin.sbx_fileDivi_onviewchange">
+                                    <xf:choices>
+                                        <xf:item>
+                                            <xf:label><![CDATA[사진]]></xf:label>
+                                            <xf:value><![CDATA[01]]></xf:value>
+                                        </xf:item>
+                                        <xf:item>
+                                            <xf:label><![CDATA[문서]]></xf:label>
+                                            <xf:value>02</xf:value>
+                                        </xf:item>
+                                    </xf:choices>
+                                </xf:select1></xf:group>
+                            <xf:group class="w2tb_th" tagname="th">파일<w2:attributes>
+                                    <w2:colspan>1</w2:colspan>
+                                    <w2:rowspan>1</w2:rowspan>
+                                </w2:attributes></xf:group>
+                            <xf:group tagname="td" class="w2tb_td"><w2:attributes><w2:colspan>1</w2:colspan><w2:rowspan>1</w2:rowspan></w2:attributes><w2:upload disabled="true" id="upd_keyFileName" imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
+                                    inputStyle="position:absolute;vertical-align:middle;word-wrap:break-word" style="width:400px;height:22px;" type="">
+                                </w2:upload></xf:group>
+                            <xf:group tagname="th" class="w2tb_th">대표사진여부<w2:attributes></w2:attributes></xf:group>
+                            <xf:group tagname="td" class="w2tb_td tar">
+                                <w2:attributes></w2:attributes>
+                                <xf:select appearance="full" cols="" escape="" id="cbx_rprsPictYn" ref="" rows="1" selectedindex="-1"
+                                    style="" falseValue="N" ev:onchange="scwin.cbx_rprsPictYn_onchange" disabled="true">
+                                    <xf:choices>
+                                        <xf:item>
+                                            <xf:label><![CDATA[]]></xf:label>
+                                            <xf:value><![CDATA[Y]]></xf:value>
+                                        </xf:item>
+                                    </xf:choices>
+                                </xf:select>
+                            </xf:group>
+                            <xf:group tagname="td" class="w2tb_td tar">
+                                <w2:attributes></w2:attributes>
+                                <w2:anchor class="btn_cm ty3" ev:onclick="scwin.btn_fileSave_onclick" id="btn_fileSave" outerDiv="false" style="" disabled="true">
+                                    <xf:label><![CDATA[파일저장]]></xf:label>
+                                </w2:anchor>
+                                <w2:anchor class="btn_cm ty3" ev:onclick="scwin.btn_clear_onclick" id="btn_clear" outerDiv="false" style="" disabled="true">
+                                    <xf:label><![CDATA[file clear]]></xf:label>
+                                </w2:anchor>
+                            </xf:group></xf:group>
+                    </xf:group>
+                </xf:group>
+            </xf:group>
+            <xf:group class="dfbox" id="" style="">
+                <w2:textbox class="df_tit fl" id="" label="파일 리스트" style=""></w2:textbox>
+            </xf:group>
+            <xf:group class="gvwbox" id="" style="">
+                <w2:gridView autoFit="allColumn" autoFitMinWidth="" class="wq_gvw" dataList="data:dlt_onpmc01_s09" fixedColumn=""
+                    fixedRow="" focusMode="row" id="grd_onpma02" ignoreCellClick="false" ignoreToggleOnDisabled="false"
+                    keepDefaultColumnWidth="true" oddEvenColorDisplay="false" readOnly="true" rowNumHeaderValue="" rowNumStatusUniqueId=""
+                    rowNumVisible="" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="" rowStatusWidth="" scrollByColumn="false"
+                    scrollByColumnAdaptive="false" showSortableUseFilter="false" style="height:378px;" summaryAuto="false"
+                    summaryOnlyAuto="false" useFilterList="false" useShiftKey="true" visibleRowNum="" preventPaste="true" preventPasteColumn=""
+                    ev:oncellclick="scwin.grd_onpma02_oncellclick" ev:oncelldblclick="">
+                    <w2:caption id="caption1" style="" value="this is a grid caption."></w2:caption>
+                    <w2:header id="header1" style="">
+                        <w2:row id="row1" style="">
+                            <w2:column blockSelect="false" displayMode="label" id="column94" inputType="text" removeBorderStyle="false"
+                                value="파일명" width="200" style="">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="70" inputType="text" style="" id="column117" value="구분"
+                                blockSelect="false" displayMode="label">
+                            </w2:column>
+                            <w2:column blockSelect="false" displayMode="label" id="column99" inputType="text" removeBorderStyle="false"
+                                value="만든날" width="80" style="">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="101" inputType="text" id="column113" value="대표사진"
+                                blockSelect="false" displayMode="label" disabled="false" style="">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="30" inputType="text" id="column116" value="삭제" blockSelect="false"
+                                displayMode="label" style="">
+                            </w2:column>
+                        </w2:row>
+                    </w2:header>
+                    <w2:gBody id="gBody1" style="">
+                        <w2:row id="row2" style="">
+                            <w2:column blockSelect="false" displayMode="label" id="FILE_NAME" inputType="text" removeBorderStyle="false"
+                                style="" width="200" class="pto">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="70" inputType="text" style="" id="FILE_DIVI" value=""
+                                blockSelect="false" displayMode="label">
+                            </w2:column>
+                            <w2:column blockSelect="false" displayMode="label" id="INPT_DATE" inputType="text" removeBorderStyle="false"
+                                width="80" dataType="date" style="">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="101" inputType="checkbox" id="RPRS_PICT_YN" blockSelect="false"
+                                displayMode="label" trueValue="Y" falseValue="N" valueType="other" readOnly="false" style="" disabled="false">
+                            </w2:column>
+                            <w2:column removeBorderStyle="false" width="30" inputType="button" id="DEL_BTN" blockSelect="false"
+                                displayMode="label" value="클릭" style="">
+                            </w2:column>
+                        </w2:row>
+                    </w2:gBody>
+                </w2:gridView>
+            </xf:group>
+
+        </xf:group>
+    </body>
+</html>
