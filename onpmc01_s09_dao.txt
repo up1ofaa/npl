@@ -1,0 +1,121 @@
+/*
+================================================================================
+프로그램명 : onpmc01_s09_dao.java
+내          용 : 고객정보팝업리스트
+--------------------------------------------------------------------------------
+작  성  자 : 김표진(2019.11.23)
+--------------------------------------------------------------------------------
+수  정   자 : 
+내        용 : 
+관련  근거 : 
+================================================================================
+*/
+
+package and.np.dao;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+import oracle.jdbc.OracleTypes;
+
+import com.and.bean.CommonBean;
+import com.and.db.DBhandler;
+import com.and.exception.AndException;
+import com.and.util.CommExcel;
+import com.inswave.util.MappedRecordASRV;
+
+public class onpmc01_s09_dao {
+
+	public MappedRecordASRV execute(CommonBean comm, Connection conn, MappedRecordASRV inRec, MappedRecordASRV outRec) throws Exception {
+
+		// 변수 선언 시작  ================================================================================/		
+		CallableStatement 	cstmt_onpmc01_s09 	= 	null;
+		ResultSet 			rs 					= 	null;
+		StringBuffer 		sb_query 			= 	new StringBuffer();
+
+		int i=0;
+		String strBasePath	= null;
+		// 변수 선언 끝 ==================================================================================/
+		
+		try {
+
+			// 쿼리 작성 ==========================================/
+			sb_query.append("begin onpmc01.onpmc01_s009	( ?, ?, ?   			\n");
+			sb_query.append("	,	'" + inRec.get("SPC_CODE")			+ "'	\n");	// SPC_code
+			sb_query.append("	,	'" + inRec.get("DEBT_NO") 			+ "'	\n");	// 차주번호
+			sb_query.append("	,	'" + inRec.get("OBJT_NO") 			+ "'	\n");	// 물건번호
+			sb_query.append("	,	'" + inRec.get("DEBT_NAME") 		+ "'	\n");	// 차주명
+			sb_query.append("	,	'" + inRec.get("STAF_NAME") 		+ "'	\n");	// 담당자명
+			sb_query.append("	,	'" + inRec.get("INFL_YN") 			+ "'	\n");	// 유입여부
+			sb_query.append("	)	;	 end	;		            			\n");		
+			
+			// 쿼리 출력 ==========================================/
+			comm.sqlLog(sb_query.toString());
+			// 쿼리 출력 ==========================================/			
+
+			// 쿼리 수행
+			cstmt_onpmc01_s09 = conn.prepareCall(sb_query.toString());
+			
+			// PL/SQL output parameter정의
+			cstmt_onpmc01_s09.registerOutParameter(1, OracleTypes.VARCHAR);
+			cstmt_onpmc01_s09.registerOutParameter(2, OracleTypes.VARCHAR);
+			cstmt_onpmc01_s09.registerOutParameter(3, OracleTypes.CURSOR);
+
+			// PL/SQL 실행
+			cstmt_onpmc01_s09.execute();
+
+			// PL/SQL 결과 코드및 메세지를 공통 리턴 정보에 할당한다. ===================/
+			comm.setSYS_RETN_CODE(cstmt_onpmc01_s09.getString(1));  // 리턴 코드 설정
+			comm.setSYS_RETN_MSG (cstmt_onpmc01_s09.getString(2));  // 리턴 메세지 설정
+			
+			if (!comm.getSYS_RETN_CODE().startsWith("0")) {
+				new AndException(comm.getSYS_RETN_CODE(),comm.getSYS_RETN_MSG());
+			}
+			// PL/SQL 결과 코드및 메세지를 공통 리턴 정보에 할당한다. ===================/
+
+            // ResultSet을  커서에서 할당 받는다.
+			rs = (ResultSet)cstmt_onpmc01_s09.getObject(3);
+		
+			while (rs.next()) {
+				outRec.put("SPC_CODE"			,	rs.getString("SPC_CODE")		, i);	//SPC_code
+				outRec.put("DEBT_NO"			,	rs.getString("DEBT_NO")			, i);	//차주번호
+				outRec.put("DEBT_NAME"			,	rs.getString("DEBT_NAME")		, i);	//차주명
+				outRec.put("STAF_NAME"			,	rs.getString("STAF_NAME")		, i);	//담당자명
+				outRec.put("INFL_YN"			,	rs.getString("INFL_YN")			, i);	//유입여부
+				outRec.put("OBJT_NO"			,	rs.getString("OBJT_NO")			, i);	//물건번호
+				outRec.put("FILE_NAME"			,	rs.getString("FILE_NAME")		, i);	//파일명
+				outRec.put("INPT_DATE"			,	rs.getString("INPT_DATE")		, i);	//입력일시
+				outRec.put("RPRS_PICT_YN"		,	rs.getString("RPRS_PICT_YN")	, i);	//대표사진여부
+				outRec.put("FILE_SEQ"			,	rs.getString("FILE_SEQ")		, i);	//파일순번
+				outRec.put("FILE_DIR"			,	rs.getString("FILE_DIR")		, i);	//파일디렉토리
+				
+				strBasePath = CommExcel.getUpFilePath() + rs.getString("FILE_DIR");
+				outRec.put("FILE_PATH"			, 	strBasePath						, i);	// 절대 패스
+				
+				i++;
+			}
+			
+			outRec.put("RCXXCNTF", ""+i);  // 리스트 전체 갯수 할당
+			
+			if(i == 0 ) {
+				comm.setSYS_RETN_MSG ("조회건이 없습니다.");  // 리턴 메세지 설정
+			}			
+			
+			
+			return outRec;
+
+		} catch (AndException ae) {
+
+			throw ae;
+
+		} catch (Exception e) {
+
+            throw e;
+
+		} finally {
+			//CallableStatement 객체 CLOSE
+			DBhandler.close(cstmt_onpmc01_s09, rs);
+		}
+	}
+}

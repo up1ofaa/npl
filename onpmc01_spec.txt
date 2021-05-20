@@ -1,0 +1,1091 @@
+PACKAGE        ONPMC01
+
+----------------------------------------
+
+-- package 기능 : 담보정보상세
+
+-- 작성일자     : 2019/11/29
+
+-- 작성자       : 조 천 일 
+
+--------------------------------------------------------------------------------
+
+-- 수정일자     :
+
+-- 수정자       :
+
+-- 수정내용     :
+
+--------------------------------------------------------------------------------
+
+IS
+
+--------------------------------------------------------------------
+
+-- 담보정보 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type1 IS RECORD(    
+
+        spc_code                NP04OBJT.SPC_CODE%TYPE                            --SPC코드
+
+        , debt_no                NP04OBJT.DEBT_NO%TYPE                            --차주번호
+
+        , debt_name                NP04OBJT.DEBT_NAME%TYPE                            --차주명
+
+        , objt_no                NP04OBJT.OBJT_NO%TYPE                            --물건번호
+
+        , staf_name                VARCHAR2(20)                                       --담당자명
+
+        , mort_kind                NP04OBJT.MORT_KIND%TYPE                            --담보코드
+
+        , mort_kind_name        VARCHAR2(20)                                    --담보명
+
+        , addr_2                NP04OBJT.ADDR_2%TYPE                            --시/군/구
+
+        , addr_3                NP04OBJT.ADDR_3%TYPE                            --동/리/읍/면
+
+        , infl_yn                NP04OBJT.INFL_YN%TYPE                            --유입여부
+
+        , dpsl_cplt_yn            NP04OBJT.DPSL_CPLT_YN%TYPE                        --매각완료여부
+
+    );
+
+    TYPE list_rctype1  IS  REF CURSOR  RETURN  r_list_type1;
+
+--------------------------------------------------------------------
+
+-- 등기부정보 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type2 IS RECORD(    
+
+        spc_code                NP08RGST.SPC_CODE%TYPE                            --SPC코드
+
+        , debt_no                NP08RGST.DEBT_NO%TYPE                            --차주번호
+
+        , objt_no                NP08RGST.OBJT_NO%TYPE                            --물건번호
+
+        , fst_sec_dvsn            NP08RGST.FST_SEC_DVSN%TYPE                        --갑을구분
+
+        , rgst_seq                NP08RGST.RGST_SEQ%TYPE                            --등록순번
+
+        , rgst_ymd                NP08RGST.RGST_YMD%TYPE                            --등록일자
+
+        , riht_kind                NP08RGST.RIHT_KIND%TYPE                            --권리종류
+
+        , riht_prsn_name        NP08RGST.RIHT_PRSN_NAME%TYPE                    --권리자
+
+        , riht_amt                NP08RGST.RIHT_AMT%TYPE                            --권리금액
+
+        , memo                    NP08RGST.MEMO%TYPE                                --비고
+
+    );
+
+    TYPE list_rctype2  IS  REF CURSOR  RETURN  r_list_type2;
+
+--------------------------------------------------------------------
+
+-- 실거래정보 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type3 IS RECORD(    
+
+        dlgs_seq                NP09DLGS.DLGS_SEQ%TYPE                            --거래순번
+
+        , lctn                    VARCHAR2(500)                                   --소재지
+
+        , land_volu                NP04OBJT.LAND_VOLU%TYPE                            --대지면적
+
+        , bldg_volu                NP04OBJT.BLDG_VOLU%TYPE                            --건물면적
+
+        , dlgs_ymd                NP09DLGS.DLGS_YMD%TYPE                            --거래일자
+
+        , dlgs_amt                NP09DLGS.DLGS_AMT%TYPE                            --거래금액
+
+        , dlgs_ucst                NP09DLGS.DLGS_UCST%TYPE                            --거래단가
+
+        , memo                    NP09DLGS.MEMO%TYPE                                --비고
+
+        , bldg_slot_volut         NP09DLGS.BLDG_SLOT_VOLU%type                      --건물분양면적  
+
+    );
+
+    TYPE list_rctype3  IS  REF CURSOR  RETURN  r_list_type3;
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type4 IS RECORD(
+
+        rgst_seq                NP10SCFB.RGST_SEQ%TYPE                            --등록순번
+
+        , caseno                VARCHAR2(50)                                    --경매사건번호
+
+        , lctn                    VARCHAR2(500)                                   --소재지
+
+        , land_volu                NP10SCFB.LAND_VOLU%TYPE                            --대지면적
+
+        , bldg_volu                NP10SCFB.BLDG_VOLU%TYPE                            --건물면적
+
+        , scfb_ymd                NP10SCFB.SCFB_YMD%TYPE                            --낙찰일자
+
+        , apra_vlut_amt            NP10SCFB.APRA_VLUT_AMT%TYPE                        --감정평가액
+
+        , scfb_amt              NP10SCFB.SCFB_AMT%TYPE                            --낙찰금액
+
+        , scfb_rate              NP10SCFB.SCFB_RATE%TYPE                            --낙찰율
+
+        , memo                    NP10SCFB.MEMO%TYPE                                --비고
+
+        , auct_case_no1         NP10SCFB.AUCT_CASE_NO1%TYPE                        --경매사건번호1
+
+        , auct_case_no2         NP10SCFB.AUCT_CASE_NO2%TYPE                        --경매사건번호2
+
+        , auct_case_no3         NP10SCFB.AUCT_CASE_NO3%TYPE                        --경매사건번호3
+
+        , bldg_slot_volut         NP10SCFB.BLDG_SLOT_VOLU%type                      --건물분양면적  
+
+    );
+
+    TYPE list_rctype4  IS  REF CURSOR  RETURN  r_list_type4;
+
+--------------------------------------------------------------------
+
+-- 유입물건 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type5 IS RECORD(
+
+        objt_no                    NP04OBJT.OBJT_NO%TYPE                            --물건번호
+
+        , addr_1                NP04OBJT.ADDR_1%TYPE                            --특별,광역시/도
+
+        , addr_2                NP04OBJT.ADDR_2%TYPE                            --시/군/구
+
+        , addr_3                NP04OBJT.ADDR_3%TYPE                            --동/리/읍/면
+
+        , etc_addr                NP04OBJT.ETC_ADDR%TYPE                            --상세주소
+
+        , land_volu                NP04OBJT.LAND_VOLU%TYPE                            --대지면적
+
+        , bldg_volu                NP04OBJT.BLDG_VOLU%TYPE                            --건물면적
+
+        , mach_devc                NP04OBJT.MACH_DEVC%TYPE                            --기계기구등
+
+        , non_prsn                NP04OBJT.NON_PRSN%TYPE                            --제시외
+
+        , etc_amt                NP04OBJT.ETC_AMT%TYPE                            --기타금액
+
+        , infl_yn                NP04OBJT.INFL_YN%TYPE                            --유입여부
+
+        , ownr_acqs_ymd            NP04OBJT.OWNR_ACQS_YMD%TYPE                        --소유권취득일
+
+        , infl_amt                NP04OBJT.INFL_AMT%TYPE                            --유입금액
+
+        , prcr_cost                NP04OBJT.PRCR_COST%TYPE                            --선순위비용
+
+        , dpsl_expt_amt            NP04OBJT.DPSL_EXPT_AMT%TYPE                        --매각예정액
+
+        , photcnt               NUMBER(5)                                       --담보물사진
+
+        , ownr                  NP04OBJT.OWNR%TYPE                                --소유자
+
+        , mort_kind             VARCHAR2(20)                    
+
+    );
+
+    TYPE list_rctype5  IS  REF CURSOR  RETURN  r_list_type5;
+
+--------------------------------------------------------------------
+
+-- 물건사진 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type6 IS RECORD(
+
+        file_seq                NP05OJPT.FILE_SEQ%TYPE                            --파일순번
+
+        , file_dir                NP05OJPT.FILE_DIR%TYPE                            --파일디렉토리
+
+        , file_name                NP05OJPT.FILE_NAME%TYPE                            --파일명
+
+    );
+
+    TYPE list_rctype6  IS  REF CURSOR  RETURN  r_list_type6;
+
+--------------------------------------------------------------------
+
+-- 물건사진 조회 리스트 
+
+--------------------------------------------------------------------
+
+    TYPE r_list_type7 IS RECORD(
+
+        spc_code                NP05OJPT.SPC_CODE%TYPE                            --SPC_CODE
+
+        , debt_no                NP05OJPT.DEBT_NO%TYPE                            --차주번호
+
+        , debt_name                NP02DEBT.DEBT_NAME%TYPE                            --차주명
+
+        , staf_name             VARCHAR2(20)                                    --담당자
+
+        , infl_yn               NP05OJPT.INFL_YN%TYPE                           --유입여부
+
+        , objt_no               NP05OJPT.OBJT_NO%TYPE                           --물건번호
+
+        , file_name                NP05OJPT.FILE_NAME%TYPE                            --파일명
+
+        , inpt_date             VARCHAR2(8)                                     --입력일
+
+        , rprs_pict_yn          NP05OJPT.RPRS_PICT_YN%TYPE                      --대표사진여부
+
+        , file_seq                NP05OJPT.FILE_SEQ%TYPE                            --파일순번
+
+        , file_dir                NP05OJPT.FILE_DIR%TYPE                            --파일디렉토리
+
+        , file_divi                 NP05OJPT.FILE_DIVI%TYPE                            --
+
+    );
+
+    TYPE list_rctype7  IS  REF CURSOR  RETURN  r_list_type7;
+
+--------------------------------------------------------------------
+
+-- 담보정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s001  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지              
+
+       , p_list                 OUT list_rctype1                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_debt_name            IN  NP02DEBT.DEBT_NAME%TYPE                     --채무자명
+
+       , p_staf_id              IN  NP04OBJT.STAF_ID%TYPE                       --담당자
+
+       , p_infl_yn              IN  NP04OBJT.INFL_YN%TYPE                        --유입여부
+
+    );     
+
+    
+
+--------------------------------------------------------------------
+
+-- 담보정보 상세조회 
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s002  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+        , p_msg                 OUT VARCHAR2                                    --리턴메시지                
+
+        , p_spc_code            OUT    NP04OBJT.SPC_CODE%TYPE                        --SPC코드
+
+        , p_debt_no                OUT    NP04OBJT.DEBT_NO%TYPE                        --차주번호
+
+        , p_objt_no                OUT    NP04OBJT.OBJT_NO%TYPE                        --물건번호
+
+        , p_debt_name            OUT    NP04OBJT.DEBT_NAME%TYPE                        --차주명
+
+        , p_mort_kind            OUT    VARCHAR2                                    --담보종류
+
+        , p_staf_id                OUT    NP04OBJT.STAF_ID%TYPE                        --담당자
+
+        , p_addr_1                OUT    NP04OBJT.ADDR_1%TYPE                        --특별,광역시/도
+
+        , p_addr_2                OUT    NP04OBJT.ADDR_2%TYPE                        --시/군/구
+
+        , p_addr_3                OUT    NP04OBJT.ADDR_3%TYPE                        --동/리/읍/면
+
+        , p_etc_addr            OUT    NP04OBJT.ETC_ADDR%TYPE                        --상세주소
+
+        , p_objt_use            OUT    NP04OBJT.OBJT_USE%TYPE                        --용도
+
+        , p_land_volu            OUT    NP04OBJT.LAND_VOLU%TYPE                        --대지면적
+
+        , p_bldg_volu            OUT    NP04OBJT.BLDG_VOLU%TYPE                        --건물면적
+
+        , p_mach_devc            OUT    NP04OBJT.MACH_DEVC%TYPE                        --기계기구등
+
+        , p_non_prsn            OUT    NP04OBJT.NON_PRSN%TYPE                        --제시외
+
+        , p_etc_amt                OUT    NP04OBJT.ETC_AMT%TYPE                        --기타금액
+
+        , p_ownr                OUT    NP04OBJT.OWNR%TYPE                            --소유자
+
+        , p_mort_stat            OUT    NP04OBJT.MORT_STAT%TYPE                        --담보상태
+
+        , p_fxng_rank            OUT    NP04OBJT.FXNG_RANK%TYPE                        --설정순위
+
+        , p_fxng_ymd            OUT    NP04OBJT.FXNG_YMD%TYPE                        --설정일자
+
+        , p_clsc_fxng_amt        OUT    NP04OBJT.CLSC_FXNG_AMT%TYPE                    --근저당권설정액
+
+        , p_prcr_fxng_amt        OUT    NP04OBJT.PRCR_FXNG_AMT%TYPE                    --선설정액
+
+        , p_samt_grnt_amt        OUT    NP04OBJT.SAMT_GRNT_AMT%TYPE                    --소액보증금
+
+        , p_bond_pay            OUT    NP04OBJT.BOND_PAY%TYPE                        --임금채권
+
+        , p_curr_year_tax        OUT    NP04OBJT.CURR_YEAR_TAX%TYPE                    --당해세
+
+        , p_prcr_rent_grnt_amt    OUT    NP04OBJT.PRCR_RENT_GRNT_AMT%TYPE            --선임차보증금
+
+        , p_prcr_bond_tax        OUT    NP04OBJT.PRCR_BOND_TAX%TYPE                    --선조세채권
+
+        , p_etc_prcr            OUT    NP04OBJT.ETC_PRCR%TYPE                        --기타 선순위
+
+        , p_prcr_sum            OUT    NP04OBJT.PRCR_SUM%TYPE                        --선순위 計
+
+        , p_apra_vlut_ymd        OUT    NP04OBJT.APRA_VLUT_YMD%TYPE                    --감정평가일
+
+        , p_apra_vlut_orgn        OUT    NP04OBJT.APRA_VLUT_ORGN%TYPE                --감정평가기관
+
+        , p_apra_amt_land        OUT    NP04OBJT.APRA_AMT_LAND%TYPE                    --감정가_대지
+
+        , p_apra_amt_bldg        OUT    NP04OBJT.APRA_AMT_BLDG%TYPE                    --감정가_건물
+
+        , p_apra_amt_mcdc        OUT    NP04OBJT.APRA_AMT_MCDC%TYPE                    --감정가_기계기구
+
+        , p_apra_amt_etc        OUT    NP04OBJT.APRA_AMT_ETC%TYPE                    --감정가_제시외
+
+        , p_auct_curt            OUT    NP04OBJT.AUCT_CURT%TYPE                        --경매법원
+
+        , p_auct_case_no1        OUT    NP04OBJT.AUCT_CASE_NO1%TYPE                    --경매사건번호1
+
+        , p_auct_case_no2        OUT    NP04OBJT.AUCT_CASE_NO2%TYPE                    --경매사건번호2
+
+        , p_auct_case_no3        OUT    NP04OBJT.AUCT_CASE_NO3%TYPE                    --경매사건번호3
+
+        , p_infl_yn                OUT    NP04OBJT.INFL_YN%TYPE                        --유입여부
+
+        , p_ownr_acqs_ymd        OUT    NP04OBJT.OWNR_ACQS_YMD%TYPE                    --소유권취득일
+
+        , p_infl_amt            OUT    NP04OBJT.INFL_AMT%TYPE                        --유입금액
+
+        , p_infl_cost            OUT    NP04OBJT.INFL_COST%TYPE                        --유입비용
+
+        , p_prcr_cost            OUT    NP04OBJT.PRCR_COST%TYPE                        --선순위비용
+
+        , p_dpsl_expt_amt        OUT    NP04OBJT.DPSL_EXPT_AMT%TYPE                    --매각예정액
+
+        , p_dpsl_cplt_yn        OUT    NP04OBJT.DPSL_CPLT_YN%TYPE                    --매각완료여부
+
+        , p_mort_end_yn            OUT    NP04OBJT.MORT_END_YN%TYPE                    --담보종결여부
+
+        , p_mort_end_ymd        OUT    NP04OBJT.MORT_END_YMD%TYPE                    --담보종결일
+
+        , p_mort_end_resn        OUT    NP04OBJT.MORT_END_RESN%TYPE                    --담보종결사유
+
+        , p_bddc_pose_dept        OUT    VARCHAR2                                    --건철보유부서
+
+        , p_mort_cmnt            OUT    NP04OBJT.MORT_CMNT%TYPE                        --담보COMMENT
+
+        , p_prcr_cmnt            OUT    NP04OBJT.PRCR_CMNT%TYPE                        --선순위COMMENT
+
+        , p_real_dlgs_cmnt        OUT    NP04OBJT.REAL_DLGS_CMNT%TYPE                --실거래COMMENT
+
+        , p_scfb_cmnt            OUT    NP04OBJT.SCFB_CMNT%TYPE                        --낙찰COMMENT
+
+        , p_main_issu_cmnt        OUT    NP04OBJT.MAIN_ISSU_CMNT%TYPE                --주요이슈COMMENT
+
+        , p_scfb_amt            OUT    NP10SCFB.SCFB_AMT%TYPE                      --낙찰금액
+
+        , p_scfb_rate           OUT    NP10SCFB.SCFB_RATE%TYPE                     --낙찰율
+
+        , p_slot_volu           OUT    NP04OBJT.SLOT_VOLU%TYPE                     --
+
+        , p_etc_name            OUT    NP04OBJT.ETC_NAME%TYPE                     --
+
+
+
+        , p_spc_code_in         IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+        , p_debt_no_in          IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+        , p_objt_no_in          IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    );
+
+--------------------------------------------------------------------
+
+-- 등기부정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s003  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype2                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+       , p_fst_sec_dvsn         IN  NP08RGST.FST_SEC_DVSN%TYPE                  --갑을구분
+
+    );
+
+--------------------------------------------------------------------
+
+-- 실거래정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s004  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype3                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    );
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s005  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype4                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    );
+
+--------------------------------------------------------------------
+
+-- 회수정보 상세조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s006  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+        , p_msg                 OUT VARCHAR2                                    --리턴메시지
+
+        , p_objt_no                OUT    NP11GETE.OBJT_NO%TYPE                        --물건번호
+
+        , p_mort_kind            OUT    NP11GETE.MORT_KIND%TYPE                        --담보종류
+
+        , p_frst_ljco_amt        OUT    NP11GETE.FRST_LJCO_AMT%TYPE                    --최초법사가
+
+        , p_mprc_estm            OUT    NP11GETE.MPRC_ESTM%TYPE                        --시세추정
+
+        , p_scfb_expt_ymd        OUT    NP11GETE.SCFB_EXPT_YMD%TYPE                    --낙찰예상일
+
+        , p_scfb_expt_amt        OUT    NP11GETE.SCFB_EXPT_AMT%TYPE                    --낙찰예상가
+
+        , p_prcr_amt            OUT    NP11GETE.PRCR_AMT%TYPE                        --선순위
+
+        , p_frst_tp             OUT    NP11GETE.FRST_TP%TYPE                        --최초TP
+
+        , p_frst_hp             OUT    NP11GETE.FRST_HP%TYPE                        --최초HP
+
+        , p_get_metd            OUT    NP11GETE.GET_METD%TYPE                        --회수방법
+
+        , p_mdfc_tp             OUT    NP11GETE.MDFC_TP%TYPE                        --수정TP
+
+        , p_mdfc_hp             OUT    NP11GETE.MDFC_HP%TYPE                        --수정HP
+
+        , p_intr_tp             OUT    NP11GETE.INTR_TP%TYPE                        --내부TP
+
+        , p_intr_hp             OUT    NP11GETE.INTR_HP%TYPE                        --내부HP
+
+
+
+        , p_spc_code_in         IN  NP11GETE.SPC_CODE%TYPE                      --SPC코드
+
+        , p_debt_no_in          IN  NP11GETE.DEBT_NO%TYPE                       --차주번호
+
+        , p_objt_no_in          IN  NP11GETE.OBJT_NO%TYPE                       --물건번호
+
+        , p_mort_kind_in        IN  NP11GETE.MORT_KIND%TYPE                     --담보종류
+
+    );
+
+--------------------------------------------------------------------
+
+-- 유입물건 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s007  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype5                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+    );
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s008  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype6                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    );
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s009  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype7                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+       , p_debt_name            IN  NP02DEBT.DEBT_NAME%TYPE                     --차주명
+
+       , p_staf_name            IN  VARCHAR2                                    --담당자
+
+       , p_infl_yn              IN  NP04OBJT.INFL_YN%TYPE                       --유입여부
+
+       , p_file_divi            IN  NP05OJPT.FILE_DIVI%TYPE             
+
+    );    
+
+--------------------------------------------------------------------
+
+-- 담보내용comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_mort_cmnt            IN            NP04OBJT.MORT_CMNT%TYPE                --담보COMMENT        
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ); 
+
+--------------------------------------------------------------------
+
+-- 선순위comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u002  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_prcr_cmnt            IN            NP04OBJT.PRCR_CMNT%TYPE                --선순위COMMENT        
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ); 
+
+--------------------------------------------------------------------
+
+-- 실거래COMMENT 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u003  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_real_dlgs_cmnt      IN            NP04OBJT.REAL_DLGS_CMNT%TYPE        --실거래COMMENT     
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ); 
+
+--------------------------------------------------------------------
+
+-- 낙찰comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u004  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_scfb_cmnt           IN            NP04OBJT.SCFB_CMNT%TYPE                --낙찰comment 
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    );   
+
+--------------------------------------------------------------------
+
+-- 주요이슈comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u005  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_main_issu_cmnt      IN            NP04OBJT.MAIN_ISSU_CMNT%TYPE        --주요이슈COMMENT
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    );
+
+--------------------------------------------------------------------
+
+-- 등기부정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u006  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP08RGST.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP08RGST.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP08RGST.OBJT_NO%TYPE                --물건번호
+
+        , p_fst_sec_dvsn        IN            NP08RGST.FST_SEC_DVSN%TYPE            --갑을구분
+
+        , p_rgst_seq            IN            NP08RGST.RGST_SEQ%TYPE                --등록순번        
+
+        , p_rgst_ymd            IN            NP08RGST.RGST_YMD%TYPE                --등록일자
+
+        , p_riht_kind           IN            NP08RGST.RIHT_KIND%TYPE                --권리종류
+
+        , p_riht_prsn_name      IN            NP08RGST.RIHT_PRSN_NAME%TYPE        --권리자
+
+        , p_riht_amt            IN            NP08RGST.RIHT_AMT%TYPE                --권리금액
+
+        , p_memo                IN            NP08RGST.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    );
+
+--------------------------------------------------------------------
+
+-- 실거래정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u007  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP09DLGS.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP09DLGS.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP09DLGS.OBJT_NO%TYPE                --물건번호
+
+        , p_dlgs_seq            IN            NP09DLGS.DLGS_SEQ%TYPE                --거래순번
+
+        , p_dlgs_ymd            IN            NP09DLGS.DLGS_YMD%TYPE                --거래일자
+
+        , p_dlgs_amt            IN            NP09DLGS.DLGS_AMT%TYPE                --거래금액
+
+        , p_dlgs_ucst            IN            NP09DLGS.DLGS_UCST%TYPE             --거래단가
+
+        , p_memo                IN            NP09DLGS.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP09DLGS.CHNG_STAF%TYPE             --변경담당
+
+        , p_lctn                IN          NP09DLGS.LCTN%TYPE             --
+
+        , p_land_volu                IN          NP09DLGS.LAND_VOLU%TYPE             --
+
+        , p_bldg_volu                IN          NP09DLGS.BLDG_VOLU%TYPE             --
+
+        , p_bldg_slot_volu           IN          NP09DLGS.BLDG_SLOT_VOLU%TYPE
+
+    );
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u008  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP10SCFB.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP10SCFB.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP10SCFB.OBJT_NO%TYPE                --물건번호
+
+        , p_auct_case_no1        IN            NP10SCFB.AUCT_CASE_NO1%TYPE            --경매사건번호1
+
+        , p_auct_case_no2        IN            NP10SCFB.AUCT_CASE_NO2%TYPE            --경매사건번호2
+
+        , p_auct_case_no3        IN            NP10SCFB.AUCT_CASE_NO3%TYPE            --경매사건번호3
+
+        , p_rgst_seq            IN            NP10SCFB.RGST_SEQ%TYPE                --등록순번
+
+        , p_scfb_ymd            IN            NP10SCFB.SCFB_YMD%TYPE                --낙찰일자
+
+        , p_scfb_amt            IN            NP10SCFB.SCFB_AMT%TYPE                --낙찰금액
+
+        , p_apra_vlut_amt        IN            NP10SCFB.APRA_VLUT_AMT%TYPE            --감정평가액
+
+        , p_scfb_rate            IN            NP10SCFB.SCFB_RATE%TYPE             --낙찰율
+
+        , p_memo                IN            NP10SCFB.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP10SCFB.CHNG_STAF%TYPE             --변경담당
+
+        , p_lctn                IN          NP10SCFB.LCTN%TYPE             --
+
+        , p_land_volu                IN          NP10SCFB.LAND_VOLU%TYPE             --
+
+        , p_bldg_volu                IN          NP10SCFB.BLDG_VOLU%TYPE             --
+
+        , p_bldg_slot_volu           IN          NP09DLGS.BLDG_SLOT_VOLU%TYPE
+
+    );
+
+--------------------------------------------------------------------
+
+-- 회수예상정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u009  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP11GETE.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no             IN            NP11GETE.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP11GETE.OBJT_NO%TYPE                --채권번호
+
+        , p_mort_kind            IN            NP11GETE.MORT_KIND%TYPE                --담보종류
+
+        , p_frst_ljco_amt        IN            NP11GETE.FRST_LJCO_AMT%TYPE            --최초법사가
+
+        , p_mprc_estm            IN            NP11GETE.MPRC_ESTM%TYPE                --시세추정
+
+        , p_scfb_expt_ymd        IN            NP11GETE.SCFB_EXPT_YMD%TYPE            --낙찰예상일
+
+        , p_scfb_expt_amt        IN            NP11GETE.SCFB_EXPT_AMT%TYPE            --낙찰예상가
+
+        , p_prcr_amt            IN            NP11GETE.PRCR_AMT%TYPE                --선순위
+
+        , p_frst_tp             IN            NP11GETE.FRST_TP %TYPE                --최초TP
+
+        , p_frst_hp             IN            NP11GETE.FRST_HP %TYPE                --최초HP
+
+        , p_get_metd            IN            NP11GETE.GET_METD%TYPE                --회수방법
+
+        , p_mdfc_tp             IN            NP11GETE.MDFC_TP %TYPE                --수정TP
+
+        , p_mdfc_hp             IN            NP11GETE.MDFC_HP %TYPE                --수정HP
+
+        , p_intr_tp             IN            NP11GETE.INTR_TP %TYPE                --내부TP
+
+        , p_intr_hp             IN            NP11GETE.INTR_HP %TYPE                --내부HP
+
+        , p_chng_staf           IN          NP11GETE.CHNG_STAF%TYPE             --변경담당
+
+    ); 
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 등록
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_i001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_dir            IN            NP05OJPT.FILE_DIR%TYPE                --파일디렉토리
+
+        , p_file_name            IN            NP05OJPT.FILE_NAME%TYPE                --파일명
+
+        , p_staf_id                IN            NP05OJPT.STAF_ID%TYPE                --담당자
+
+        , p_infl_yn             IN            NP05OJPT.INFL_YN%TYPE                --유입여부
+
+        , p_rprs_pict_yn        IN            NP05OJPT.RPRS_PICT_YN%TYPE            --대표사진여부
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+        , p_file_divi           IN          NP05OJPT.FILE_DIVI%TYPE
+
+    );     
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_seq            IN            NP05OJPT.FILE_SEQ%TYPE                --파일순번
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+    );
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 수정(대표사진여부)
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u010  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_seq            IN            NP05OJPT.FILE_SEQ%TYPE                --파일순번
+
+        , p_rprs_pict_yn        IN          NP05OJPT.RPRS_PICT_YN%TYPE            --대표사진여부
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+    );                
+
+--------------------------------------------------------------------
+
+-- 등기부정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d002  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP08RGST.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP08RGST.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP08RGST.OBJT_NO%TYPE                --물건번호
+
+        , p_fst_sec_dvsn        IN            NP08RGST.FST_SEC_DVSN%TYPE            --갑을구분
+
+        , p_rgst_seq            IN            NP08RGST.RGST_SEQ%TYPE                --등록순번
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    );        
+
+--------------------------------------------------------------------
+
+-- 실거래정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d003  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP09DLGS.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP09DLGS.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP09DLGS.OBJT_NO%TYPE                --물건번호
+
+        , p_dlgs_seq            IN            NP09DLGS.DLGS_SEQ%TYPE                --거래순번
+
+        , p_chng_staf           IN          NP09DLGS.CHNG_STAF%TYPE             --변경담당
+
+    ); 
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d004  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP10SCFB.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP10SCFB.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP10SCFB.OBJT_NO%TYPE                --물건번호
+
+        , p_auct_case_no1        IN            NP10SCFB.AUCT_CASE_NO1%TYPE            --경매사건번호1
+
+        , p_auct_case_no2        IN            NP10SCFB.AUCT_CASE_NO2%TYPE            --경매사건번호2
+
+        , p_auct_case_no3        IN            NP10SCFB.AUCT_CASE_NO3%TYPE            --경매사건번호3
+
+        , p_rgst_seq            IN            NP10SCFB.RGST_SEQ%TYPE                --등록순번
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    );     
+
+END ONPMC01;

@@ -1,0 +1,23 @@
+SELECT *
+ FROM ALL_PROCEDURES
+WHERE OBJECT_NAME = 'owpba18'
+ ;
+
+select * from all_source where name = upper('owpaf12');
+;
+
+select  name , type, line, replace(replace(replace(A.text,chr(13),' '),chr(10),' '),chr(9),' ') text from all_source a where name = upper('OCEAB01');
+;
+
+/*패키지 에러확인하기*/
+select * FROM all_source
+ where type ='PACKAGE BODY'
+  AND NAME=upper('onpmc01')
+
+
+;
+
+/*패키지 에러확인하기*/
+select * FROM all_errors
+ where type ='PACKAGE'
+  AND NAME='OWPGD02';

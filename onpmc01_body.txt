@@ -1,0 +1,3509 @@
+PACKAGE BODY        ONPMC01 AS
+
+/******************************************************************************
+
+-------------------------------------------------------------------------------------------------------------
+
+-- package 기능 : 담보정보상세
+
+-- 작성일자     : 2019/11/29
+
+-- 작성자       : 조 천 일 
+
+-- PACKAGE 내용 :
+
+-------------------------------------------------------------------------------------------------------------
+
+-- 수정일자     : 
+
+-- 수정자       : 
+
+-- 수정내용     : 
+
+-------------------------------------------------------------------------------------------------------------
+
+******************************************************************************/
+
+-------------------------------------------------------------------- 
+
+-- 담보정보 리스트 조회
+
+--------------------------------------------------------------------     
+
+    PROCEDURE onpmc01_s001  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지              
+
+       , p_list                 OUT list_rctype1                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_debt_name            IN  NP02DEBT.DEBT_NAME%TYPE                     --채무자명
+
+       , p_staf_id              IN  NP04OBJT.STAF_ID%TYPE                       --담당자
+
+       , p_infl_yn              IN  NP04OBJT.INFL_YN%TYPE                        --유입여부
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+        
+
+            select np01.spc_code
+
+                , np02.debt_no
+
+                , np02.debt_name
+
+                , np04.objt_no
+
+                , comm_func.f_get_staf_name('1', np04.staf_id) as staf_name
+
+                , np04.mort_kind
+
+                , comm_func.f_get_code_name('NPL_MORT_KIND', np04.mort_kind) as mort_kind_name
+
+                , np04.addr_2
+
+                , np04.addr_3
+
+                , np04.infl_yn
+
+                , np04.dpsl_cplt_yn
+
+                from np01spcs np01, np02debt np02, np04objt np04
+
+                where np01.use_yn = ' '
+
+                and np02.use_yn = ' '
+
+                and np04.use_yn = ' '
+
+                and np01.spc_code = np02.spc_code
+
+                and np02.spc_code = np04.spc_code
+
+                and np02.debt_no = np04.debt_no
+
+                and (p_spc_code is null or np01.spc_code = p_spc_code)
+
+                and (p_debt_no is null or np02.debt_no like '%'||p_debt_no||'%')
+
+                and (p_debt_name is null or np02.debt_name like '%'||p_debt_name||'%')
+
+                and (p_staf_id is null or np04.staf_id = p_staf_id)
+
+                and (p_infl_yn is null or np04.infl_yn = p_infl_yn)
+
+                order by np02.spc_code, np02.debt_no
+
+                ;
+
+    
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;
+
+    
+
+--------------------------------------------------------------------
+
+-- 담보정보 상세조회 
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s002  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+        , p_msg                 OUT VARCHAR2                                    --리턴메시지                
+
+        , p_spc_code            OUT    NP04OBJT.SPC_CODE%TYPE                        --SPC코드
+
+        , p_debt_no                OUT    NP04OBJT.DEBT_NO%TYPE                        --차주번호
+
+        , p_objt_no                OUT    NP04OBJT.OBJT_NO%TYPE                        --물건번호
+
+        , p_debt_name            OUT    NP04OBJT.DEBT_NAME%TYPE                        --차주명
+
+        , p_mort_kind            OUT    VARCHAR2                                    --담보종류
+
+        , p_staf_id                OUT    NP04OBJT.STAF_ID%TYPE                        --담당자
+
+        , p_addr_1                OUT    NP04OBJT.ADDR_1%TYPE                        --특별,광역시/도
+
+        , p_addr_2                OUT    NP04OBJT.ADDR_2%TYPE                        --시/군/구
+
+        , p_addr_3                OUT    NP04OBJT.ADDR_3%TYPE                        --동/리/읍/면
+
+        , p_etc_addr            OUT    NP04OBJT.ETC_ADDR%TYPE                        --상세주소
+
+        , p_objt_use            OUT    NP04OBJT.OBJT_USE%TYPE                        --용도
+
+        , p_land_volu            OUT    NP04OBJT.LAND_VOLU%TYPE                        --대지면적
+
+        , p_bldg_volu            OUT    NP04OBJT.BLDG_VOLU%TYPE                        --건물면적
+
+        , p_mach_devc            OUT    NP04OBJT.MACH_DEVC%TYPE                        --기계기구등
+
+        , p_non_prsn            OUT    NP04OBJT.NON_PRSN%TYPE                        --제시외
+
+        , p_etc_amt                OUT    NP04OBJT.ETC_AMT%TYPE                        --기타금액
+
+        , p_ownr                OUT    NP04OBJT.OWNR%TYPE                            --소유자
+
+        , p_mort_stat            OUT    NP04OBJT.MORT_STAT%TYPE                        --담보상태
+
+        , p_fxng_rank            OUT    NP04OBJT.FXNG_RANK%TYPE                        --설정순위
+
+        , p_fxng_ymd            OUT    NP04OBJT.FXNG_YMD%TYPE                        --설정일자
+
+        , p_clsc_fxng_amt        OUT    NP04OBJT.CLSC_FXNG_AMT%TYPE                    --근저당권설정액
+
+        , p_prcr_fxng_amt        OUT    NP04OBJT.PRCR_FXNG_AMT%TYPE                    --선설정액
+
+        , p_samt_grnt_amt        OUT    NP04OBJT.SAMT_GRNT_AMT%TYPE                    --소액보증금
+
+        , p_bond_pay            OUT    NP04OBJT.BOND_PAY%TYPE                        --임금채권
+
+        , p_curr_year_tax        OUT    NP04OBJT.CURR_YEAR_TAX%TYPE                    --당해세
+
+        , p_prcr_rent_grnt_amt    OUT    NP04OBJT.PRCR_RENT_GRNT_AMT%TYPE            --선임차보증금
+
+        , p_prcr_bond_tax        OUT    NP04OBJT.PRCR_BOND_TAX%TYPE                    --선조세채권
+
+        , p_etc_prcr            OUT    NP04OBJT.ETC_PRCR%TYPE                        --기타 선순위
+
+        , p_prcr_sum            OUT    NP04OBJT.PRCR_SUM%TYPE                        --선순위 計
+
+        , p_apra_vlut_ymd        OUT    NP04OBJT.APRA_VLUT_YMD%TYPE                    --감정평가일
+
+        , p_apra_vlut_orgn        OUT    NP04OBJT.APRA_VLUT_ORGN%TYPE                --감정평가기관
+
+        , p_apra_amt_land        OUT    NP04OBJT.APRA_AMT_LAND%TYPE                    --감정가_대지
+
+        , p_apra_amt_bldg        OUT    NP04OBJT.APRA_AMT_BLDG%TYPE                    --감정가_건물
+
+        , p_apra_amt_mcdc        OUT    NP04OBJT.APRA_AMT_MCDC%TYPE                    --감정가_기계기구
+
+        , p_apra_amt_etc        OUT    NP04OBJT.APRA_AMT_ETC%TYPE                    --감정가_제시외
+
+        , p_auct_curt            OUT    NP04OBJT.AUCT_CURT%TYPE                        --경매법원
+
+        , p_auct_case_no1        OUT    NP04OBJT.AUCT_CASE_NO1%TYPE                    --경매사건번호1
+
+        , p_auct_case_no2        OUT    NP04OBJT.AUCT_CASE_NO2%TYPE                    --경매사건번호2
+
+        , p_auct_case_no3        OUT    NP04OBJT.AUCT_CASE_NO3%TYPE                    --경매사건번호3
+
+        , p_infl_yn                OUT    NP04OBJT.INFL_YN%TYPE                        --유입여부
+
+        , p_ownr_acqs_ymd        OUT    NP04OBJT.OWNR_ACQS_YMD%TYPE                    --소유권취득일
+
+        , p_infl_amt            OUT    NP04OBJT.INFL_AMT%TYPE                        --유입금액
+
+        , p_infl_cost            OUT    NP04OBJT.INFL_COST%TYPE                        --유입비용
+
+        , p_prcr_cost            OUT    NP04OBJT.PRCR_COST%TYPE                        --선순위비용
+
+        , p_dpsl_expt_amt        OUT    NP04OBJT.DPSL_EXPT_AMT%TYPE                    --매각예정액
+
+        , p_dpsl_cplt_yn        OUT    NP04OBJT.DPSL_CPLT_YN%TYPE                    --매각완료여부
+
+        , p_mort_end_yn            OUT    NP04OBJT.MORT_END_YN%TYPE                    --담보종결여부
+
+        , p_mort_end_ymd        OUT    NP04OBJT.MORT_END_YMD%TYPE                    --담보종결일
+
+        , p_mort_end_resn        OUT    NP04OBJT.MORT_END_RESN%TYPE                    --담보종결사유
+
+        , p_bddc_pose_dept        OUT    VARCHAR2                                    --건철보유부서
+
+        , p_mort_cmnt            OUT    NP04OBJT.MORT_CMNT%TYPE                        --담보COMMENT
+
+        , p_prcr_cmnt            OUT    NP04OBJT.PRCR_CMNT%TYPE                        --선순위COMMENT
+
+        , p_real_dlgs_cmnt        OUT    NP04OBJT.REAL_DLGS_CMNT%TYPE                --실거래COMMENT
+
+        , p_scfb_cmnt            OUT    NP04OBJT.SCFB_CMNT%TYPE                        --낙찰COMMENT
+
+        , p_main_issu_cmnt        OUT    NP04OBJT.MAIN_ISSU_CMNT%TYPE                --주요이슈COMMENT
+
+        , p_scfb_amt            OUT    NP10SCFB.SCFB_AMT%TYPE                      --낙찰금액
+
+        , p_scfb_rate           OUT    NP10SCFB.SCFB_RATE%TYPE                     --낙찰율
+
+        , p_slot_volu           OUT    NP04OBJT.SLOT_VOLU%TYPE                     --
+
+        , p_etc_name            OUT    NP04OBJT.ETC_NAME%TYPE                     --
+
+
+
+        , p_spc_code_in         IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+        , p_debt_no_in          IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+        , p_objt_no_in          IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    )
+
+    IS
+
+    
+
+    BEGIN
+
+    
+
+        select
+
+            np04.spc_code
+
+            , np04.debt_no
+
+            , np04.objt_no
+
+            , np04.debt_name
+
+            , comm_func.f_get_code_name('NPL_MORT_KIND', np04.mort_kind)
+
+            , np04.staf_id
+
+            , np04.addr_1
+
+            , np04.addr_2
+
+            , np04.addr_3
+
+            , xx1.dec_varchar2_sel(np04.etc_addr,10,'SSN')
+
+            , np04.objt_use
+
+            , np04.land_volu
+
+            , np04.bldg_volu
+
+            , np04.mach_devc
+
+            , np04.non_prsn
+
+            , np04.etc_amt
+
+            , np04.ownr
+
+            , np04.mort_stat
+
+            , np04.fxng_rank
+
+            , np04.fxng_ymd
+
+            , np04.clsc_fxng_amt
+
+            , np04.prcr_fxng_amt
+
+            , np04.samt_grnt_amt
+
+            , np04.bond_pay
+
+            , np04.curr_year_tax
+
+            , np04.prcr_rent_grnt_amt
+
+            , np04.prcr_bond_tax
+
+            , np04.etc_prcr
+
+            , np04.prcr_sum
+
+            , np04.apra_vlut_ymd
+
+            , np04.apra_vlut_orgn
+
+            , np04.apra_amt_land
+
+            , np04.apra_amt_bldg
+
+            , np04.apra_amt_mcdc
+
+            , np04.apra_amt_etc
+
+            , np04.auct_curt
+
+            , np04.auct_case_no1
+
+            , np04.auct_case_no2
+
+            , np04.auct_case_no3
+
+            , np04.infl_yn
+
+            , np04.ownr_acqs_ymd
+
+            , np04.infl_amt
+
+            , np04.infl_cost
+
+            , np04.prcr_cost
+
+            , np04.dpsl_expt_amt
+
+            , np04.dpsl_cplt_yn
+
+            , np04.mort_end_yn
+
+            , np04.mort_end_ymd
+
+            , comm_func.f_get_code_name('NPL_END_RESN', np04.mort_end_resn) as mort_end_resn
+
+            , comm_func.f_get_code_name('NPL_BDDC_POSE_DEPT', np04.bddc_pose_dept)
+
+            , np04.mort_cmnt
+
+            , np04.prcr_cmnt
+
+            , np04.real_dlgs_cmnt
+
+            , np04.scfb_cmnt
+
+            , np04.main_issu_cmnt
+
+            , (select np11.scfb_expt_amt
+
+                        from np11gete np11
+
+                        where np11.spc_code = np04.spc_code
+
+                        and np11.debt_no = np04.debt_no
+
+                        and np11.objt_no = np04.objt_no
+
+                        and np11.mort_kind = np04.mort_kind
+
+                        and np11.use_yn = ' '
+
+                        and rownum = 1
+
+                       ) as scfb_amt
+
+            , (select np10.scfb_rate
+
+                        from np10scfb np10
+
+                        where np10.spc_code = np04.spc_code
+
+                        and np10.debt_no = np04.debt_no
+
+                        and np10.objt_no = np04.objt_no
+
+                        and np10.auct_case_no1 = np04.auct_case_no1
+
+                        and np10.auct_case_no2 = np04.auct_case_no2
+
+                        and np10.auct_case_no3 = np04.auct_case_no3
+
+                        and np10.use_yn = ' '
+
+                       ) as scfb_rate 
+
+            , np04.slot_volu
+
+            , np04.etc_name
+
+        into
+
+            p_spc_code
+
+            , p_debt_no
+
+            , p_objt_no
+
+            , p_debt_name
+
+            , p_mort_kind
+
+            , p_staf_id
+
+            , p_addr_1
+
+            , p_addr_2
+
+            , p_addr_3
+
+            , p_etc_addr
+
+            , p_objt_use
+
+            , p_land_volu
+
+            , p_bldg_volu
+
+            , p_mach_devc
+
+            , p_non_prsn
+
+            , p_etc_amt
+
+            , p_ownr
+
+            , p_mort_stat
+
+            , p_fxng_rank
+
+            , p_fxng_ymd
+
+            , p_clsc_fxng_amt
+
+            , p_prcr_fxng_amt
+
+            , p_samt_grnt_amt
+
+            , p_bond_pay
+
+            , p_curr_year_tax
+
+            , p_prcr_rent_grnt_amt
+
+            , p_prcr_bond_tax
+
+            , p_etc_prcr
+
+            , p_prcr_sum
+
+            , p_apra_vlut_ymd
+
+            , p_apra_vlut_orgn
+
+            , p_apra_amt_land
+
+            , p_apra_amt_bldg
+
+            , p_apra_amt_mcdc
+
+            , p_apra_amt_etc
+
+            , p_auct_curt
+
+            , p_auct_case_no1
+
+            , p_auct_case_no2
+
+            , p_auct_case_no3
+
+            , p_infl_yn
+
+            , p_ownr_acqs_ymd
+
+            , p_infl_amt
+
+            , p_infl_cost
+
+            , p_prcr_cost
+
+            , p_dpsl_expt_amt
+
+            , p_dpsl_cplt_yn
+
+            , p_mort_end_yn
+
+            , p_mort_end_ymd
+
+            , p_mort_end_resn
+
+            , p_bddc_pose_dept
+
+            , p_mort_cmnt
+
+            , p_prcr_cmnt
+
+            , p_real_dlgs_cmnt
+
+            , p_scfb_cmnt
+
+            , p_main_issu_cmnt
+
+            , p_scfb_amt
+
+            , p_scfb_rate
+
+            , p_slot_volu
+
+            , p_etc_name
+
+        from np01spcs np01, np02debt np02, np04objt np04
+
+        where np01.use_yn = ' '
+
+          and np02.use_yn = ' '
+
+          and np04.use_yn = ' '
+
+          and np01.spc_code = np02.spc_code
+
+          and np02.spc_code = np04.spc_code
+
+          and np02.debt_no = np04.debt_no
+
+          and np04.spc_code = p_spc_code_in
+
+          and np04.debt_no = p_debt_no_in
+
+          and np04.objt_no = p_objt_no_in
+
+        ;
+
+        
+
+        p_ret := '00' ; 
+
+        p_msg := '정상적으로 조회가 완료 되었습니다.' ;
+
+    
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;    
+
+    END;     
+
+    
+
+--------------------------------------------------------------------
+
+-- 등기부정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s003  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype2                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+       , p_fst_sec_dvsn         IN  NP08RGST.FST_SEC_DVSN%TYPE                  --갑을구분
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+        
+
+            select  np08.spc_code
+
+                    , np08.debt_no
+
+                    , np08.objt_no
+
+                    , np08.fst_sec_dvsn
+
+                    , np08.rgst_seq
+
+                    , np08.rgst_ymd
+
+                    , np08.riht_kind
+
+                    , np08.riht_prsn_name
+
+                    , np08.riht_amt
+
+                    , np08.memo
+
+                from np08rgst np08
+
+                where np08.use_yn = ' '
+
+                and np08.spc_code = p_spc_code
+
+                and np08.debt_no = p_debt_no
+
+                and np08.objt_no = p_objt_no
+
+                and (p_fst_sec_dvsn is null or np08.fst_sec_dvsn = p_fst_sec_dvsn)
+
+                order by np08.rgst_seq
+
+                ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;    
+
+--------------------------------------------------------------------
+
+-- 실거래정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s004  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype3                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+        
+
+            select
+
+                np09.dlgs_seq
+
+                , xx1.dec_varchar2_sel(np09.lctn,10,'SSN') as lctn
+
+                , np09.land_volu
+
+                , np09.bldg_volu
+
+                , np09.dlgs_ymd
+
+                , np09.dlgs_amt
+
+                , np09.dlgs_ucst
+
+                , np09.memo
+
+                , np09.bldg_slot_volu
+
+                from np04objt np04, np09dlgs np09
+
+                where np04.use_yn = ' '
+
+                and np09.use_yn = ' '
+
+                and np04.spc_code = np09.spc_code
+
+                and np04.debt_no = np09.debt_no
+
+                and np04.objt_no = np09.objt_no
+
+                and np04.spc_code = p_spc_code
+
+                and np04.debt_no = p_debt_no
+
+                and np04.objt_no = p_objt_no
+
+                order by np09.dlgs_seq
+
+                ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;      
+
+    
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s005  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype4                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+            select
+
+                np10.rgst_seq
+
+                , np10.auct_case_no1||'-'||np10.auct_case_no2||'-'||np10.auct_case_no3 as caseno
+
+                , xx1.dec_varchar2_sel(np10.lctn,10,'SSN') as lctn
+
+                , np10.land_volu
+
+                , np10.bldg_volu
+
+                , np10.scfb_ymd
+
+                , np10.apra_vlut_amt
+
+                , np10.scfb_amt
+
+                , np10.scfb_rate
+
+                , np10.memo
+
+                , np10.auct_case_no1
+
+                , np10.auct_case_no2
+
+                , np10.auct_case_no3
+
+                , np10.bldg_slot_volu
+
+            from np04objt np04, np10scfb np10
+
+            where np04.use_yn = ' '
+
+            and np10.use_yn = ' '
+
+            and np04.spc_code = np10.spc_code
+
+            and np04.debt_no = np10.debt_no
+
+            and np04.objt_no = np10.objt_no
+
+            and np04.spc_code = p_spc_code
+
+            and np04.debt_no = p_debt_no
+
+            and np04.objt_no = p_objt_no
+
+            order by np10.rgst_seq
+
+            ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;        
+
+      
+
+--------------------------------------------------------------------
+
+-- 회수정보 상세조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s006  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드 
+
+        , p_msg                 OUT VARCHAR2                                    --리턴메시지
+
+        , p_objt_no                OUT    NP11GETE.OBJT_NO%TYPE                        --물건번호
+
+        , p_mort_kind            OUT    NP11GETE.MORT_KIND%TYPE                        --담보종류
+
+        , p_frst_ljco_amt        OUT    NP11GETE.FRST_LJCO_AMT%TYPE                    --최초법사가
+
+        , p_mprc_estm            OUT    NP11GETE.MPRC_ESTM%TYPE                        --시세추정
+
+        , p_scfb_expt_ymd        OUT    NP11GETE.SCFB_EXPT_YMD%TYPE                    --낙찰예상일
+
+        , p_scfb_expt_amt        OUT    NP11GETE.SCFB_EXPT_AMT%TYPE                    --낙찰예상가
+
+        , p_prcr_amt            OUT    NP11GETE.PRCR_AMT%TYPE                        --선순위
+
+        , p_frst_tp             OUT    NP11GETE.FRST_TP%TYPE                        --최초TP
+
+        , p_frst_hp             OUT    NP11GETE.FRST_HP%TYPE                        --최초HP
+
+        , p_get_metd            OUT    NP11GETE.GET_METD%TYPE                        --회수방법
+
+        , p_mdfc_tp             OUT    NP11GETE.MDFC_TP%TYPE                        --수정TP
+
+        , p_mdfc_hp             OUT    NP11GETE.MDFC_HP%TYPE                        --수정HP
+
+        , p_intr_tp             OUT    NP11GETE.INTR_TP%TYPE                        --내부TP
+
+        , p_intr_hp             OUT    NP11GETE.INTR_HP%TYPE                        --내부HP
+
+
+
+        , p_spc_code_in         IN  NP11GETE.SPC_CODE%TYPE                      --SPC코드
+
+        , p_debt_no_in          IN  NP11GETE.DEBT_NO%TYPE                       --차주번호
+
+        , p_objt_no_in          IN  NP11GETE.OBJT_NO%TYPE                       --물건번호
+
+        , p_mort_kind_in        IN  NP11GETE.MORT_KIND%TYPE                     --담보종류
+
+    )
+
+    
+
+    IS
+
+    
+
+    BEGIN
+
+    
+
+        select
+
+            np11.objt_no
+
+            , np11.mort_kind
+
+            , np11.frst_ljco_amt
+
+            , np11.mprc_estm
+
+            , np11.scfb_expt_ymd
+
+            , np11.scfb_expt_amt
+
+            , np11.prcr_amt
+
+            , np11.frst_tp 
+
+            , np11.frst_hp 
+
+            , np11.get_metd
+
+            , np11.mdfc_tp 
+
+            , np11.mdfc_hp 
+
+            , np11.intr_tp 
+
+            , np11.intr_hp 
+
+        into
+
+            p_objt_no
+
+            , p_mort_kind
+
+            , p_frst_ljco_amt
+
+            , p_mprc_estm
+
+            , p_scfb_expt_ymd
+
+            , p_scfb_expt_amt
+
+            , p_prcr_amt
+
+            , p_frst_tp
+
+            , p_frst_hp
+
+            , p_get_metd
+
+            , p_mdfc_tp
+
+            , p_mdfc_hp
+
+            , p_intr_tp
+
+            , p_intr_hp
+
+        from np11gete np11
+
+        where np11.use_yn = ' '
+
+          and np11.spc_code = p_spc_code_in
+
+          and np11.debt_no = p_debt_no_in
+
+          and np11.objt_no = p_objt_no_in
+
+          and np11.mort_kind = p_mort_kind_in
+
+        ;
+
+        
+
+        p_ret := '00' ; 
+
+        p_msg := '정상적으로 조회가 완료 되었습니다.' ;
+
+    
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;    
+
+    END;
+
+
+
+--------------------------------------------------------------------
+
+-- 유입물건 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s007  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype5                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+            select
+
+                np04.objt_no
+
+                , np04.addr_1
+
+                , np04.addr_2
+
+                , np04.addr_3
+
+                , xx1.dec_varchar2_sel(np04.etc_addr,10,'SSN') as etc_addr
+
+                , np04.land_volu
+
+                , np04.bldg_volu
+
+                , np04.mach_devc
+
+                , np04.non_prsn
+
+                , np04.etc_amt
+
+                , np04.infl_yn
+
+                , np04.ownr_acqs_ymd
+
+                , np04.infl_amt
+
+                , np04.prcr_cost
+
+                , np04.dpsl_expt_amt
+
+                , (select count(*)
+
+                    from np05ojpt np05
+
+                    where np05.use_yn = ' '
+
+                    and np05.spc_code = np04.spc_code
+
+                    and np05.debt_no = np04.debt_no
+
+                    and np05.objt_no = np04.objt_no
+
+                    ) as photcnt
+
+                , np04.ownr
+
+                , comm_func.f_get_code_name('NPL_MORT_KIND', np04.mort_kind) as mort_kind
+
+            from np04objt np04
+
+            where np04.use_yn = ' '
+
+            and np04.spc_code = p_spc_code
+
+            and np04.debt_no = p_debt_no
+
+            order by np04.objt_no
+
+            ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END; 
+
+    
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s008  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype6                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+            select
+
+                np05.file_seq
+
+                , np05.file_dir
+
+                , np05.file_name
+
+            from np05ojpt np05
+
+            where np05.use_yn = ' '
+
+            and np05.spc_code = p_spc_code
+
+            and np05.debt_no = p_debt_no
+
+            and np05.objt_no = p_objt_no
+
+            order by np05.file_seq
+
+            ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;     
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 리스트 조회
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_s009  (
+
+        p_ret                   OUT VARCHAR2                                    --리턴코드
+
+       , p_msg                  OUT VARCHAR2                                    --리턴메시지
+
+       , p_list                 OUT list_rctype7                                --리스트
+
+       
+
+       , p_spc_code             IN  NP01SPCS.SPC_CODE%TYPE                      --SPC코드
+
+       , p_debt_no              IN  NP02DEBT.DEBT_NO%TYPE                       --차주번호
+
+       , p_objt_no              IN  NP04OBJT.OBJT_NO%TYPE                       --물건번호
+
+       , p_debt_name            IN  NP02DEBT.DEBT_NAME%TYPE                     --차주명
+
+       , p_staf_name            IN  VARCHAR2                                    --담당자
+
+       , p_infl_yn              IN  NP04OBJT.INFL_YN%TYPE                       --유입여부
+
+       , p_file_divi            IN  NP05OJPT.FILE_DIVI%TYPE
+
+    ) IS
+
+    
+
+    BEGIN
+
+    
+
+        open p_list for
+
+            select
+
+                np05.spc_code
+
+                , np05.debt_no
+
+                , np02.debt_name
+
+                , comm_func.f_get_staf_name('1', np05.staf_id) as staf_name
+
+                , np05.infl_yn
+
+                , np05.objt_no
+
+                , np05.file_name
+
+                , to_char(np05.inpt_date, 'yyyymmdd') as inpt_date
+
+                , np05.rprs_pict_yn
+
+                , np05.file_seq
+
+                , np05.file_dir
+
+                , np05.file_divi
+
+            from np05ojpt np05, np02debt np02
+
+            where np05.use_yn = ' '
+
+            and np02.use_yn = ' '
+
+            and np02.spc_code = np05.spc_code
+
+            and np02.debt_no = np05.debt_no
+
+            and (p_spc_code is null or np05.spc_code = p_spc_code)
+
+            and (p_debt_no is null or (p_debt_no is not null and np05.debt_no like '%'||p_debt_no||'%'))
+
+            and (p_objt_no is null or (p_objt_no is not null and np05.objt_no = p_objt_no))
+
+            and (p_debt_name is null or (p_debt_name is not null and np02.debt_name like '%'||p_debt_name||'%'))
+
+            and (p_staf_name is null or (p_staf_name is not null and comm_func.f_get_staf_name('1', np05.staf_id) like '%'||p_staf_name||'%'))
+
+            and (p_infl_yn is null or (p_infl_yn is not null and np05.infl_yn = p_infl_yn))
+
+            and (p_file_divi is null or (p_file_divi is not null and p_file_divi = np05.file_divi))
+
+            order by np05.file_divi asc, np05.file_seq desc
+
+            ;
+
+
+
+    p_ret := '00' ; 
+
+    p_msg := '정상적으로 조회가 완료 되었습니다.' ; 
+
+ 
+
+    EXCEPTION 
+
+        WHEN NO_DATA_FOUND THEN
+
+            p_ret := '10';
+
+            p_msg := '조회건이 없습니다.';
+
+        WHEN OTHERS THEN
+
+            p_ret := '10';
+
+            p_msg := '조회시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    END;    
+
+--------------------------------------------------------------------
+
+-- 담보내용comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_mort_cmnt            IN            NP04OBJT.MORT_CMNT%TYPE                --담보COMMENT        
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_exist_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np04objt np04
+
+        where np04.use_yn   = ' '
+
+        and np04.spc_code   = p_spc_code
+
+        and np04.debt_no    = p_debt_no
+
+        and np04.objt_no    = p_objt_no
+
+        ;
+
+    
+
+        if v_objt_cnt < 1 then 
+
+            raise v_exist_err;
+
+        end if;
+
+    
+
+        update np04objt np04
+
+        set np04.mort_cmnt            =    p_mort_cmnt
+
+            , np04.chng_date        =   sysdate
+
+            , np04.chng_staf        =   p_chng_staf
+
+            , np04.chng_pgm_id      =   'onpmc01_u001'
+
+        where np04.use_yn = ' '
+
+        and np04.spc_code = p_spc_code
+
+        and np04.debt_no = p_debt_no
+
+        and np04.objt_no = p_objt_no
+
+        ;
+
+
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_exist_err THEN
+
+                p_ret := '10';
+
+                p_msg := '입력하신 물건정보에 해당하는 데이터가 없습니다.['||p_spc_code||'-'||p_debt_no||'-'||p_objt_no||']';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+        
+
+    END;
+
+
+
+--------------------------------------------------------------------
+
+-- 선순위comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u002  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_prcr_cmnt            IN            NP04OBJT.PRCR_CMNT%TYPE                --선순위COMMENT        
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_exist_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np04objt np04
+
+        where np04.use_yn   = ' '
+
+        and np04.spc_code   = p_spc_code
+
+        and np04.debt_no    = p_debt_no
+
+        and np04.objt_no    = p_objt_no
+
+        ;
+
+    
+
+        if v_objt_cnt < 1 then 
+
+            raise v_exist_err;
+
+        end if;
+
+    
+
+        update np04objt np04
+
+        set np04.prcr_cmnt            =    p_prcr_cmnt
+
+            , np04.chng_date        =   sysdate
+
+            , np04.chng_staf        =   p_chng_staf
+
+            , np04.chng_pgm_id      =   'onpmc01_u002'
+
+        where np04.use_yn = ' '
+
+        and np04.spc_code = p_spc_code
+
+        and np04.debt_no = p_debt_no
+
+        and np04.objt_no = p_objt_no
+
+        ;
+
+
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_exist_err THEN
+
+                p_ret := '10';
+
+                p_msg := '입력하신 물건정보에 해당하는 데이터가 없습니다.['||p_spc_code||'-'||p_debt_no||'-'||p_objt_no||']';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+        
+
+    END;
+
+    
+
+--------------------------------------------------------------------
+
+-- 실거래COMMENT 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u003  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_real_dlgs_cmnt      IN            NP04OBJT.REAL_DLGS_CMNT%TYPE        --실거래COMMENT     
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_exist_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np04objt np04
+
+        where np04.use_yn   = ' '
+
+        and np04.spc_code   = p_spc_code
+
+        and np04.debt_no    = p_debt_no
+
+        and np04.objt_no    = p_objt_no
+
+        ;
+
+    
+
+        if v_objt_cnt < 1 then 
+
+            raise v_exist_err;
+
+        end if;
+
+    
+
+        update np04objt np04
+
+        set np04.real_dlgs_cmnt     =    p_real_dlgs_cmnt
+
+            , np04.chng_date        =   sysdate
+
+            , np04.chng_staf        =   p_chng_staf
+
+            , np04.chng_pgm_id      =   'onpmc01_u003'
+
+        where np04.use_yn = ' '
+
+        and np04.spc_code = p_spc_code
+
+        and np04.debt_no = p_debt_no
+
+        and np04.objt_no = p_objt_no
+
+        ;
+
+
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_exist_err THEN
+
+                p_ret := '10';
+
+                p_msg := '입력하신 물건정보에 해당하는 데이터가 없습니다.['||p_spc_code||'-'||p_debt_no||'-'||p_objt_no||']';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+        
+
+    END;    
+
+--------------------------------------------------------------------
+
+-- 낙찰comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u004  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지      
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_scfb_cmnt           IN            NP04OBJT.SCFB_CMNT%TYPE                --낙찰comment 
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_exist_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np04objt np04
+
+        where np04.use_yn   = ' '
+
+        and np04.spc_code   = p_spc_code
+
+        and np04.debt_no    = p_debt_no
+
+        and np04.objt_no    = p_objt_no
+
+        ;
+
+    
+
+        if v_objt_cnt < 1 then 
+
+            raise v_exist_err;
+
+        end if;
+
+    
+
+        update np04objt np04
+
+        set np04.scfb_cmnt          =    p_scfb_cmnt
+
+            , np04.chng_date        =   sysdate
+
+            , np04.chng_staf        =   p_chng_staf
+
+            , np04.chng_pgm_id      =   'onpmc01_u004'
+
+        where np04.use_yn = ' '
+
+        and np04.spc_code = p_spc_code
+
+        and np04.debt_no = p_debt_no
+
+        and np04.objt_no = p_objt_no
+
+        ;
+
+
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_exist_err THEN
+
+                p_ret := '10';
+
+                p_msg := '입력하신 물건정보에 해당하는 데이터가 없습니다.['||p_spc_code||'-'||p_debt_no||'-'||p_objt_no||']';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+        
+
+    END;
+
+--------------------------------------------------------------------
+
+-- 주요이슈comment 수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u005  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP04OBJT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP04OBJT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP04OBJT.OBJT_NO%TYPE                --물건번호
+
+        , p_main_issu_cmnt      IN            NP04OBJT.MAIN_ISSU_CMNT%TYPE        --주요이슈COMMENT
+
+        , p_chng_staf           IN          NP04OBJT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_exist_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np04objt np04
+
+        where np04.use_yn   = ' '
+
+        and np04.spc_code   = p_spc_code
+
+        and np04.debt_no    = p_debt_no
+
+        and np04.objt_no    = p_objt_no
+
+        ;
+
+    
+
+        if v_objt_cnt < 1 then 
+
+            raise v_exist_err;
+
+        end if;
+
+    
+
+        update np04objt np04
+
+        set np04.main_issu_cmnt     =    p_main_issu_cmnt
+
+            , np04.chng_date        =   sysdate
+
+            , np04.chng_staf        =   p_chng_staf
+
+            , np04.chng_pgm_id      =   'onpmc01_u005'
+
+        where np04.use_yn = ' '
+
+        and np04.spc_code = p_spc_code
+
+        and np04.debt_no = p_debt_no
+
+        and np04.objt_no = p_objt_no
+
+        ;
+
+
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_exist_err THEN
+
+                p_ret := '10';
+
+                p_msg := '입력하신 물건정보에 해당하는 데이터가 없습니다.['||p_spc_code||'-'||p_debt_no||'-'||p_objt_no||']';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+        
+
+    END;             
+
+    
+
+--------------------------------------------------------------------
+
+-- 등기부정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u006  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP08RGST.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP08RGST.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP08RGST.OBJT_NO%TYPE                --물건번호
+
+        , p_fst_sec_dvsn        IN            NP08RGST.FST_SEC_DVSN%TYPE            --갑을구분
+
+        , p_rgst_seq            IN            NP08RGST.RGST_SEQ%TYPE                --등록순번        
+
+        , p_rgst_ymd            IN            NP08RGST.RGST_YMD%TYPE                --등록일자
+
+        , p_riht_kind           IN            NP08RGST.RIHT_KIND%TYPE                --권리종류
+
+        , p_riht_prsn_name      IN            NP08RGST.RIHT_PRSN_NAME%TYPE        --권리자
+
+        , p_riht_amt            IN            NP08RGST.RIHT_AMT%TYPE                --권리금액
+
+        , p_memo                IN            NP08RGST.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np08rgst np08
+
+        where np08.spc_code   = p_spc_code
+
+        and np08.debt_no    = p_debt_no
+
+        and np08.objt_no    = p_objt_no
+
+        and np08.fst_sec_dvsn = p_fst_sec_dvsn
+
+        and np08.rgst_seq   = p_rgst_seq
+
+        ;
+
+    
+
+        if v_objt_cnt > 0 then
+
+        
+
+            update np08rgst np08
+
+            set np08.rgst_ymd           =    p_rgst_ymd
+
+                , np08.riht_kind        =    p_riht_kind
+
+                , np08.riht_prsn_name   =    p_riht_prsn_name
+
+                , np08.riht_amt         =    p_riht_amt
+
+                , np08.memo             =    p_memo
+
+                , np08.rgst_seq         =   p_rgst_seq
+
+                , np08.chng_date        =   sysdate
+
+                , np08.chng_staf        =   p_chng_staf
+
+                , np08.chng_pgm_id      =   'onpmc01_u006'
+
+            where np08.spc_code   = p_spc_code
+
+            and np08.debt_no    = p_debt_no
+
+            and np08.objt_no    = p_objt_no
+
+            and np08.fst_sec_dvsn = p_fst_sec_dvsn
+
+            and np08.rgst_seq   = p_rgst_seq
+
+            ; 
+
+        else
+
+            insert into np08rgst(
+
+                spc_code
+
+                , debt_no
+
+                , objt_no
+
+                , fst_sec_dvsn
+
+                , rgst_seq
+
+                , rgst_ymd
+
+                , riht_kind
+
+                , riht_prsn_name
+
+                , riht_amt
+
+                , memo
+
+                , inpt_date
+
+                , inpt_staf
+
+                , use_yn
+
+            ) values (
+
+                p_spc_code
+
+                , p_debt_no
+
+                , p_objt_no
+
+                , p_fst_sec_dvsn
+
+                , p_rgst_seq
+
+                , p_rgst_ymd
+
+                , p_riht_kind
+
+                , p_riht_prsn_name
+
+                , p_riht_amt
+
+                , p_memo
+
+                , sysdate
+
+                , p_chng_staf
+
+                , ' '
+
+            );
+
+
+
+        end if;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN NO_DATA_FOUND THEN
+
+                p_ret := '10';
+
+                p_msg := '조회건이 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;  
+
+--------------------------------------------------------------------
+
+-- 실거래정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u007  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP09DLGS.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP09DLGS.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP09DLGS.OBJT_NO%TYPE                --물건번호
+
+        , p_dlgs_seq            IN            NP09DLGS.DLGS_SEQ%TYPE                --거래순번
+
+        , p_dlgs_ymd            IN            NP09DLGS.DLGS_YMD%TYPE                --거래일자
+
+        , p_dlgs_amt            IN            NP09DLGS.DLGS_AMT%TYPE                --거래금액
+
+        , p_dlgs_ucst            IN            NP09DLGS.DLGS_UCST%TYPE             --거래단가
+
+        , p_memo                IN            NP09DLGS.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP09DLGS.CHNG_STAF%TYPE             --변경담당
+
+        , p_lctn                IN          NP09DLGS.LCTN%TYPE             --
+
+        , p_land_volu                IN          NP09DLGS.LAND_VOLU%TYPE             --
+
+        , p_bldg_volu                IN          NP09DLGS.BLDG_VOLU%TYPE             --
+
+        , p_bldg_slot_volu           IN          NP09DLGS.BLDG_SLOT_VOLU%TYPE
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_max_dlgs_seq number;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np09dlgs np09
+
+        where np09.spc_code = p_spc_code
+
+        and np09.debt_no    = p_debt_no
+
+        and np09.objt_no    = p_objt_no
+
+        and np09.dlgs_seq   = p_dlgs_seq
+
+        ;
+
+    
+
+        if v_objt_cnt > 0 then
+
+            update np09dlgs np09
+
+            set np09.dlgs_ymd           =    p_dlgs_ymd
+
+                , np09.dlgs_amt         =    p_dlgs_amt
+
+                , np09.dlgs_ucst        =    p_dlgs_ucst
+
+                , np09.memo             =    p_memo
+
+                , np09.chng_date        =   sysdate
+
+                , np09.chng_staf        =   p_chng_staf
+
+                , np09.chng_pgm_id      =   'onpmc01_u007'
+
+                , np09.lctn             =   xx1.enc_varchar2_ins(p_lctn, 10, 'SSN')
+
+                , np09.land_volu        =   p_land_volu
+
+                , np09.bldg_volu        =   p_bldg_volu
+
+                , np09.bldg_slot_volu   =   p_bldg_slot_volu
+
+            where np09.spc_code = p_spc_code
+
+            and np09.debt_no    = p_debt_no
+
+            and np09.objt_no    = p_objt_no
+
+            and np09.dlgs_seq   = p_dlgs_seq
+
+            ; 
+
+        else
+
+            insert into np09dlgs(
+
+                spc_code
+
+                , debt_no
+
+                , objt_no
+
+                , dlgs_seq
+
+                , dlgs_ymd
+
+                , dlgs_amt
+
+                , dlgs_ucst
+
+                , memo
+
+                , inpt_date
+
+                , inpt_staf
+
+                , use_yn
+
+                , lctn
+
+                , land_volu
+
+                , bldg_volu
+
+                , bldg_slot_volu
+
+            ) values (
+
+                p_spc_code
+
+                , p_debt_no
+
+                , p_objt_no
+
+                , p_dlgs_seq
+
+                , p_dlgs_ymd
+
+                , p_dlgs_amt
+
+                , p_dlgs_ucst
+
+                , p_memo
+
+                , sysdate
+
+                , p_chng_staf
+
+                , ' '
+
+                , xx1.enc_varchar2_ins(p_lctn, 10, 'SSN')
+
+                , p_land_volu
+
+                , p_bldg_volu
+
+                , p_bldg_slot_volu
+
+            );
+
+
+
+        end if;
+
+        
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN NO_DATA_FOUND THEN
+
+                p_ret := '10';
+
+                p_msg := '조회건이 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;     
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u008  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP10SCFB.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP10SCFB.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP10SCFB.OBJT_NO%TYPE                --물건번호
+
+        , p_auct_case_no1        IN            NP10SCFB.AUCT_CASE_NO1%TYPE            --경매사건번호1
+
+        , p_auct_case_no2        IN            NP10SCFB.AUCT_CASE_NO2%TYPE            --경매사건번호2
+
+        , p_auct_case_no3        IN            NP10SCFB.AUCT_CASE_NO3%TYPE            --경매사건번호3
+
+        , p_rgst_seq            IN            NP10SCFB.RGST_SEQ%TYPE                --등록순번
+
+        , p_scfb_ymd            IN            NP10SCFB.SCFB_YMD%TYPE                --낙찰일자
+
+        , p_scfb_amt            IN            NP10SCFB.SCFB_AMT%TYPE                --낙찰금액
+
+        , p_apra_vlut_amt       IN            NP10SCFB.APRA_VLUT_AMT%TYPE            --감정평가액
+
+        , p_scfb_rate            IN            NP10SCFB.SCFB_RATE%TYPE             --낙찰율
+
+        , p_memo                IN            NP10SCFB.MEMO%TYPE                    --비고
+
+        , p_chng_staf           IN          NP10SCFB.CHNG_STAF%TYPE             --변경담당
+
+        , p_lctn                IN          NP10SCFB.LCTN%TYPE             --
+
+        , p_land_volu                IN          NP10SCFB.LAND_VOLU%TYPE             --
+
+        , p_bldg_volu                IN          NP10SCFB.BLDG_VOLU%TYPE             --
+
+        , p_bldg_slot_volu           IN          NP09DLGS.BLDG_SLOT_VOLU%TYPE
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    v_max_rgst_seq number;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np10scfb np10
+
+        where np10.spc_code = p_spc_code
+
+        and np10.debt_no    = p_debt_no
+
+        and np10.objt_no    = p_objt_no
+
+        and np10.auct_case_no1   = p_auct_case_no1
+
+        and np10.auct_case_no2   = p_auct_case_no2
+
+        and np10.auct_case_no3   = p_auct_case_no3
+
+        and np10.rgst_seq        = p_rgst_seq
+
+        ;
+
+    
+
+        if v_objt_cnt > 0 then
+
+        
+
+            update np10scfb np10
+
+            set np10.scfb_ymd           =    p_scfb_ymd
+
+                , np10.scfb_amt         =    p_scfb_amt
+
+                , np10.apra_vlut_amt    =    p_apra_vlut_amt
+
+                , np10.scfb_rate        =    p_scfb_rate
+
+                , np10.memo             =    p_memo
+
+                , np10.chng_date        =   sysdate
+
+                , np10.chng_staf        =   p_chng_staf
+
+                , np10.chng_pgm_id      =   'onpmc01_u008'
+
+                , np10.lctn             =   xx1.enc_varchar2_ins(p_lctn, 10, 'SSN')
+
+                , np10.land_volu        =   p_land_volu
+
+                , np10.bldg_volu        =   p_bldg_volu
+
+                , np10.bldg_slot_volu   =   p_bldg_slot_volu
+
+            where np10.spc_code = p_spc_code
+
+            and np10.debt_no    = p_debt_no
+
+            and np10.objt_no    = p_objt_no
+
+            and np10.auct_case_no1   = p_auct_case_no1
+
+            and np10.auct_case_no2   = p_auct_case_no2
+
+            and np10.auct_case_no3   = p_auct_case_no3
+
+            and np10.rgst_seq        = p_rgst_seq
+
+            ; 
+
+        else
+
+            insert into np10scfb(
+
+                spc_code
+
+                , debt_no
+
+                , objt_no
+
+                , auct_case_no1
+
+                , auct_case_no2
+
+                , auct_case_no3
+
+                , rgst_seq
+
+                , lctn
+
+                , land_volu
+
+                , bldg_volu
+
+                , scfb_ymd
+
+                , scfb_amt
+
+                , apra_vlut_amt
+
+                , scfb_rate
+
+                , memo
+
+                , inpt_date
+
+                , inpt_staf
+
+                , use_yn
+
+                , bldg_slot_volu
+
+            ) values (
+
+                p_spc_code
+
+                , p_debt_no
+
+                , p_objt_no
+
+                , p_auct_case_no1
+
+                , p_auct_case_no2
+
+                , p_auct_case_no3
+
+                , p_rgst_seq
+
+                , xx1.enc_varchar2_ins(p_lctn, 10, 'SSN')
+
+                , p_land_volu
+
+                , p_bldg_volu
+
+                , p_scfb_ymd
+
+                , p_scfb_amt
+
+                , p_apra_vlut_amt
+
+                , p_scfb_rate
+
+                , p_memo
+
+                , sysdate
+
+                , p_chng_staf
+
+                , ' '
+
+                , p_bldg_slot_volu
+
+            );
+
+
+
+        end if;
+
+        
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN NO_DATA_FOUND THEN
+
+                p_ret := '10';
+
+                p_msg := '조회건이 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;
+
+--------------------------------------------------------------------
+
+-- 회수예상정보 입력/수정
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u009  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP11GETE.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no             IN            NP11GETE.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP11GETE.OBJT_NO%TYPE                --채권번호
+
+        , p_mort_kind            IN            NP11GETE.MORT_KIND%TYPE                --담보종류
+
+        , p_frst_ljco_amt        IN            NP11GETE.FRST_LJCO_AMT%TYPE            --최초법사가
+
+        , p_mprc_estm            IN            NP11GETE.MPRC_ESTM%TYPE                --시세추정
+
+        , p_scfb_expt_ymd        IN            NP11GETE.SCFB_EXPT_YMD%TYPE            --낙찰예상일
+
+        , p_scfb_expt_amt        IN            NP11GETE.SCFB_EXPT_AMT%TYPE            --낙찰예상가
+
+        , p_prcr_amt            IN            NP11GETE.PRCR_AMT%TYPE                --선순위
+
+        , p_frst_tp             IN            NP11GETE.FRST_TP %TYPE                --최초TP
+
+        , p_frst_hp             IN            NP11GETE.FRST_HP %TYPE                --최초HP
+
+        , p_get_metd            IN            NP11GETE.GET_METD%TYPE                --회수방법
+
+        , p_mdfc_tp             IN            NP11GETE.MDFC_TP %TYPE                --수정TP
+
+        , p_mdfc_hp             IN            NP11GETE.MDFC_HP %TYPE                --수정HP
+
+        , p_intr_tp             IN            NP11GETE.INTR_TP %TYPE                --내부TP
+
+        , p_intr_hp             IN            NP11GETE.INTR_HP %TYPE                --내부HP
+
+        , p_chng_staf           IN          NP11GETE.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_objt_cnt number;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_objt_cnt
+
+        from np11gete np11
+
+        where np11.spc_code = p_spc_code
+
+        and np11.debt_no    = p_debt_no
+
+        and np11.objt_no    = p_objt_no
+
+        and np11.mort_kind  = p_mort_kind
+
+        ;
+
+    
+
+        if v_objt_cnt > 0 then
+
+        
+
+            update np11gete np11
+
+            set np11.frst_ljco_amt      =    p_frst_ljco_amt
+
+                , np11.mprc_estm        =    p_mprc_estm
+
+                , np11.scfb_expt_ymd    =    p_scfb_expt_ymd
+
+                , np11.scfb_expt_amt    =    p_scfb_expt_amt
+
+                , np11.prcr_amt         =    p_prcr_amt
+
+                , np11.frst_tp          =    p_frst_tp
+
+                , np11.frst_hp          =    p_frst_hp
+
+                , np11.get_metd         =    p_get_metd
+
+                , np11.mdfc_tp          =    p_mdfc_tp
+
+                , np11.mdfc_hp          =    p_mdfc_hp
+
+                , np11.intr_tp          =    p_intr_tp
+
+                , np11.intr_hp          =    p_intr_hp
+
+                , np11.chng_date        =   sysdate
+
+                , np11.chng_staf        =   p_chng_staf
+
+                , np11.chng_pgm_id      =   'onpmc01_u009'
+
+            where np11.spc_code = p_spc_code
+
+            and np11.debt_no    = p_debt_no
+
+            and np11.objt_no    = p_objt_no
+
+            and np11.mort_kind  = p_mort_kind
+
+            ; 
+
+        else
+
+            insert into np11gete(
+
+                spc_code
+
+                , debt_no
+
+                , objt_no
+
+                , mort_kind
+
+                , frst_ljco_amt
+
+                , mprc_estm
+
+                , scfb_expt_ymd
+
+                , scfb_expt_amt
+
+                , prcr_amt
+
+                , frst_tp
+
+                , frst_hp
+
+                , get_metd
+
+                , mdfc_tp
+
+                , mdfc_hp
+
+                , intr_tp
+
+                , intr_hp
+
+                , inpt_date
+
+                , inpt_staf
+
+                , use_yn
+
+            ) values (
+
+                p_spc_code
+
+                , p_debt_no
+
+                , p_objt_no
+
+                , p_mort_kind
+
+                , p_frst_ljco_amt
+
+                , p_mprc_estm
+
+                , p_scfb_expt_ymd
+
+                , p_scfb_expt_amt
+
+                , p_prcr_amt
+
+                , p_frst_tp
+
+                , p_frst_hp
+
+                , p_get_metd
+
+                , p_mdfc_tp
+
+                , p_mdfc_hp
+
+                , p_intr_tp
+
+                , p_intr_hp
+
+                , sysdate
+
+                , p_chng_staf
+
+                , ' '
+
+            );
+
+
+
+        end if;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN NO_DATA_FOUND THEN
+
+                p_ret := '10';
+
+                p_msg := '조회건이 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;  
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 등록
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_i001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_dir            IN            NP05OJPT.FILE_DIR%TYPE                --파일디렉토리
+
+        , p_file_name            IN            NP05OJPT.FILE_NAME%TYPE                --파일명
+
+        , p_staf_id                IN            NP05OJPT.STAF_ID%TYPE                --담당자
+
+        , p_infl_yn             IN            NP05OJPT.INFL_YN%TYPE                --유입여부
+
+        , p_rprs_pict_yn        IN            NP05OJPT.RPRS_PICT_YN%TYPE            --대표사진여부
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+        , p_file_divi           IN          NP05OJPT.FILE_DIVI%TYPE
+
+    ) IS
+
+    
+
+    v_phot_seq number;
+
+    
+
+    BEGIN
+
+    
+
+        select nvl(max(file_seq), 0)
+
+        into v_phot_seq
+
+        from np05ojpt np05
+
+        where np05.spc_code   = p_spc_code
+
+        and np05.debt_no    = p_debt_no
+
+        and np05.objt_no    = p_objt_no
+
+        ;
+
+        insert into np05ojpt(
+
+            spc_code
+
+            , debt_no
+
+            , objt_no
+
+            , file_seq
+
+            , file_dir
+
+            , file_name
+
+            , staf_id
+
+            , infl_yn
+
+            , rprs_pict_yn
+
+            , inpt_date
+
+            , inpt_staf
+
+            , use_yn
+
+            , file_divi
+
+        ) values (
+
+            p_spc_code
+
+            , p_debt_no
+
+            , p_objt_no
+
+            , v_phot_seq + 1
+
+            , p_file_dir
+
+            , p_file_name
+
+            , p_staf_id
+
+            , p_infl_yn
+
+            , p_rprs_pict_yn
+
+            , sysdate
+
+            , p_chng_staf
+
+            , ' '
+
+            , p_file_divi
+
+        );
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN NO_DATA_FOUND THEN
+
+                p_ret := '10';
+
+                p_msg := '조회건이 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d001  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_seq            IN            NP05OJPT.FILE_SEQ%TYPE                --파일순번
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_phot_cnt number;
+
+    v_cnt_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_phot_cnt
+
+        from np05ojpt np05
+
+        where np05.spc_code = p_spc_code
+
+        and np05.debt_no    = p_debt_no
+
+        and np05.objt_no    = p_objt_no
+
+        and np05.file_seq   = p_file_seq
+
+        and np05.use_yn = ' '
+
+        ;
+
+        
+
+        if v_phot_cnt < 1 then
+
+            raise v_cnt_err;
+
+        end if;
+
+        
+
+        update np05ojpt np05
+
+            set np05.use_yn     = 'D'
+
+            , np05.chng_date    = sysdate
+
+            , np05.chng_staf    = p_chng_staf
+
+            , np05.chng_pgm_id  = 'onpmc01_d001'
+
+        where np05.spc_code = p_spc_code
+
+        and np05.debt_no    = p_debt_no
+
+        and np05.objt_no    = p_objt_no
+
+        and np05.file_seq   = p_file_seq
+
+        and np05.use_yn = ' '
+
+        ;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_cnt_err THEN
+
+                p_ret := '10';
+
+                p_msg := '삭제할 사진정보가 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;
+
+--------------------------------------------------------------------
+
+-- 등기부정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d002  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP08RGST.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP08RGST.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP08RGST.OBJT_NO%TYPE                --물건번호
+
+        , p_fst_sec_dvsn        IN            NP08RGST.FST_SEC_DVSN%TYPE            --갑을구분
+
+        , p_rgst_seq            IN            NP08RGST.RGST_SEQ%TYPE                --등록순번
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_cnt number;
+
+    v_cnt_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_cnt
+
+        from NP08RGST np08
+
+        where np08.spc_code = p_spc_code
+
+        and np08.debt_no    = p_debt_no
+
+        and np08.objt_no    = p_objt_no
+
+        and np08.fst_sec_dvsn   = p_fst_sec_dvsn
+
+        and np08.rgst_seq   = p_rgst_seq
+
+        ;
+
+        
+
+        if v_cnt < 1 then
+
+            raise v_cnt_err;
+
+        end if;
+
+        
+
+        delete NP08RGST NP08
+
+        where np08.spc_code = p_spc_code
+
+        and np08.debt_no    = p_debt_no
+
+        and np08.objt_no    = p_objt_no
+
+        and np08.fst_sec_dvsn   = p_fst_sec_dvsn
+
+        and np08.rgst_seq   = p_rgst_seq
+
+        ;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_cnt_err THEN
+
+                p_ret := '10';
+
+                p_msg := '삭제할 정보가 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;    
+
+--------------------------------------------------------------------
+
+-- 물건사진정보 수정(대표사진여부)
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_u010  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP05OJPT.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP05OJPT.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP05OJPT.OBJT_NO%TYPE                --물건번호
+
+        , p_file_seq            IN            NP05OJPT.FILE_SEQ%TYPE                --파일순번
+
+        , p_rprs_pict_yn        IN          NP05OJPT.RPRS_PICT_YN%TYPE            --대표사진여부
+
+        , p_chng_staf           IN          NP05OJPT.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_phot_cnt number;
+
+    v_cnt_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_phot_cnt
+
+        from np05ojpt np05
+
+        where np05.spc_code = p_spc_code
+
+        and np05.debt_no    = p_debt_no
+
+        and np05.objt_no    = p_objt_no
+
+        and np05.file_seq   = p_file_seq
+
+        and np05.use_yn = ' '
+
+        ;
+
+        
+
+        if v_phot_cnt < 1 then
+
+            raise v_cnt_err;
+
+        end if;
+
+        
+
+        update np05ojpt np05
+
+            set np05.rprs_pict_yn   =   p_rprs_pict_yn
+
+            , np05.chng_date        = sysdate
+
+            , np05.chng_staf        = p_chng_staf
+
+            , np05.chng_pgm_id      = 'onpmc01_u001'
+
+        where np05.spc_code = p_spc_code
+
+        and np05.debt_no    = p_debt_no
+
+        and np05.objt_no    = p_objt_no
+
+        and np05.file_seq   = p_file_seq
+
+        and np05.use_yn = ' '
+
+        ;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_cnt_err THEN
+
+                p_ret := '10';
+
+                p_msg := '수정할 사진정보가 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;   
+
+--------------------------------------------------------------------
+
+-- 실거래정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d003  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP09DLGS.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP09DLGS.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP09DLGS.OBJT_NO%TYPE                --물건번호
+
+        , p_dlgs_seq            IN            NP09DLGS.DLGS_SEQ%TYPE                --거래순번
+
+        , p_chng_staf           IN          NP09DLGS.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_cnt number;
+
+    v_cnt_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_cnt
+
+        from NP09DLGS np09
+
+        where np09.spc_code = p_spc_code
+
+        and np09.debt_no    = p_debt_no
+
+        and np09.objt_no    = p_objt_no
+
+        and np09.DLGS_SEQ    = p_dlgs_seq
+
+        ;
+
+        
+
+        if v_cnt = 1 then
+
+            raise v_cnt_err;
+
+        end if;
+
+        
+
+        delete NP09DLGS np09
+
+        where np09.spc_code = p_spc_code
+
+        and np09.debt_no    = p_debt_no
+
+        and np09.objt_no    = p_objt_no
+
+        and np09.dlgs_seq   = p_dlgs_seq
+
+        ;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_cnt_err THEN
+
+                p_ret := '10';
+
+                p_msg := '삭제할 정보가 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;     
+
+--------------------------------------------------------------------
+
+-- 낙찰정보 삭제
+
+--------------------------------------------------------------------
+
+    PROCEDURE onpmc01_d004  (
+
+        p_ret                   OUT         VARCHAR2                            --리턴코드 
+
+        , p_msg                 OUT         VARCHAR2                            --리턴메시지
+
+        , p_spc_code            IN            NP10SCFB.SPC_CODE%TYPE                --SPC코드
+
+        , p_debt_no                IN            NP10SCFB.DEBT_NO%TYPE                --차주번호
+
+        , p_objt_no                IN            NP10SCFB.OBJT_NO%TYPE                --물건번호
+
+        , p_auct_case_no1        IN            NP10SCFB.AUCT_CASE_NO1%TYPE            --경매사건번호1
+
+        , p_auct_case_no2        IN            NP10SCFB.AUCT_CASE_NO2%TYPE            --경매사건번호2
+
+        , p_auct_case_no3        IN            NP10SCFB.AUCT_CASE_NO3%TYPE            --경매사건번호3
+
+        , p_rgst_seq            IN            NP10SCFB.RGST_SEQ%TYPE                --등록순번
+
+        , p_chng_staf           IN          NP08RGST.CHNG_STAF%TYPE             --변경담당
+
+    ) IS
+
+    
+
+    v_cnt number;
+
+    v_cnt_err exception;
+
+    
+
+    BEGIN
+
+    
+
+        select count(*)
+
+        into v_cnt
+
+        from NP10SCFB np10
+
+        where np10.spc_code = p_spc_code
+
+        and np10.debt_no    = p_debt_no
+
+        and np10.objt_no    = p_objt_no
+
+        and np10.auct_case_no1    = p_auct_case_no1
+
+        and np10.auct_case_no2    = p_auct_case_no2
+
+        and np10.auct_case_no3    = p_auct_case_no3
+
+        and np10.rgst_seq    = p_rgst_seq
+
+        ;
+
+        
+
+        if v_cnt < 1 then
+
+            raise v_cnt_err;
+
+        end if;
+
+        
+
+        delete NP10SCFB np10
+
+        where np10.spc_code = p_spc_code
+
+        and np10.debt_no    = p_debt_no
+
+        and np10.objt_no    = p_objt_no
+
+        and np10.auct_case_no1    = p_auct_case_no1
+
+        and np10.auct_case_no2    = p_auct_case_no2
+
+        and np10.auct_case_no3    = p_auct_case_no3
+
+        and np10.rgst_seq    = p_rgst_seq
+
+        ;
+
+    
+
+        p_ret := '00' ;
+
+        p_msg := '정상적으로 반영 되었습니다.' ;
+
+        
+
+        EXCEPTION
+
+            WHEN v_cnt_err THEN
+
+                p_ret := '10';
+
+                p_msg := '삭제할 정보가 없습니다.';
+
+            WHEN OTHERS THEN
+
+                p_ret := '10';
+
+                p_msg := '처리시 에러- ' || SQLCODE || ' ' || SQLERRM;
+
+    
+
+    END;     
+
+END ONPMC01;

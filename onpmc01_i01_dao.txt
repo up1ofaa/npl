@@ -1,0 +1,101 @@
+/*
+================================================================================
+프로그램명 : onpmc01_i01_dao.java
+내          용 : comment 수정
+--------------------------------------------------------------------------------
+작  성  자 : 김표진(2019.11.23)
+--------------------------------------------------------------------------------
+수  정   자 : 
+내        용 : 
+관련  근거 : 
+================================================================================
+*/
+
+package and.np.dao;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+import oracle.jdbc.OracleTypes;
+
+import com.and.bean.CommonBean;
+import com.and.db.DBhandler;
+import com.and.exception.AndException;
+import com.inswave.util.MappedRecordASRV;
+
+public class onpmc01_i01_dao {
+
+	public MappedRecordASRV execute(CommonBean comm, Connection conn, MappedRecordASRV inRec, MappedRecordASRV outRec) throws Exception {
+		
+	          
+		// 변수 선언 시작  ================================================================================/		
+		CallableStatement 	cstmt_onpmc01_i01 	= 	null;
+		StringBuffer 		sb_query 			= 	new StringBuffer();
+
+		// 변수 선언 끝 ==================================================================================/
+		
+		try {
+			
+			DBhandler.setAutoCommitState(conn,false);
+
+			// 쿼리 작성 ==========================================/
+			sb_query.append("begin onpmc01.onpmc01_i001	( ?, ?   			\n");
+			sb_query.append("	,	'" + inRec.get("SPC_CODE")		+ "'	\n");	// SPC코드         
+			sb_query.append("	,	'" + inRec.get("DEBT_NO")		+ "'	\n");	// 차주번호   
+			sb_query.append("	,	'" + inRec.get("OBJT_NO")		+ "'	\n");	// 물건번호   
+			sb_query.append("	,	'" + inRec.get("FILE_DIR")		+ "'	\n");	// 파일디렉토리
+			sb_query.append("	,	'" + inRec.get("FILE_NAME")		+ "'	\n");	// 파일명
+			sb_query.append("	,	'" + inRec.get("STAF_ID")		+ "'	\n");	// 담당자
+			sb_query.append("	,	'" + inRec.get("INFL_YN")		+ "'	\n");	// 유입여부
+			sb_query.append("	,	'" + inRec.get("RPRS_PICT_YN")	+ "'	\n");	// 대표사진
+			sb_query.append("	,	'" + inRec.get("CHNG_STAF")		+ "'	\n");	// 변경담당
+			sb_query.append("	)	;	 end	;		            		\n");		
+			
+			// 쿼리 출력 ==========================================/
+			comm.sqlLog(sb_query.toString());
+			// 쿼리 출력 ==========================================/			
+
+			cstmt_onpmc01_i01 = conn.prepareCall(sb_query.toString());
+			
+			// PL/SQL output parameter정의
+			cstmt_onpmc01_i01.registerOutParameter(1, OracleTypes.VARCHAR);
+			cstmt_onpmc01_i01.registerOutParameter(2, OracleTypes.VARCHAR);
+			
+			// PL/SQL 실행
+			cstmt_onpmc01_i01.execute();
+
+			// PL/SQL 결과 코드및 메세지를 공통 리턴 정보에 할당한다. ===================/
+			comm.setSYS_RETN_CODE(cstmt_onpmc01_i01.getString(1));  // 리턴 코드 설정
+			comm.setSYS_RETN_MSG (cstmt_onpmc01_i01.getString(2));  // 리턴 메세지 설정
+
+			if (!comm.getSYS_RETN_CODE().startsWith("0")) {
+				throw new AndException(comm.getSYS_RETN_CODE(),comm.getSYS_RETN_MSG());
+			}
+
+			DBhandler.close(cstmt_onpmc01_i01);					
+			
+			// 정상적인 경우 commit 처리
+			conn.commit() ;
+			
+			return outRec;
+			
+			// PL/SQL 결과 코드및 메세지를 공통 리턴 정보에 할당한다. ===================/
+		} catch (AndException ae) {
+
+			conn.rollback();
+			throw ae;
+
+		} catch (Exception e) {
+
+			conn.rollback();
+            throw e;
+
+		} finally {
+			// Transaction 처리가 일어난 경우는 commit 상태를 다시 True 바꿔준다.
+			DBhandler.setAutoCommitState(conn,true);
+			//CallableStatement 객체 CLOSE
+			DBhandler.close(cstmt_onpmc01_i01);
+		}
+	}
+}
