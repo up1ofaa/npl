@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="application;charset=euc-kr"%>
+<%@ page import="java.io.*, java.text.*, java.lang.*, java.util.*,java.net.*"%>
+<%@ page import="com.fasoo.adk.packager.*" %>
+
+
+<%
+
+	request.setCharacterEncoding("euc-kr"); 							// request 한글로 설정
+
+	String filename		= request.getParameter("file_name");			//파일이름
+	filename			= filename == null ? "" : filename;
+	String filepath		= request.getParameter("file_path");			//파일경로
+	filepath			= filepath == null ? "" : filepath;
+	
+	String staf_id		= request.getParameter("staf_id");			//사번
+	staf_id			= staf_id == null ? "" : staf_id;
+
+	String staf_name	= request.getParameter("staf_name");			//사번명
+	staf_name			= staf_name == null ? "" : staf_name;
+
+
+	out.println("<script>");
+	out.println("alert(\"path="+filepath+"\");");
+	out.println("alert(\"name="+filename+"\");");
+	out.println("</script>");
+
+	System.out.println("filepath===>"+filepath);			/// 메세지를 찍어본다.
+	System.out.println("filename===>"+filename);			//메세지를 찍어본다.
+
+	System.out.println("[STAF_ID]=" + staf_id);
+	System.out.println("[STAF_NAME]=" + staf_name);
+ 
+	InputStream in		= null;
+	OutputStream os		= null;
+	File file			= null;
+	boolean skip		= false;
+	String client		= "";
+
+	try{
+		try{
+	     
+            String HOMEDIR = "/oraweb/jeus/webroot/WEB-INF/fasoo/fsdinit";
+    		String SERVERID = "0000000000010076";//서버 DRM
+    		String SERVERID2 = "0000000000010078";//PC DRM
+
+          //파일암호화  
+        /*    WorkPackager oWorkPackager = new WorkPackager();
+    		oWorkPackager.setOverWriteFlag(true);//true:기존파일명그대로, false:파일명변경
+
+    		int nFileType = oWorkPackager.GetFileType(filepath +'/'+ filename);
+		        System.out.println("[file type1]=" + nFileType);
+				System.out.println("[PATH1]=" + filepath +'/'+ filename);
+    		if (nFileType == 29)
+    		{System.out.println("[STEP1]=" + filepath +'/'+ filename);
+    			if( oWorkPackager.IsSupportFile(HOMEDIR, SERVERID, filepath +'/'+ filename) ){
+					System.out.println("[STEP2]=" + filepath +'/'+ filename);
+    			boolean bret = oWorkPackager.DoPackaging(HOMEDIR, 
+    									SERVERID, 
+    									filepath +'/'+ filename,
+    									filepath +'/'+ filename, 
+    									filename, 
+//    									"90064", 
+//    									"김승현", 
+                                        staf_id,
+										staf_name,
+    									"EASYONE",
+    									"admin",
+    									filepath + filename,
+    									"V1.0",
+    									"");
+    			
+    				if (!bret) {
+    					System.out.println("암호화 중 오류중 오류입니다.");
+    					System.out.println(" 오류 정보..");
+    					System.out.println("    ["+ oWorkPackager.getLastErrorNum()+"] "+oWorkPackager.getLastErrorStr());
+    					
+    				} else {
+    					System.out.println("성공 했슴... " + oWorkPackager.getContainerFileName());
+    				}
+    			}
+    		}	
+*/
+			file		= new File(filepath, filename);					//파일 선언
+			in			= new FileInputStream(file);
+		}catch(FileNotFoundException fe){
+			skip		= true;
+		}
+		response.reset() ;					//
+		client			= request.getHeader("User-Agent");				//인터넷 익스플로러의 버전 체크
+		response.setContentType("application/x-msdownload;");
+		response.setHeader("Content-Description", "JSP Generated Data");
+
+		if(!skip){
+			if(client.indexOf("MSIE 5.5") != -1)						//인터넷 익스플로의 버전이 5.5이다.
+			{
+				response.setHeader("Content-Type", "doesn/matter; charset=euc-kr");
+				response.setHeader("Content-Disposition", "filename="+new String(filename));	//파일명
+			}
+			else
+			{
+				response.setHeader ("Content-Disposition", "attachment; filename="+new String(filename));
+			}
+			
+			response.setHeader ("Content-Length", ""+file.length() );
+
+			os			= response.getOutputStream();
+			byte b[]	= new byte[(int)file.length()];
+			int leng	= 0;
+
+			while( (leng = in.read(b)) > 0 )
+			{
+				os.write(b,0,leng);
+			}
+		}
+		else
+		{
+			response.setContentType("text/html;charset=euc-kr");
+			out.println("<script language='javascript'>");
+			out.println("alert('선택 하신 파일을 찾을 수 없습니다');");
+			out.println("history.back();");
+			out.println("</script>");
+		}
+		in.close();
+		os.close();
+			
+
+	//    		파일복호화
+
+	        String HOMEDIR1 = "/oraweb/jeus/webroot/WEB-INF/fasoo/fsdinit";
+    		String SERVERID1 = "0000000000010076";//서버 DRM
+    		String SERVERID12 = "0000000000010078";//PC DRM
+
+          //파일복호화  
+            WorkPackager oWorkPackager1 = new WorkPackager();
+    		oWorkPackager1.setOverWriteFlag(true);//true:기존파일명그대로, false:파일명변경
+
+		     boolean bRet1 = false;
+            
+    		int nFileType1 = oWorkPackager1.GetFileType(filepath +'/'+ filename);
+                System.out.println("[file type2]=" + nFileType1);
+				System.out.println("[PATH2]=" + filepath +'/'+ filename);
+    		if (nFileType1 == 26 ) // 서버 DRM복호화
+    		{
+				System.out.println("[#######################3]=" + nFileType1);
+    			bRet1 = oWorkPackager1.DoExtract_s(HOMEDIR1,
+    											SERVERID1,
+    											filepath +'/'+ filename,
+    											filepath +'/'+ filename,
+    											"admin",
+    											"SECURE_SAVE", "", "", "", ""
+    											);	
+
+
+    	        if (!bRet1){
+    				System.out.println("복호화 에러");
+    				System.out.println("    ["+ oWorkPackager1.getLastErrorNum()+"] "+oWorkPackager1.getLastErrorStr());
+    			}else{
+    				System.out.println("복호화 성공!!");
+    			}
+    		}
+    		else if (nFileType1 == 103) // PC DRM복호화
+    		{
+				System.out.println("[#######################4]=" + nFileType1);
+    			bRet1 = oWorkPackager1.DoExtract_s(HOMEDIR1,
+    											SERVERID1,
+    											filepath +'/'+ filename,
+    											filepath +'/'+ filename,
+    											"admin",
+    											"SECURE_SAVE", "", "", "", ""
+    											);	
+    			
+
+    	        if (!bRet1){
+    				System.out.println("복호화 에러");
+    				System.out.println("    ["+ oWorkPackager1.getLastErrorNum()+"] "+oWorkPackager1.getLastErrorStr());
+    			}else{
+    				System.out.println("복호화 성공!!");
+    			}
+    		}
+			
+			
+	}catch(Exception e) 
+	{
+		System.out.println(e);
+	}
+%>
