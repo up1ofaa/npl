@@ -3,4 +3,7 @@ WebContent > jsp > receive.jsp
 WebContent > ui > np > onpbi07.xml
 WebContent > ui > np > onpma02.xml
 WebContent > cm > js > common.js
+WebContent > cm > css > all.css
+WebContent > cm > css > contents.css
+
 
